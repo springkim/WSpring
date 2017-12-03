@@ -31,6 +31,7 @@ cmake ../opencv^
  -DWITH_OPENCL=OFF^
  -DBUILD_opencv_apps=OFF^
  -DBUILD_SHARED_LIBS=OFF^
+ -DBUILD_WITH_STATIC_CRT=ON^
 ";
 cmake --build . --config Release --target ALL_BUILD
 cmake --build . --config Release --target INSTALL
