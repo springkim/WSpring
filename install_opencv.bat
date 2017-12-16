@@ -89,9 +89,10 @@ if exist "C:\python27\Lib\site-packages\" (
 	xcopy /Y "opencv(wspring)\cv2.pyd" "C:\python27\Lib\site-packages\" >NUL
 )
 if exist "C:\MinGW64\" (
+	echo Install opencv in MinGW64
 	xcopy /Y "opencv(wspring)\MinGW64\include\*.*" "C:\MinGW64\x86_64-w64-mingw32\include" /e /h /k >NUL
-	xcopy /Y "opencv(wspring)\MinGW64\lib\*.lib" "C:\MinGW64\x86_64-w64-mingw32\lib" >NUL
-	xcopy /Y "opencv(wspring)\MinGW64\bin\*.lib" "C:\Windows\System32\" >NUL
+	xcopy /Y "opencv(wspring)\MinGW64\lib\*.*" "C:\MinGW64\x86_64-w64-mingw32\lib" >NUL
+	xcopy /Y "opencv(wspring)\MinGW64\bin\*.*" "C:\Windows\System32\" >NUL
 )
 RMDIR /S /Q "opencv(wspring)"
 DEL "opencv(wspring).zip"
