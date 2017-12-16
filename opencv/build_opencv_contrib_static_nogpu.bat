@@ -25,13 +25,14 @@ cmake ../opencv^
  -DBUILD_opencv_world=OFF^
  -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules^
  -DEIGEN_INCLUDE_PATH=../eigen^
- -DWITH_OPENMP=ON^
+ -DWITH_OPENMP=OFF^
  -DBUILD_opencv_saliency=OFF^
  -DWITH_CUDA=OFF^
  -DWITH_OPENCL=OFF^
  -DBUILD_opencv_apps=OFF^
  -DBUILD_SHARED_LIBS=OFF^
  -DBUILD_WITH_STATIC_CRT=ON^
+ -DBUILD_opencv_python=OFF^
 ";
 cmake --build . --config Release --target ALL_BUILD
 cmake --build . --config Release --target INSTALL
