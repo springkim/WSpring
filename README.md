@@ -1,6 +1,6 @@
 ## <img src="https://i.imgur.com/oJucnwG.png" width="48"> <img src="https://i.imgur.com/uPNNm8K.png" width="48"> WSpring 
 
-#### windows10 setup project
+#### windows10 Programming Library Setup Project
 
 
 Just run script below as double click.
@@ -18,5 +18,8 @@ So you don't have to set path when you are using visual studio. You need to only
 
 And in python2.7, just typing `import cv2`.
 
+##### <img src="http://i66.tinypic.com/ekepg3.jpg" width="48"> install_openBLAS.bat
+Build lastest project from git. And install library to Visual Studio folder and local 3rdparty folder.
 
-
+##### <img src="http://i66.tinypic.com/t7mltu.png" width="48"> install_tinyxml2.bat
+Build lastest project from git. And install library to Visual Studio folder and local 3rdparty folder.
