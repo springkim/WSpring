@@ -47,7 +47,7 @@ powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.
 echo "Unzip & Install MinGW"
 powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('MinGW.zip', 'C:\MinGW'); }"
 
-SETX PATH %PATH%;C:\MinGW\bin\ /m
+SETX PATH "%PATH%;C:\MinGW\bin\" /m
 ::SET PATH=%PATH%;C:\MinGW\bin\
 
 DEL "MinGW.zip"

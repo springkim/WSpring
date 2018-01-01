@@ -1,8 +1,8 @@
 ::
-::  install_opencv.bat
+::  install_OpenBLAS.bat
 ::  WSpring
 ::
-::  Created by kimbom on 2017. 12. 2...
+::  Created by kimbom on 2017. 12. 29...
 ::  Copyright 2017 kimbom. All rights reserved.
 ::
 
