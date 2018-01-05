@@ -67,7 +67,7 @@ cmake ..^
  -DBUILD_SHARED_LIBS:BOOL=OFF^
  -DBUILD_STATIC_LIBS:BOOL=ON^
  -DBUILD_TESTS:BOOL=OFF^
-";
+;
 cmake .. -G %CC% -DCMAKE_BUILD_TYPE=RELEASE
 cmake --build . --config Release --target ALL_BUILD
 cmake --build . --config Release --target INSTALL

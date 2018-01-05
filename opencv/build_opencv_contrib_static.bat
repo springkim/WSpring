@@ -30,7 +30,7 @@ cmake ../opencv^
  -DWITH_CUBLAS=ON^
  -DWITH_OPENCL_SVM=ON^
  -DBUILD_SHARED_LIBS=OFF^
-";
+;
 cmake --build . --config Release --target ALL_BUILD
 cmake --build . --config Release --target INSTALL
 cmake --build . --config Debug --target ALL_BUILD

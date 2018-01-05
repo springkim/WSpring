@@ -33,7 +33,7 @@ cmake ../opencv^
  -DBUILD_SHARED_LIBS=OFF^
  -DBUILD_WITH_STATIC_CRT=ON^
  -DBUILD_opencv_python=OFF^
-";
+;
 cmake --build . --config Release --target ALL_BUILD
 cmake --build . --config Release --target INSTALL
 cmake --build . --config Debug --target ALL_BUILD
