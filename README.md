@@ -1,24 +1,24 @@
-## <img src="https://i.imgur.com/oJucnwG.png" width="48"> <img src="https://i.imgur.com/uPNNm8K.png" width="48"> WSpring 
+## <img src="http://i65.tinypic.com/241uzhc.png" width="64"> <img src="http://i65.tinypic.com/2a95tdy.png" width="64"> WSpring 
 
 ## Windows Programming Library Setup Project
 
-#### Global/Local
+### Global/Local
 
 Global install is installing library on compiler directory. It can run directly your source code without any settings.
 Local library is installing library on your project directory. You have to use local library if you consider move or release your project.
 
 For example in MSVC14(Visual Studio 2015), you need include directory and library directory. You can check below. This scripts will download modules in this directory.
 
-#### x86/x64
+### x86/x64
 Drop x86(32bit application). x86 is past technology on desktop computer.
 Actually many libraries don't support x86 system.
 
-#### Shared/Static
+### Shared/Static
 
 This option is actually not important. But consider if you want use independent executable file. 
 But static library depends on compiler. MSVC14's library will not work on MSVC15.
 So we use shared library.
-#### Global directories
+### Global directories
 **Dll location** : `C:\Windows\System32`
 ##### MSVC14(Visual Studio 2015)
 **Include directory** : `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\`
