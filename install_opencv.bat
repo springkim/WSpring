@@ -61,14 +61,14 @@ if exist "C:\MinGW64\" (
 )
 if exist "C:\python27\Lib\site-packages\" (
 	echo Install opencv in Python2.7
-	pip install numpy >NUL
-	pip install matplotlib >NUL
+	pip2 install numpy >NUL
+	pip2 install matplotlib >NUL
 	xcopy /Y "opencv(wspring)\Python2\*.pyd" "C:\python27\Lib\site-packages\" >NUL
 )
 if exist "C:\python36\Lib\site-packages\" (
 	echo Install opencv in Python3.6
-	pip install numpy >NUL
-	pip install matplotlib >NUL
+	pip3 install numpy >NUL
+	pip3 install matplotlib >NUL
 	xcopy /Y "opencv(wspring)\Python3\*.pyd" "C:\python36\Lib\site-packages\" >NUL
 )
 RMDIR /S /Q "opencv(wspring)"
