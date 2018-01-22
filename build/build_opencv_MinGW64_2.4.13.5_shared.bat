@@ -1,13 +1,16 @@
 ::
-::  MinGW/build_opencv.bat
+::  MinGW64/build_opencv_MinGW64_2.4.13.5_shared.bat
 ::  WSpring
 ::
-::  Created by kimbom on 2017. 12. 16...
+::  Created by kimbom on 2018. 01. 05...
 ::  Copyright 2017 kimbom. All rights reserved.
 ::
-mkdir opencv_MinGW
-cd opencv_MinGW
-git clone https://github.com/opencv/opencv
+mkdir build_opencv_MinGW64_2.4.13.5_shared
+cd build_opencv_MinGW64_2.4.13.5_shared
+
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/tcrapcv1epp8azv/opencv2.4.13.5.zip?dl=1','opencv.zip')"
+powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('opencv.zip', 'opencv'); }"
+DEL "opencv.zip"
 git clone https://github.com/RLovelett/eigen
 mkdir build
 cd build
@@ -20,13 +23,14 @@ cmake ../opencv^
  -DBUILD_PERF_TESTS=OFF^
  -DBUILD_PACKAGE=OFF^
  -DBUILD_IPP_IW=OFF^
- -DBUILD_opencv_world=ON^
+ -DBUILD_opencv_world=OFF^
  -DEIGEN_INCLUDE_PATH=../eigen^
  -DWITH_OPENMP=OFF^
  -DWITH_CUDA=OFF^
  -DWITH_OPENCL=OFF^
  -DBUILD_SHARED_LIBS=ON^
  -DENABLE_PRECOMPILED_HEADERS=OFF^
+ -DBUILD_opencv_python=OFF
 ;
 
 cmake --build . --config Release

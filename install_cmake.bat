@@ -1,11 +1,10 @@
 ::
-::  install_MinGW64.bat
+::  install_cmake.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2017. 12. 16...
+::  Created by kimbomm on 2018. 01. 22...
 ::  Copyright 2017 kimbomm. All rights reserved.
 ::
-:: 7.2.0
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if '%errorlevel%' NEQ '0' (
@@ -23,16 +22,15 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
     CD /D "%~dp0"
 	
-
 ::start
-echo Download MinGW64
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/5hc0q3ryk8lt2w4/MinGW64.zip?dl=1','MinGW64.zip')"
-echo "Unzip & Install MinGW64"
-powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('MinGW64.zip', 'C:\MinGW64'); }"
+echo Download cmake
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/b53bfujeezfo6qg/CMake.zip?dl=1','CMake.zip')"
+echo "Unzip & Install CMake"
+powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('CMake.zip', 'C:\Program Files\CMake'); }"
 
-setw "C:\MinGW64\bin\"
+setw "C:\Program Files\CMake\bin"
 
-DEL "MinGW64.zip"
+DEL "CMake.zip"
 echo Finish!!
 pause
 exit /b

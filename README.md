@@ -1,25 +1,63 @@
 ## <img src="https://i.imgur.com/oJucnwG.png" width="48"> <img src="https://i.imgur.com/uPNNm8K.png" width="48"> WSpring 
 
-#### windows10 Programming Library Setup Project
+## Windows Programming Library Setup Project
+
+#### Global/Local
+
+Global install is installing library on compiler directory. It can run directly your source code without any settings.
+Local library is installing library on your project directory. You have to use local library if you consider move or release your project.
+
+For example in MSVC14(Visual Studio 2015), you need include directory and library directory. You can check below. This scripts will download modules in this directory.
+
+#### x86/x64
+Drop x86(32bit application). x86 is past technology on desktop computer.
+Actually many libraries don't support x86 system.
+
+#### Shared/Static
+
+This option is actually not important. But consider if you want use independent executable file. 
+But static library depends on compiler. MSVC14's library will not work on MSVC15.
+So we use shared library.
+#### Global directories
+**Dll location** : `C:\Windows\System32`
+##### MSVC14(Visual Studio 2015)
+**Include directory** : `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\`
+**Library directory** : `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\amd64\`
+##### MSVC12(Visual Studio 2013)
+**Include directory** : `C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\`
+**Library directory** : `C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\amd64\`
+##### MinGW64
+**Include directory** : `C:\MinGW64\x86_64-w64-mingw32\include\`
+**Library directory** : `C:\MinGW64\x86_64-w64-mingw32\lib\`
 
 
-Just run script below as double click.
+## Programming Language & Tools
+### <img src="http://i64.tinypic.com/2qmzon4.png" width="64">CMake
+**[CMake](https://cmake.org/)** is an open-source, cross-platform tools to build. Maybe you are using cmake as CLI(Command-Line-Interface) in Linux. Windows is same with Linux.
+You have to install this script before every build scripts.
+### <img src="http://i68.tinypic.com/15axee.png" width="64">MinGW64
+**[MinGW-w64](https://mingw-w64.org/doku.php)** is an advancement of the original mingw.org project, Created to support the GCC compiler on Windows system. You can use this compiler on Windows **[CLion](https://www.jetbrains.com/clion/)**.
+### <img src="http://i67.tinypic.com/2dcd7x0.png" width="64">Python2.7.14
+**[Python](https://www.python.org/)** is light-weight script language. I don't like python. But many interfaces of deep-learning libraries are python2 or python3. So we need both of them as python2.exe and python3.exe.
+This script will install Python2.7.14 at `C:\Python27\`.
+You can run python2.X as `python2.exe` and `pip2.exe`.
+### <img src="http://i65.tinypic.com/r1klsl.png" width="64">Python3.6.4
+This script will install Python3.6.4 at `C:\Python36\`.
+You can run python3.X as `python3.exe` and `pip3.exe`.
+
+## Libraries
+
+### <img src="http://i64.tinypic.com/4hcxp3.png" width="64">OpenCV
+**[OpenCV](https://opencv.org/)** is open source computer vision library. Please install opencv correctly way. Many people installed opencv strange way*(e.g. C:/Opencv)*. Also OpenCV dropped C interface after version 3.0. So you need to install both 2.4.X and 3.X if you are C/C++ programmer. And i prepare contrib build scripts too.
+This script will install opencv3.4.0*(prebuilt)* library in **VS2015,VS2013,VS2012,VS2010,MinGW64,Python2** and **Python3**.
+
+You don't have to any settings for Visual Studio and Python. But you need link libraries in MinGW64.
+It automatically selects opencv version. For example in gcc or Visual Studio(/TC) it will use opencv 2.4.13.5. and g++ or Visual Studio(/TP) it will use opencv 3.4.0.
 
 
-### Modules
+### <img src="http://i67.tinypic.com/33ua5p3.png" width="64"> OpenBLAS
+**[OpenBLAS](http://www.openblas.net/)** is an optimized BLAS library based on GotoBLAS2 1.13 BSD version. Usually we use BLAS for Matrix Multiplication in C. C++ has [Eigen](eigen.tuxfamily.org/) and Python has numpy.
 
-##### <img src="https://i.imgur.com/j2JVXi9.png" width="48"> install_opencv.bat
 
-opencv 3.3.1 world build for **Visual studio**(2010,2012,2013,2015), **MinGW64** and **python 2.7**.
-
-This script will generate opencv's include,lib and bin in system folder.
-
-So you don't have to set path when you are using visual studio. You need to only `#include<opencv2/...>`.
-
-And in python2.7, just typing `import cv2`.
-
-##### <img src="http://i66.tinypic.com/ekepg3.jpg" width="48"> install_openBLAS.bat
-Build lastest project from git. And install library to Visual Studio folder and local 3rdparty folder.
-
-##### <img src="http://i66.tinypic.com/t7mltu.png" width="48"> install_tinyxml2.bat
-Build lastest project from git. And install library to Visual Studio folder and local 3rdparty folder.
+### <img src="http://i63.tinypic.com/14cqwx3.png" width="64"> TinyXML2
+**[TinyXML-2](http://www.grinninglizard.com/tinyxml2/)** is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs.

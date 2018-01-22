@@ -1,11 +1,10 @@
 ::
-::  install_MinGW64.bat
+::  install_python2.7.14.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2017. 12. 16...
+::  Created by kimbomm on 2018. 01. 22...
 ::  Copyright 2017 kimbomm. All rights reserved.
 ::
-:: 7.2.0
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if '%errorlevel%' NEQ '0' (
@@ -23,16 +22,24 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
     CD /D "%~dp0"
 	
-
 ::start
-echo Download MinGW64
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/5hc0q3ryk8lt2w4/MinGW64.zip?dl=1','MinGW64.zip')"
-echo "Unzip & Install MinGW64"
-powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('MinGW64.zip', 'C:\MinGW64'); }"
+echo Download python2.7.14
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/cen5fyn3hnxjwgg/Python27.zip?dl=1','Python27.zip')"
+echo "Unzip & Install Python27"
+call :SafeRMDIR "C:\Python27"
+powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('Python27.zip', 'C:\Python27'); }"
 
-setw "C:\MinGW64\bin\"
+setw "C:\Python27\"
+setw "C:\Python27\Scripts"
 
-DEL "MinGW64.zip"
+DEL "Python27.zip"
 echo Finish!!
 pause
+exit /b
+
+
+:SafeRMDIR
+IF EXIST "%~1" (
+	RMDIR /S /Q "%~1"
+)
 exit /b
