@@ -48,8 +48,8 @@ You can run python3.X as `python3.exe` and `pip3.exe`.
 ## Libraries
 
 ### <img src="http://i64.tinypic.com/4hcxp3.png" width="64">OpenCV
-**[OpenCV](https://opencv.org/)** is open source computer vision library. Please install opencv correctly way. Many people installed opencv strange way*(e.g. C:/Opencv)*. Also OpenCV dropped C interface after version 3.0. So you need to install both 2.4.X and 3.X if you are C/C++ programmer. And i prepare contrib build scripts too.
-This script will install opencv3.4.0*(prebuilt)* library in **VS2015,VS2013,VS2012,VS2010,MinGW64,Python2** and **Python3**.
+**[OpenCV](https://opencv.org/)** is open source computer vision library. Please install opencv correctly way. Many people installed opencv strange way *(e.g. C:/Opencv)* . Also OpenCV dropped C interface after version 3.0. So you need to install both 2.4.X and 3.X if you are C/C++ programmer. And i prepare contrib build scripts too.
+This script will install opencv3.4.0,2.4.13.5 *(prebuilt)* library in **VS2015,VS2013,VS2012,VS2010,MinGW64,Python2** and **Python3**.
 
 You don't have to any settings for Visual Studio and Python. But you need link libraries in MinGW64.
 It automatically selects opencv version. For example in gcc or Visual Studio(/TC) it will use opencv 2.4.13.5. and g++ or Visual Studio(/TP) it will use opencv 3.4.0.
