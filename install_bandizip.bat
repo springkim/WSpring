@@ -24,6 +24,7 @@ pushd "%CD%"
 	
 	
 ::::::::::::install
+powershell "Set-ExecutionPolicy RemoteSigned -Force"
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.bandisoft.co.kr/bandizip/dl.php?web','BANDIZIP-SETUP-KR.EXE')"
 
 echo $myshell=New-Object -com 'Wscript.Shell'; >> install_bandizip.ps1
