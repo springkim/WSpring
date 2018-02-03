@@ -1,4 +1,5 @@
 <div style="background-color:rgba(103, 153, 255, 0.4); text-align:left; padding:20px 20px 20px 20px;">
+
 ## <img src="http://i65.tinypic.com/241uzhc.png" width="64"> <img src="http://i65.tinypic.com/2a95tdy.png" width="64"> WSpring 
 
 ## Windows Programming Library Setup Project
