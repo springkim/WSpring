@@ -33,7 +33,7 @@ So we use shared library.
 
 ## Programming Language & Tools
 ### <img src="http://i64.tinypic.com/ravog1.png" width="64">Bandizip
-Bandizip is a lightweight, fast and free All-In-One Zip Archiver.
+**[Bandizip](https://www.bandisoft.co.kr/bandizip/)** is a lightweight, fast and free All-In-One Zip Archiver.
 Bandizip has a very fast Zip algorithm for compression & extraction with Fast Drag and Drop, High Speed Archiving, and Multi-core compression. It handles the most popular compression formats, including Zip, 7z, Rar, and so on.
 
 ### <img src="http://i64.tinypic.com/2qmzon4.png" width="64">CMake
