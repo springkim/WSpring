@@ -44,6 +44,13 @@ You can run python2.X as `python2.exe` and `pip2.exe`.
 ### <img src="http://i65.tinypic.com/r1klsl.png" width="64">Python3.6.4
 This script will install Python3.6.4 at `C:\Python36\`.
 You can run python3.X as `python3.exe` and `pip3.exe`.
+### <img src="https://i.imgur.com/KOubi5z.png" width="64">WSL
+Windows Subsystem for Linux (WSL) is a compatibility layer for running Linux binary executables (in ELF format) natively on Windows 10.
+Do not install WSL from Windows store if you are korean.
+This script will install WSL(current locale) and Xming(for GUI) automatically.
+
+
+
 
 ## Libraries
 
