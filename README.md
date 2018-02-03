@@ -1,6 +1,6 @@
 ## <img src="http://i65.tinypic.com/241uzhc.png" width="64"> <img src="http://i65.tinypic.com/2a95tdy.png" width="64"> WSpring 
 
-## Windows Programming Library & Tool Setup Project
+## Windows(x64) Programming Library & Tool Setup Project
 
 ### Global/Local
 
