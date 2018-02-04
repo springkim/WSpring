@@ -22,33 +22,51 @@ So we use shared library.
 **Dll location** : `C:\Windows\System32`
 ##### MSVC14(Visual Studio 2015)
 **Include directory** : `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\`
+
 **Library directory** : `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\amd64\`
+
 ##### MSVC12(Visual Studio 2013)
 **Include directory** : `C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\`
+
 **Library directory** : `C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\amd64\`
+
 ##### MinGW64
 **Include directory** : `C:\MinGW64\x86_64-w64-mingw32\include\`
+
 **Library directory** : `C:\MinGW64\x86_64-w64-mingw32\lib\`
+
+### Program directories
+** Program directory** : `C:\Program Files`
+
+** Startup directory** : `C:\ProgramData\Microsoft\Windows\Start Menu\Programs`
 
 
 ## Programming Language & Tools
 ### <img src="http://i64.tinypic.com/ravog1.png" width="64">Bandizip
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 **[Bandizip](https://www.bandisoft.co.kr/bandizip/)** is a lightweight, fast and free All-In-One Zip Archiver.
 Bandizip has a very fast Zip algorithm for compression & extraction with Fast Drag and Drop, High Speed Archiving, and Multi-core compression. It handles the most popular compression formats, including Zip, 7z, Rar, and so on.
-
+### <img src="http://i63.tinypic.com/25tu4y9.png" width="64">Clion
+<img src="http://i64.tinypic.com/33oqss3.png" height="20">
+**[CLion](https://www.jetbrains.com/clion/)** is a smart C and C++ editor. It using CMake as a project model, CLion handles your changes in CMake files automatically, using all the information from there during code editing and refactorings.
 ### <img src="http://i64.tinypic.com/2qmzon4.png" width="64">CMake
+<img src="http://i67.tinypic.com/14y6cfq.png" height="20">
 **[CMake](https://cmake.org/)** is an open-source, cross-platform tools to build. Maybe you are using cmake as CLI(Command-Line-Interface) in Linux. Windows is same with Linux.
 You have to install this script before every build scripts.
 ### <img src="http://i68.tinypic.com/15axee.png" width="64">MinGW64
+<img src="http://i66.tinypic.com/2q87by9.png" height="20">
 **[MinGW-w64](https://mingw-w64.org/doku.php)** is an advancement of the original mingw.org project, Created to support the GCC compiler on Windows system. You can use this compiler on Windows **[CLion](https://www.jetbrains.com/clion/)**.
-### <img src="http://i67.tinypic.com/2dcd7x0.png" width="64">Python2.7.14
+### <img src="http://i67.tinypic.com/2dcd7x0.png" width="64">Python2.7
+<img src="http://i67.tinypic.com/153bgnm.png" height="20">
 **[Python](https://www.python.org/)** is light-weight script language. I don't like python. But many interfaces of deep-learning libraries are python2 or python3. So we need both of them as python2.exe and python3.exe.
 This script will install Python2.7.14 at `C:\Python27\`.
 You can run python2.X as `python2.exe` and `pip2.exe`.
 ### <img src="http://i65.tinypic.com/r1klsl.png" width="64">Python3.6.4
+<img src="http://i67.tinypic.com/oswlxk.png" height="20">
 This script will install Python3.6.4 at `C:\Python36\`.
 You can run python3.X as `python3.exe` and `pip3.exe`.
 ### <img src="https://i.imgur.com/KOubi5z.png" width="64">WSL
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 Windows Subsystem for Linux (WSL) is a compatibility layer for running Linux binary executables (in ELF format) natively on Windows 10.
 Do not install WSL from Windows store if you are korean.
 This script will install WSL(current locale) and Xming(for GUI) automatically.
@@ -59,16 +77,21 @@ This script will install WSL(current locale) and Xming(for GUI) automatically.
 ## Libraries
 
 ### <img src="http://i64.tinypic.com/4hcxp3.png" width="64">OpenCV
+<img src="http://i68.tinypic.com/33ljz1j.png" height="20">
+<img src="http://i68.tinypic.com/w0rf61.png" height="20">
+
 **[OpenCV](https://opencv.org/)** is open source computer vision library. Please install opencv correctly way. Many people installed opencv strange way *(e.g. C:/Opencv)* . Also OpenCV dropped C interface after version 3.0. So you need to install both 2.4.X and 3.X if you are C/C++ programmer. And i prepare contrib build scripts too.
-This script will install opencv3.4.0,2.4.13.5 *(prebuilt)* library in **VS2015,VS2013,VS2012,VS2010,MinGW64,Python2** and **Python3**.
+This script will install opencv3.X,2.4.X *(prebuilt)* library in **VS2015,VS2013,VS2012,VS2010,MinGW64,Python2** and **Python3**.
 
 You don't have to any settings for Visual Studio and Python. But you need link libraries in MinGW64.
-It automatically selects opencv version. For example in gcc or Visual Studio(/TC) it will use opencv 2.4.13.5. and g++ or Visual Studio(/TP) it will use opencv 3.4.0.
+It automatically selects opencv version. For example in gcc or Visual Studio(/TC) it will use opencv 2.4.X. and g++ or Visual Studio(/TP) it will use opencv 3.X.
 
 
 ### <img src="http://i67.tinypic.com/33ua5p3.png" width="64"> OpenBLAS
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 **[OpenBLAS](http://www.openblas.net/)** is an optimized BLAS library based on GotoBLAS2 1.13 BSD version. Usually we use BLAS for Matrix Multiplication in C. C++ has [Eigen](eigen.tuxfamily.org/) and Python has numpy.
 
 
 ### <img src="http://i63.tinypic.com/14cqwx3.png" width="64"> TinyXML2
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 **[TinyXML-2](http://www.grinninglizard.com/tinyxml2/)** is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs.

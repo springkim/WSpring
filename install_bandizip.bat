@@ -49,6 +49,7 @@ echo del BANDIZIP-SETUP-KR.EXE >> install_bandizip.ps1
 echo del install_bandizip.ps1 >> install_bandizip.ps1
 
 powershell -noprofile -command "&{ start-process powershell -windowstyle hidden -ArgumentList '-noprofile -file %cd%\install_bandizip.ps1' -verb RunAs}"
+::powershell -noprofile -command "&{ start-process powershell -ArgumentList '-noprofile -file %cd%\install_bandizip.ps1' -verb RunAs}"
 start %cd%\BANDIZIP-SETUP-KR.EXE
 
 
