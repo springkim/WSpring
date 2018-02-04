@@ -44,26 +44,32 @@ So we use shared library.
 ## Programming Language & Tools
 ### <img src="http://i64.tinypic.com/ravog1.png" width="64">Bandizip
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
 **[Bandizip](https://www.bandisoft.co.kr/bandizip/)** is a lightweight, fast and free All-In-One Zip Archiver.
 Bandizip has a very fast Zip algorithm for compression & extraction with Fast Drag and Drop, High Speed Archiving, and Multi-core compression. It handles the most popular compression formats, including Zip, 7z, Rar, and so on.
 ### <img src="http://i63.tinypic.com/25tu4y9.png" width="64">Clion
 <img src="http://i64.tinypic.com/33oqss3.png" height="20">
+
 **[CLion](https://www.jetbrains.com/clion/)** is a smart C and C++ editor. It using CMake as a project model, CLion handles your changes in CMake files automatically, using all the information from there during code editing and refactorings.
 ### <img src="http://i64.tinypic.com/2qmzon4.png" width="64">CMake
 <img src="http://i67.tinypic.com/14y6cfq.png" height="20">
+
 **[CMake](https://cmake.org/)** is an open-source, cross-platform tools to build. Maybe you are using cmake as CLI(Command-Line-Interface) in Linux. Windows is same with Linux.
 You have to install this script before every build scripts.
 ### <img src="http://i68.tinypic.com/15axee.png" width="64">MinGW64
 <img src="http://i66.tinypic.com/2q87by9.png" height="20">
+
 **[MinGW-w64](https://mingw-w64.org/doku.php)** is an advancement of the original mingw.org project, Created to support the GCC compiler on Windows system. You can use this compiler on Windows **[CLion](https://www.jetbrains.com/clion/)**.
 ### <img src="http://i67.tinypic.com/2dcd7x0.png" width="64">Python2.7
 <img src="http://i67.tinypic.com/153bgnm.png" height="20">
+
 **[Python](https://www.python.org/)** is light-weight script language. I don't like python. But many interfaces of deep-learning libraries are python2 or python3. So we need both of them as python2.exe and python3.exe.
 This script will install Python2.7.14 at `C:\Python27\`.
 You can run python2.X as `python2.exe` and `pip2.exe`.
 ### <img src="http://i65.tinypic.com/r1klsl.png" width="64">Python3.6.4
 <img src="http://i67.tinypic.com/oswlxk.png" height="20">
-This script will install Python3.6.4 at `C:\Python36\`.
+
+This script will install Python3.6 at `C:\Python36\`.
 You can run python3.X as `python3.exe` and `pip3.exe`.
 ### <img src="https://i.imgur.com/KOubi5z.png" width="64">WSL
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
