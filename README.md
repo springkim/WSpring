@@ -15,7 +15,7 @@ Actually many libraries don't support x86 system.
 
 ### Shared/Static
 
-This option is actually not important. But consider if you want use independent executable file. 
+This option is actually not important. But consider if you want use independent executable file.
 But static library depends on compiler. MSVC14's library will not work on MSVC15.
 So we use shared library.
 ### Global directories
@@ -60,6 +60,13 @@ You have to install this script before every build scripts.
 <img src="http://i66.tinypic.com/2q87by9.png" height="20">
 
 **[MinGW-w64](https://mingw-w64.org/doku.php)** is an advancement of the original mingw.org project, Created to support the GCC compiler on Windows system. You can use this compiler on Windows **[CLion](https://www.jetbrains.com/clion/)**.
+
+
+### <img src="http://i66.tinypic.com/j6pu94.png" width="64">Perl5
+<img src="http://i68.tinypic.com/2eulyqb.png" height="20">
+
+**[Strawberry Perl](http://strawberryperl.com/)** is a perl environment for MS Windows containing all you need to run and develop perl applications. It is designed to be as close as possible to perl environment on UNIX systems.
+
 ### <img src="http://i67.tinypic.com/2dcd7x0.png" width="64">Python2.7
 <img src="http://i67.tinypic.com/153bgnm.png" height="20">
 
