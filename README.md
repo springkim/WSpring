@@ -95,9 +95,11 @@ It automatically selects opencv version. For example in gcc or Visual Studio(/TC
 
 ### <img src="http://i67.tinypic.com/33ua5p3.png" width="64"> OpenBLAS
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
 **[OpenBLAS](http://www.openblas.net/)** is an optimized BLAS library based on GotoBLAS2 1.13 BSD version. Usually we use BLAS for Matrix Multiplication in C. C++ has [Eigen](eigen.tuxfamily.org/) and Python has numpy.
 
 
 ### <img src="http://i63.tinypic.com/14cqwx3.png" width="64"> TinyXML2
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
 **[TinyXML-2](http://www.grinninglizard.com/tinyxml2/)** is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs.
