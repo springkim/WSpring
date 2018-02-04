@@ -36,9 +36,9 @@ So we use shared library.
 **Library directory** : `C:\MinGW64\x86_64-w64-mingw32\lib\`
 
 ### Program directories
-** Program directory** : `C:\Program Files`
+**Program directory** : `C:\Program Files`
 
-** Startup directory** : `C:\ProgramData\Microsoft\Windows\Start Menu\Programs`
+**Startup directory** : `C:\ProgramData\Microsoft\Windows\Start Menu\Programs`
 
 
 ## Programming Language & Tools
