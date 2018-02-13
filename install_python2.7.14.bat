@@ -23,16 +23,17 @@ pushd "%CD%"
     CD /D "%~dp0"
 	
 ::start
-echo Download python2.7.14
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/cen5fyn3hnxjwgg/Python27.zip?dl=1','Python27.zip')"
-echo "Unzip & Install Python27"
+echo install_python2.7.14
+echo Downloading...
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/cen5fyn3hnxjwgg/Python27.zip?dl=1','%TEMP%\Python27.zip')"
+echo Unzipping...
 call :SafeRMDIR "C:\Python27"
-powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('Python27.zip', 'C:\Python27'); }"
+powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\Python27.zip', 'C:\Python27'); }"
 
 setw "C:\Python27\"
 setw "C:\Python27\Scripts"
 
-DEL "Python27.zip"
+DEL "%TEMP%\Python27.zip"
 echo Finish!!
 pause
 exit /b

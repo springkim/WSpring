@@ -44,6 +44,7 @@ echo "Please, Run WSL and download USpring(https://github.com/springkim/USpring)
 
 ::remove
 :: lxrun /uninstall /full
+echo Finish!!
 pause
 exit /b
 

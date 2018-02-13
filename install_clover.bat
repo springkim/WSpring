@@ -1,8 +1,8 @@
 ::
-::  install_perl.bat
+::  install_clover.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 02. 04...
+::  Created by kimbomm on 2018. 02. 14...
 ::  Copyright 2018 kimbomm. All rights reserved.
 ::
 @echo off
@@ -22,14 +22,16 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
     CD /D "%~dp0"
 	
-::::::::::::install
-echo install_perl
+	
+::start
+echo install_clover
 echo Downloading...
-cd %TEMP%
-powershell "(New-Object System.Net.WebClient).DownloadFile('http://strawberryperl.com/download/5.26.1.1/strawberry-perl-5.26.1.1-64bit.msi','strawberry-perl-5.26.1.1-64bit.msi')"
+powershell "Set-ExecutionPolicy RemoteSigned -Force"
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/z6gvg1e3666afci/clover.exe?dl=1','%TEMP%\clover.exe')"
+cd %TEMP% 
 echo Installing...
-msiexec /i  strawberry-perl-5.26.1.1-64bit.msi /qb
-del strawberry-perl-5.26.1.1-64bit.msi
-echo Finish!
+start /wait clover.exe /S
+DEL "%TEMP%\clover.exe"
+echo Finish!!
 pause
 exit /b

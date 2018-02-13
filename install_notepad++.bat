@@ -1,8 +1,8 @@
 ::
-::  install_perl.bat
+::  install_notepad++.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 02. 04...
+::  Created by kimbomm on 2018. 02. 14...
 ::  Copyright 2018 kimbomm. All rights reserved.
 ::
 @echo off
@@ -23,13 +23,15 @@ pushd "%CD%"
     CD /D "%~dp0"
 	
 ::::::::::::install
-echo install_perl
+echo install_notepad++
 echo Downloading...
-cd %TEMP%
-powershell "(New-Object System.Net.WebClient).DownloadFile('http://strawberryperl.com/download/5.26.1.1/strawberry-perl-5.26.1.1-64bit.msi','strawberry-perl-5.26.1.1-64bit.msi')"
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://notepad-plus-plus.org/repository/7.x/7.5.4/npp.7.5.4.Installer.x64.exe','%TEMP%\npp.exe')"
 echo Installing...
-msiexec /i  strawberry-perl-5.26.1.1-64bit.msi /qb
-del strawberry-perl-5.26.1.1-64bit.msi
-echo Finish!
+if exist "%programfiles%\Notepad++\uninstall.exe" "%programfiles%\Notepad++\uninstall.exe" /S
+if exist "%programfiles(x86)%\ Notepad++\uninstall.exe" "%programfiles(x86)%\ Notepad++\uninstall.exe" /S
+cd %TEMP%
+start /wait npp.exe /S
+del "%TEMP%\npp.exe"
+echo Finish!!
 pause
 exit /b

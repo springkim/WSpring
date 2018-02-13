@@ -25,9 +25,11 @@ pushd "%CD%"
 	
 
 ::start
-echo Download opencv
+echo install_opencv
+echo Downloading...
+cd %TEMP%
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/uh97fag1yie0o8p/opencv3.4.0%28wspring%29.zip?dl=1','opencv(wspring).zip')"
-echo Unzip opencv
+echo Unzipping...
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('opencv(wspring).zip', 'opencv(wspring)'); }"
 echo Install opencv ...
 ::Set dlls
@@ -60,19 +62,23 @@ if exist "C:\MinGW64\" (
 	xcopy /Y "opencv(wspring)\MinGW64\lib\*.*" "C:\MinGW64\x86_64-w64-mingw32\lib" >NUL
 )
 if exist "C:\python27\Lib\site-packages\" (
+	cd "C:\python27"
 	echo Install opencv in Python2.7
-	pip2 install numpy >NUL
-	pip2 install matplotlib >NUL
-	xcopy /Y "opencv(wspring)\Python2\*.pyd" "C:\python27\Lib\site-packages\" >NUL
+	pip2 install numpy
+	pip2 install matplotlib
+	pip2 install opencv-python
 )
 if exist "C:\python36\Lib\site-packages\" (
+	cd "C:\python36"
 	echo Install opencv in Python3.6
-	pip3 install numpy >NUL
-	pip3 install matplotlib >NUL
-	xcopy /Y "opencv(wspring)\Python3\*.pyd" "C:\python36\Lib\site-packages\" >NUL
+	pip3 install numpy
+	pip3 install matplotlib
+	pip3 install opencv-python
 )
+cd %TEMP%
 RMDIR /S /Q "opencv(wspring)"
 DEL "opencv(wspring).zip"
+echo Finish!!
 pause
 exit /b
 

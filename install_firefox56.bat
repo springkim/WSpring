@@ -24,8 +24,12 @@ pushd "%CD%"
 	
 	
 ::::::::::::install
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xs1lhslyc76mp7p/Firefox%20Setup%2056.0.2.exe?dl=1','firefox56.exe')"
-firefox56.exe -ms
-DEL firefox56.exe
+echo install_firefox
+echo Downloading...
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xs1lhslyc76mp7p/Firefox%20Setup%2056.0.2.exe?dl=1','%TEMP%\firefox56.exe')"
+echo Installing...
+"%TEMP%\firefox56.exe" -ms
+DEL "%TEMP%\firefox56.exe"
+echo Finish!!
 pause
 exit /b

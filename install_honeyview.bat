@@ -1,8 +1,8 @@
 ::
-::  install_bandizip.bat
+::  install_honeyview.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 02. 03...
+::  Created by kimbomm on 2018. 02. 14...
 ::  Copyright 2018 kimbomm. All rights reserved.
 ::
 @echo off
@@ -24,14 +24,14 @@ pushd "%CD%"
 	
 	
 ::start
-echo install_bandizip
+echo install_honeyview
 echo Downloading...
 powershell "Set-ExecutionPolicy RemoteSigned -Force"
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.bandisoft.co.kr/bandizip/dl.php?web','%TEMP%\BANDIZIP-SETUP-KR.EXE')"
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.bandisoft.co.kr/honeyview/dl.php?web','%TEMP%\HONEYVIEW-SETUP-KR.EXE')"
 cd %TEMP% 
 echo Installing...
-start /wait BANDIZIP-SETUP-KR.EXE /S
-DEL "%TEMP%\BANDIZIP-SETUP-KR.EXE"
+start /wait HONEYVIEW-SETUP-KR.EXE /S
+DEL "%TEMP%\HONEYVIEW-SETUP-KR.EXE"
 echo Finish!!
 pause
 exit /b

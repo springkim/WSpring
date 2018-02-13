@@ -23,16 +23,17 @@ pushd "%CD%"
     CD /D "%~dp0"
 	
 ::start
-echo Download python3.6.4
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/cap76ed6uepnch5/Python36.zip?dl=1','Python36.zip')"
-echo "Unzip & Install Python36"
+echo install_python3.6.4
+echo Downloading...
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/cap76ed6uepnch5/Python36.zip?dl=1','%TEMP%\Python36.zip')"
+echo Unzipping...
 call :SafeRMDIR "C:\Python36"
-powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('Python36.zip', 'C:\Python36'); }"
+powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\Python36.zip', 'C:\Python36'); }"
 
 setw "C:\Python36\"
 setw "C:\Python36\Scripts"
 
-DEL "Python36.zip"
+DEL "%TEMP%\Python36.zip"
 echo Finish!!
 pause
 exit /b

@@ -1,8 +1,8 @@
 ::
-::  install_perl.bat
+::  install_haroopad.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 02. 04...
+::  Created by kimbomm on 2018. 02. 14...
 ::  Copyright 2018 kimbomm. All rights reserved.
 ::
 @echo off
@@ -23,13 +23,13 @@ pushd "%CD%"
     CD /D "%~dp0"
 	
 ::::::::::::install
-echo install_perl
+echo install_haroopad
 echo Downloading...
 cd %TEMP%
-powershell "(New-Object System.Net.WebClient).DownloadFile('http://strawberryperl.com/download/5.26.1.1/strawberry-perl-5.26.1.1-64bit.msi','strawberry-perl-5.26.1.1-64bit.msi')"
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://bitbucket.org/rhiokim/haroopad-download/downloads/Haroopad-v0.13.1-win-x64.msi','Haroopad-v0.13.1-win-x64.msi')"
 echo Installing...
-msiexec /i  strawberry-perl-5.26.1.1-64bit.msi /qb
-del strawberry-perl-5.26.1.1-64bit.msi
+msiexec /i Haroopad-v0.13.1-win-x64.msi /qb
+del Haroopad-v0.13.1-win-x64.msi
 echo Finish!
 pause
 exit /b

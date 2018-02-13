@@ -1,8 +1,8 @@
 ::
-::  install_perl.bat
+::  install_foxit.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 02. 04...
+::  Created by kimbomm on 2018. 02. 14...
 ::  Copyright 2018 kimbomm. All rights reserved.
 ::
 @echo off
@@ -23,13 +23,14 @@ pushd "%CD%"
     CD /D "%~dp0"
 	
 ::::::::::::install
-echo install_perl
+echo install_foxit
 echo Downloading...
-cd %TEMP%
-powershell "(New-Object System.Net.WebClient).DownloadFile('http://strawberryperl.com/download/5.26.1.1/strawberry-perl-5.26.1.1-64bit.msi','strawberry-perl-5.26.1.1-64bit.msi')"
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/w2mczugknccriop/FoxitReader90_L10N_Setup_Prom.exe?dl=1','%TEMP%\foxit.exe')"
 echo Installing...
-msiexec /i  strawberry-perl-5.26.1.1-64bit.msi /qb
-del strawberry-perl-5.26.1.1-64bit.msi
-echo Finish!
+cd %TEMP%
+start /wait foxit.exe /ForceInstall /VERYSILENT DESKTOP_SHORTCUT="0" MAKEDEFAULT="0" VIEWINBROWSER="0" LAUNCHCHECKDEFAULT="0" AUTO_UPDATE="0" /passive /norestart
+
+del "%TEMP%\foxit.exe"
+echo Finish!!
 pause
 exit /b

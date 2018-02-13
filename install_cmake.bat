@@ -23,14 +23,21 @@ pushd "%CD%"
     CD /D "%~dp0"
 	
 ::start
-echo Download cmake
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/b53bfujeezfo6qg/CMake.zip?dl=1','CMake.zip')"
-echo "Unzip & Install CMake"
-powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('CMake.zip', 'C:\Program Files\CMake'); }"
-
+echo install_cmake
+echo Downloading...
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/b53bfujeezfo6qg/CMake.zip?dl=1','%TEMP%\CMake.zip')"
+echo Unzipping...
+call :SafeRMDIR "%SystemDrive%\Program Files\CMake"
+powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\CMake.zip', '%SystemDrive%\Program Files\CMake'); }"
+echo Installing...
 setw "C:\Program Files\CMake\bin"
-
-DEL "CMake.zip"
+DEL "%TEMP%\CMake.zip"
 echo Finish!!
 pause
+exit /b
+
+:SafeRMDIR
+IF EXIST "%~1" (
+	RMDIR /S /Q "%~1"
+)
 exit /b

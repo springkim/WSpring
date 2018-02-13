@@ -24,11 +24,13 @@ pushd "%CD%"
 	
 	
 ::start
-echo Download tinyxml2
+echo install_tinyxml2
+echo Downloading...
+cd %TEMP%
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/9h1s7kgpw0onblb/tinyxml2%28wspring%29.zip?dl=1','tinyxml2(wspring).zip')"
-echo Unzip tinyxml2
+echo Unzipping...
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('tinyxml2(wspring).zip', 'tinyxml2(wspring)'); }"
-echo Install tinyxml2 ...
+echo Installing...
 ::Set dlls
 xcopy /Y "tinyxml2(wspring)\MSVC14\bin\*.dll" "C:\Windows\System32\" >NUL
 xcopy /Y "tinyxml2(wspring)\MinGW64\bin\*.dll" "C:\Windows\System32\" >NUL

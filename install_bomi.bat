@@ -1,11 +1,10 @@
 ::
-::  install_MinGW64.bat
+::  install_bomi.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2017. 12. 16...
+::  Created by kimbomm on 2018. 02. 14...
 ::  Copyright 2017 kimbomm. All rights reserved.
 ::
-:: 7.2.0
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if '%errorlevel%' NEQ '0' (
@@ -23,24 +22,13 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
     CD /D "%~dp0"
 	
-
 ::start
-echo install_mingw64
-echo Downloading...
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/5hc0q3ryk8lt2w4/MinGW64.zip?dl=1','%TEMP%\MinGW64.zip')"
-echo Unzipping...
-call :SafeRMDIR "%SystemDrive%\MinGW64"
-powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\MinGW64.zip', '%SystemDrive%\MinGW64'); }"
-
-setw "C:\MinGW64\bin\"
-
-DEL "%TEMP%\MinGW64.zip"
+echo install_bomi
+echo Downloading... 
+powershell "(New-Object System.Net.WebClient).DownloadFile('http://master.dl.sourceforge.net/project/bomi/windows/latest/bomi-64bit.7z','%TEMP%\bomi-64bit.7z')"
+echo Installing...
+7z x "%TEMP%\bomi-64bit.7z" -y -o"%SystemDrive%\Program Files\"
+DEL "%TEMP%\bomi-64bit.7z"
 echo Finish!!
 pause
-exit /b
-
-:SafeRMDIR
-IF EXIST "%~1" (
-	RMDIR /S /Q "%~1"
-)
 exit /b

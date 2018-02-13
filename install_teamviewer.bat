@@ -1,8 +1,8 @@
 ::
-::  install_perl.bat
+::  install_teamviewer.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 02. 04...
+::  Created by kimbomm on 2018. 02. 14...
 ::  Copyright 2018 kimbomm. All rights reserved.
 ::
 @echo off
@@ -23,13 +23,12 @@ pushd "%CD%"
     CD /D "%~dp0"
 	
 ::::::::::::install
-echo install_perl
 echo Downloading...
-cd %TEMP%
-powershell "(New-Object System.Net.WebClient).DownloadFile('http://strawberryperl.com/download/5.26.1.1/strawberry-perl-5.26.1.1-64bit.msi','strawberry-perl-5.26.1.1-64bit.msi')"
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://download.teamviewer.com/download/TeamViewer_Setup.exe','%TEMP%\TeamViewer_Setup.exe')"
 echo Installing...
-msiexec /i  strawberry-perl-5.26.1.1-64bit.msi /qb
-del strawberry-perl-5.26.1.1-64bit.msi
-echo Finish!
+cd %TEMP%
+start /wait TeamViewer_Setup.exe /S /norestart
+del "%TEMP%\TeamViewer_Setup.exe"
+echo Finish!!
 pause
 exit /b

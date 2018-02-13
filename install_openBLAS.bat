@@ -24,11 +24,13 @@ pushd "%CD%"
 	
 	
 ::start
-echo Download openblas
+echo install_openblas
+echo Downloading...
+cd %TEMP%
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/9ax0hovyachz9hh/openblas%28wspring%29.zip?dl=1','openblas(wspring).zip')"
-echo Unzip openblas
+echo Unzipping...
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('openblas(wspring).zip', 'openblas(wspring)'); }"
-echo Install openblas ...
+echo Installing...
 ::Set dlls
 xcopy /Y "openblas(wspring)\MSVC14\bin\*.dll" "C:\Windows\System32\" >NUL
 ::xcopy /Y "openblas(wspring)\MinGW64\bin\*.dll" "C:\Windows\System32\" >NUL
@@ -54,6 +56,7 @@ if exist "C:\MinGW64\" (
 )
 RMDIR /S /Q "openblas(wspring)"
 DEL "openblas(wspring).zip"
+echo Finish!!
 pause
 exit /b
 
