@@ -69,7 +69,7 @@ Bandizip has a very fast Zip algorithm for compression & extraction with Fast Dr
 **[Clover](http://en.ejie.me/)** is an extension of the Windows Explorer, to add multi-tab functionality similar to Google Chrome browser. After install Clover, you will be able to open multiple folders within the same window, and you can also add folder bookmarks.
 
 ### <img src="https://i.imgur.com/iVw6gUY.png" width="64">CMake
-<img src="http://i67.tinypic.com/14y6cfq.png" height="20">
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[CMake](https://cmake.org/)** is an open-source, cross-platform tools to build. Maybe you are using cmake as CLI(Command-Line-Interface) in Linux. Windows is same with Linux.
 You have to install this script before every build scripts.
