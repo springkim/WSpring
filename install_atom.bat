@@ -22,7 +22,6 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
     CD /D "%~dp0"
 	
-	
 ::start
 echo install_atom
 echo Downloading...
@@ -37,6 +36,25 @@ start /wait AtomSetup-x64.exe --silent
 ::DEL "%TEMP%\AtomSetup-x64.exe"	::대기를 넣어도 삭제불가.
 DEL "%TEMP%\atom_latest.txt"
 DEL "%TEMP%\atom_url.txt"
+::install uncrustify
+cd %TEMP% 
+git clone https://github.com/uncrustify/uncrustify
+cd uncrustify
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+cmake --build . --config Release
+move Release\uncrustify.exe "%SystemDrive%\Windows\System32"
+call :SafeRMDIR "%TEMP%\uncrustify"
+::install cfg files
+md C:\Atom
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://gist.githubusercontent.com/springkim/756f0aa50ee265f28e2465e83f70b613/raw/531e6e7fee132c86a4f03dbfca4d2c19660a3f71/uncrustify-cpp.cfg','C:\Atom\uncrustify-cpp.cfg')"
 echo Finish!!
 pause
+exit /b
+
+:SafeRMDIR
+IF EXIST "%~1" (
+	RMDIR /S /Q "%~1"
+)
 exit /b
