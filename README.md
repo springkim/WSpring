@@ -42,6 +42,11 @@ So we use shared library.
 
 
 ## Programming Language & Tools
+### <img src="http://i65.tinypic.com/2mw85xz.png" width="64">Atom
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
+**[Atom](https://atom.io/)** is a text editor that's modern, approachable, yet hackable to the core—a tool you can customize to do anything but also use productively without ever touching a config file.
+
 ### <img src="https://i.imgur.com/kCZHCl2.png" width="64">Bandizip
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
