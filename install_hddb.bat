@@ -28,6 +28,7 @@ echo install_hddb
 echo Downloading... 
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/oaz0gdo0cgj37ou/hddb_4.4.0.x64.zip?dl=1','%TEMP%\hddb_4.4.0.x64.zip')"
 echo Unzipping...
+call :SafeRMDIR "%UserProfile%\hddb"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\hddb_4.4.0.x64.zip', '%UserProfile%\hddb'); }"
 
 powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\hddb.lnk');$s.TargetPath='%UserProfile%\hddb\hddb-4.4.0.x64.exe';$s.Save()"
@@ -37,4 +38,10 @@ powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Des
 DEL "%TEMP%\hddb_4.4.0.x64.zip"
 echo Finish!!
 pause
+exit /b
+
+:SafeRMDIR
+IF EXIST "%~1" (
+	RMDIR /S /Q "%~1"
+)
 exit /b

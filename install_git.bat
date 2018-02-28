@@ -30,7 +30,7 @@ powershell "$HTML=Invoke-WebRequest -Uri 'https://git-scm.com/download/win';($HT
 powershell "get-content %TEMP%\git_latest.txt -ReadCount 1000 | foreach { $_ -match 'PortableGit' } | out-file -encoding ascii %TEMP%\git_url.txt"
 powershell "get-content %TEMP%\git_url.txt -ReadCount 1000 | foreach { $_ -match '64-bit' } | out-file -encoding ascii %TEMP%\git_url1.txt"
 set /p "url="<"%TEMP%\git_url1.txt"
-powershell "(New-Object System.Net.WebClient).DownloadFile('%url%','%TEMP%\git.7z')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('%url%','%TEMP%\git.7z')"
 echo Installing...
 call :SafeRMDIR "%SystemDrive%\Program Files\Git\"
 md "%SystemDrive%\Program Files\Git\"

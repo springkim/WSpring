@@ -25,12 +25,12 @@ pushd "%CD%"
 ::start
 echo install_atom
 echo Downloading...
-cd %TEMP% 
-powershell "$HTML=Invoke-WebRequest -Uri 'https://github.com/atom/atom/releases/latest';($HTML.ParsedHtml.getElementsByTagName('a') | %% href) > atom_latest.txt"
+cd %TEMP%
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/atom/atom/releases/latest';($HTML.ParsedHtml.getElementsByTagName('a') | %% href) > atom_latest.txt"
 powershell "get-content atom_latest.txt -ReadCount 1000 | foreach { $_ -match 'AtomSetup-x64' } | out-file -encoding ascii atom_url.txt"
 set /p "url="<"atom_url.txt"
 ::echo %url:~6%
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://github.com%url:~6%','AtomSetup-x64.exe')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com%url:~6%','AtomSetup-x64.exe')"
 echo Installing...
 start /wait AtomSetup-x64.exe --silent
 ::DEL "%TEMP%\AtomSetup-x64.exe"	::대기를 넣어도 삭제불가.
@@ -38,6 +38,7 @@ DEL "%TEMP%\atom_latest.txt"
 DEL "%TEMP%\atom_url.txt"
 ::install uncrustify
 cd %TEMP% 
+call :SafeRMDIR "%TEMP%\uncrustify"
 git clone https://github.com/uncrustify/uncrustify
 cd uncrustify
 mkdir build
