@@ -2,7 +2,7 @@
 ::  install_cmake.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 01. 22...
+::  Created by kimbomm on 2018. 02 22...
 ::  Copyright 2017 kimbomm. All rights reserved.
 ::
 @echo off
