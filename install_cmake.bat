@@ -28,11 +28,11 @@ echo install_cmake
 pushd "%CD%"
 echo Verify latest version...
 powershell "$HTML=Invoke-WebRequest -Uri 'https://cmake.org/download/';($HTML.ParsedHtml.getElementsByTagName('a') | %% href) > %TEMP%\parse_cmake.txt"
-::win64-x64.zip ê°€ ë“¤ì–´ê°„ ë¼ì¸ë§Œ ì¶”ì¶œ
+::win64-x64.zip °¡ µé¾î°£ ¶óÀÎ¸¸ ÃßÃâ
 powershell "get-content %TEMP%\parse_cmake.txt -ReadCount 1000 | foreach { $_ -match 'win64-x64.zip' } | out-file -encoding ascii %TEMP%\parse_cmake1.txt"
-::rcê°€ ë“¤ì–´ê°„ Release Candidate ë²„ì „ì€ ì œì™¸
+::rc°¡ µé¾î°£ Release Candidate ¹öÀüÀº Á¦¿Ü
 powershell "get-content %TEMP%\parse_cmake1.txt -ReadCount 1000 | foreach { $_ -notMatch 'rc' } | out-file -encoding ascii %TEMP%\parse_cmake2.txt"
-::ë§¨ ì²«ì¤„ì´ ê°€ì¥ ìµœì‹  ë²„ì „
+::¸Ç Ã¹ÁÙÀÌ °¡Àå ÃÖ½Å ¹öÀü
 set /p "url="<"%TEMP%\parse_cmake2.txt"
 ::echo %url%
 echo Downloading...
