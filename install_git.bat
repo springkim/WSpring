@@ -26,7 +26,7 @@ CD /D "%~dp0"
 ::start
 echo install_git
 echo Downloading...
-powershell "$HTML=Invoke-WebRequest -Uri 'https://git-scm.com/download/win';($HTML.ParsedHtml.getElementsByTagName('a') | %% href) > %TEMP%\git_latest.txt"
+powershell "$HTML=Invoke-WebRequest -Uri 'https://git-scm.com/download/win' -UseBasicParsing;($HTML.Links.href) > %TEMP%\git_latest.txt"
 powershell "get-content %TEMP%\git_latest.txt -ReadCount 1000 | foreach { $_ -match 'PortableGit' } | out-file -encoding ascii %TEMP%\git_url.txt"
 powershell "get-content %TEMP%\git_url.txt -ReadCount 1000 | foreach { $_ -match '64-bit' } | out-file -encoding ascii %TEMP%\git_url1.txt"
 set /p "url="<"%TEMP%\git_url1.txt"

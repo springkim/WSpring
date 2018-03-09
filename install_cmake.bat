@@ -27,7 +27,7 @@ CD /D "%~dp0"
 echo install_cmake
 pushd "%CD%"
 echo Verify latest version...
-powershell "$HTML=Invoke-WebRequest -Uri 'https://cmake.org/download/';($HTML.ParsedHtml.getElementsByTagName('a') | %% href) > %TEMP%\parse_cmake.txt"
+powershell "$HTML=Invoke-WebRequest -Uri 'https://cmake.org/download/' -UseBasicParsing;($HTML.Links.href) > %TEMP%\parse_cmake.txt"
 ::win64-x64.zip 가 들어간 라인만 추출
 powershell "get-content %TEMP%\parse_cmake.txt -ReadCount 1000 | foreach { $_ -match 'win64-x64.zip' } | out-file -encoding ascii %TEMP%\parse_cmake1.txt"
 ::rc가 들어간 Release Candidate 버전은 제외
@@ -36,7 +36,7 @@ powershell "get-content %TEMP%\parse_cmake1.txt -ReadCount 1000 | foreach { $_ -
 set /p "url="<"%TEMP%\parse_cmake2.txt"
 ::echo %url%
 echo Downloading...
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://cmake.org%url:~6%','%TEMP%\CMake.zip')"
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://cmake.org%url%','%TEMP%\CMake.zip')"
 echo Unzipping...
 call :SafeRMDIR "%SystemDrive%\Program Files\CMake"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\CMake.zip', '%SystemDrive%\Program Files\CMake'); }"

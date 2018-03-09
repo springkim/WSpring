@@ -21,11 +21,11 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
 pushd "%CD%"
     CD /D "%~dp0"
-	
+
 ::start
 echo install_shareX
 echo Downloading...
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://github.com/ShareX/ShareX/releases/download/v12.0.0/ShareX-portable.zip','%TEMP%\ShareX.zip')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('https://github.com/ShareX/ShareX/releases/download/v12.0.0/ShareX-portable.zip','%TEMP%\ShareX.zip')"
 echo Unzipping...
 call :SafeRMDIR "%UserProfile%\ShareX-Portable"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\ShareX.zip', '%UserProfile%\ShareX-Portable'); }"
