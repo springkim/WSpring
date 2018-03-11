@@ -195,3 +195,9 @@ You don't have to any settings for Visual Studio and Python. But you need link l
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[TinyXML-2](http://www.grinninglizard.com/tinyxml2/)** is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs.
+
+Uninstaller
+-----------
+### <img src="https://i.imgur.com/SFeo4v6.png" width="64"> Uninstall Onedrive
+
+**[Onedrive](https://onedrive.live.com/)** is too slow and not robust for synchronization. I recommend **[Dropbox](https://www.dropbox.com)**.
