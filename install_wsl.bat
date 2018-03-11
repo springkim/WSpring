@@ -21,9 +21,20 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
 pushd "%CD%"
     CD /D "%~dp0"
-	
-	
+
+
 ::::::::::::install
+echo !!!!!Warning!!!!!!!
+echo !!!!!Warning!!!!!!!
+echo !!!!!Warning!!!!!!!
+echo This script will restart your PC.
+@echo off
+setlocal
+:PROMPT
+SET /P AREYOUSURE=Are you sure to run this script(Y/[N])?
+IF /I "%AREYOUSURE%" NEQ "Y" GOTO END
+
+
 powershell Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 if not exist %APPDATA%\..\Local\lxss (
 	lxrun /install
@@ -40,11 +51,16 @@ del Xming-6-9-0-31-setup.exe
 echo "WSL and XMing installed!"
 echo "Please, Run WSL and download USpring(https://github.com/springkim/USpring) for setup WSL."
 
+::C:\Windows\System32\bash.exe {12345678-1234-5678-0123-456789abcdef} ~
 
+powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\ubuntu.lnk');$s.TargetPath='%SystemDrive%\Windows\System32\bash.exe';$s.Arguments = ' {12345678-1234-5678-0123-456789abcdef} ~';$s.IconLocation='%USERPROFILE%\AppData\Local\lxss\bash.ico';$s.Save()"
+powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\ubuntu.lnk');$s.TargetPath='%SystemDrive%\Windows\System32\bash.exe';$s.Arguments = ' {12345678-1234-5678-0123-456789abcdef} ~';$s.IconLocation='%USERPROFILE%\AppData\Local\lxss\bash.ico';$s.Save()"
 
 ::remove
 :: lxrun /uninstall /full
 echo Finish!!
+:END
+endlocal
 pause
 exit /b
 

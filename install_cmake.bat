@@ -21,18 +21,18 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
 pushd "%CD%"
 CD /D "%~dp0"
-	
+
 ::start
-::move "C:\Program Files\CMake\" "C:\Program Files\CMake\cmake-3.10.2-win64-x64\bin\" 
+::move "C:\Program Files\CMake\" "C:\Program Files\CMake\cmake-3.10.2-win64-x64\bin\"
 echo install_cmake
 pushd "%CD%"
 echo Verify latest version...
 powershell "$HTML=Invoke-WebRequest -Uri 'https://cmake.org/download/' -UseBasicParsing;($HTML.Links.href) > %TEMP%\parse_cmake.txt"
-::win64-x64.zip 가 들어간 라인만 추출
+::find win64-x64.zip
 powershell "get-content %TEMP%\parse_cmake.txt -ReadCount 1000 | foreach { $_ -match 'win64-x64.zip' } | out-file -encoding ascii %TEMP%\parse_cmake1.txt"
-::rc가 들어간 Release Candidate 버전은 제외
+::without RC version
 powershell "get-content %TEMP%\parse_cmake1.txt -ReadCount 1000 | foreach { $_ -notMatch 'rc' } | out-file -encoding ascii %TEMP%\parse_cmake2.txt"
-::맨 첫줄이 가장 최신 버전
+
 set /p "url="<"%TEMP%\parse_cmake2.txt"
 ::echo %url%
 echo Downloading...
@@ -53,6 +53,10 @@ DEL "%TEMP%\CMake.zip"
 DEL "%TEMP%\parse_cmake.txt"
 DEL "%TEMP%\parse_cmake1.txt"
 DEL "%TEMP%\parse_cmake2.txt"
+
+powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\cmake-gui.lnk');$s.TargetPath='%SystemDrive%\Program Files\CMake\bin\cmake-gui.exe';$s.Save()"
+powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\cmake-gui.lnk');$s.TargetPath='%SystemDrive%\Program Files\CMake\bin\cmake-gui.exe';$s.Save()"
+
 echo Finish!!
 pause
 exit /b
