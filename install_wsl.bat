@@ -40,10 +40,22 @@ if not exist %APPDATA%\..\Local\lxss (
 	lxrun /install
 )
 
+::Install XMING
+::powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ypxtonz2shil2se/Xming-6-9-0-31-setup.exe?dl=1','Xming-6-9-0-31-setup.exe')"
+::if not exist %SystemDrive%\install\Logs\ md %SystemDrive%\install\Logs\
+::"%~dp0Xming-6-9-0-31-setup.exe" /verysilent /norestart /LOG="%systemdrive%\install\logs\Xming_6_9_0_31.log"
 
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ypxtonz2shil2se/Xming-6-9-0-31-setup.exe?dl=1','Xming-6-9-0-31-setup.exe')"
-if not exist %SystemDrive%\install\Logs\ md %SystemDrive%\install\Logs\
-"%~dp0Xming-6-9-0-31-setup.exe" /verysilent /norestart /LOG="%systemdrive%\install\logs\Xming_6_9_0_31.log"
+::Install VcxSrv
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/ArcticaProject/vcxsrv/releases/latest' -UseBasicParsing;($HTML.Links.href) > vcxsrv_latest.txt"
+powershell "get-content vcxsrv_latest.txt -ReadCount 1000 | foreach { $_ -match 'installer.exe' } | out-file -encoding ascii vcxsrv_url.txt"
+powershell "get-content vcxsrv_url.txt -ReadCount 1000 | foreach { $_ -notMatch 'debug' } | out-file -encoding ascii vcxsrv_url2.txt"
+set /p "url="<"vcxsrv_url2.txt"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com%url%','vcxsrv.exe')"
+vcxsrv.exe /S
+echo Installing...
+
+
+
 del /S /Q "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\Xming\Uninstall Xming.lnk" >;NUL 2>&1
 del /S /Q "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\Xming\Xming on the Web.lnk" >;NUL 2>&1
 netsh advfirewall firewall add rule name="Xming" dir=in action=allow program="C:\Program Files\Xming\Xming.exe" enable=yes LocalSubnet profile=domain
