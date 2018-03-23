@@ -218,7 +218,7 @@ This script will install Python3.6 at `C:\Python36\`. You can run python3.X as `
 
 ### <img src="https://i.imgur.com/3rHKkBS.png" width="64">ShareX
 
-<img src="https://i.imgur.com/28cL8fS.png" height="20">
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[ShareX](https://getsharex.com/)** is an open source program that lets you take screenshots or screencasts of any selected area with a single key, save them in your clipboard, hard disk or instantly upload them to over 80 different file hosting services.
 

@@ -25,7 +25,13 @@ pushd "%CD%"
 ::start
 echo install_shareX
 echo Downloading...
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('https://github.com/ShareX/ShareX/releases/download/v12.0.0/ShareX-portable.zip','%TEMP%\ShareX.zip')"
+cd %TEMP%
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/ShareX/ShareX/releases/latest' -UseBasicParsing;($HTML.Links.href) > sharex_latest.txt"
+powershell "get-content sharex_latest.txt -ReadCount 1000 | foreach { $_ -match 'ShareX-portable.zip' } | out-file -encoding ascii sharex_url.txt"
+set /p "url="<"sharex_url.txt"
+::echo %url:~6%
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com%url%','%TEMP%\ShareX.zip')"
+
 echo Unzipping...
 call :SafeRMDIR "%UserProfile%\ShareX-Portable"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\ShareX.zip', '%UserProfile%\ShareX-Portable'); }"
