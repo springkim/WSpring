@@ -27,7 +27,7 @@ echo Downloading...
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/dgeosk46771lf77/nvidia-notebook.exe?dl=1','%TEMP%\nvidia-notebook.exe')"
 echo Installing...
 cd "%TEMP%"
-call nvidia-notebook.exe -s -noreboot -clean
+call nvidia-notebook.exe -s -noreboot
 del "%TEMP%\nvidia-notebook.exe"
 echo Finish!!
 pause

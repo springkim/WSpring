@@ -27,7 +27,7 @@ echo Downloading...
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/j8xul4vcvh6bmwf/cuda_8.0.61_win10.exe?dl=1','%TEMP%\cuda8.0.exe')"
 echo Installing...
 cd "%TEMP%"
-call cuda8.0.exe -s -noreboot -clean"
+call cuda8.0.exe -s -noreboot
 del "%TEMP%\cuda8.0.exe"
 echo Finish!!
 pause

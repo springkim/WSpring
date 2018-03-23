@@ -69,6 +69,13 @@ You can use atom for writing markdown documents instead of Haroopad. It supports
 
 **[Bomi](https://bomi-player.github.io/)** is a multimedia player formerly known as CMPlayer, which is aimed for easy usage but also provides various powerful features and convenience functions. Just install and enjoy it! There will be already what you expect. If you don't like, you can configure almost everything.
 
+
+### <img src="https://i.imgur.com/e7c6p4U.png" width="64">Chrome
+
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
+**[Google Chrome](https://www.google.co.kr/chrome/index.html)** is a freeware web browser developed by Google.[11] It was first released in September 2008, for Microsoft Windows, and was later ported to Linux, macOS, iOS and Android. Google Chrome is also the main component of Chrome OS, where it serves as a platform for running web apps.
+
 ### <img src="https://i.imgur.com/uYmBl2O.png" width="64">Clion
 
 <img src="http://i64.tinypic.com/33oqss3.png" height="20">
@@ -86,6 +93,20 @@ You can use atom for writing markdown documents instead of Haroopad. It supports
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[CMake](https://cmake.org/)** is an open-source, cross-platform tools to build. Maybe you are using cmake as CLI(Command-Line-Interface) in Linux. Windows is same with Linux. You have to install this script before every build scripts.
+
+### <img src="https://i.imgur.com/RsbLrCE.png" width="64">CUDA8.0
+
+<img src="http://i67.tinypic.com/16hiyph.png" height="20">
+
+**You have to install nvidia-driver before install cuda.**
+
+**[CUDA](https://developer.nvidia.com/cuda-downloads)** is a parallel computing platform and programming model developed by NVIDIA for general computing on graphical processing units (GPUs). With CUDA, developers are able to dramatically speed up computing applications by harnessing the power of GPUs.
+
+### <img src="https://i.imgur.com/x2ZPqkd.png" width="64">FileZilla
+
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
+**[FileZilla](https://filezilla-project.org/)** Client is a fast and reliable cross-platform FTP, FTPS and SFTP client with lots of useful features and an intuitive graphical user interface.
 
 ### <img src="https://i.imgur.com/8Zrym5N.png" width="64">Firefox56
 
@@ -136,6 +157,46 @@ Hddb is a capable search tool which will quickly find files on any NTFS drive.
 <img src="https://i.imgur.com/YOYI2lX.png" height="20">
 
 **[Notepad++](https://notepad-plus-plus.org/)** is a free (as in "free speech" and also as in "free beer") source code editor and Notepad replacement that supports several languages. Running in the MS Windows environment, its use is governed by GPL License.
+
+### <img src="https://i.imgur.com/RsbLrCE.png" width="64">NVIDIA driver
+
+<img src="https://i.imgur.com/bodbMbL.png" height="20">
+
+Install drivers for NVIDIA products including GeForce graphics cards.
+
+**install_nvidia_desktop.bat**
+* NVIDIA TITAN Series:
+	* NVIDIA TITAN V, NVIDIA TITAN Xp, NVIDIA TITAN X (Pascal), GeForce GTX TITAN X, GeForce GTX TITAN, GeForce GTX TITAN Black, GeForce GTX TITAN Z
+* GeForce 10 Series:
+	* GeForce GTX 1080 Ti, GeForce GTX 1080, GeForce GTX 1070 Ti, GeForce GTX 1070, GeForce GTX 1060, GeForce GTX 1050 Ti, GeForce GTX 1050, GeForce GT 1030
+* GeForce 900 Series:
+	* GeForce GTX 980 Ti, GeForce GTX 980, GeForce GTX 970, GeForce GTX 960, GeForce GTX 950
+* GeForce 700 Series:
+	* GeForce GTX 780 Ti, GeForce GTX 780, GeForce GTX 770, GeForce GTX 760, GeForce GTX 760 Ti (OEM), GeForce GTX 750 Ti, GeForce GTX 750, GeForce GTX 745, GeForce GT 740, GeForce GT 730, GeForce GT 720, GeForce GT 710, GeForce GT 705
+* GeForce 600 Series:
+	* GeForce GTX 690, GeForce GTX 680, GeForce GTX 670, GeForce GTX 660 Ti, GeForce GTX 660, GeForce GTX 650 Ti BOOST, GeForce GTX 650 Ti, GeForce GTX 650, GeForce GTX 645, GeForce GT 645, GeForce GT 640, GeForce GT 635, GeForce GT 630, GeForce GT 620, GeForce GT 610, GeForce 605
+* GeForce 500 Series:
+	* GeForce GTX 590, GeForce GTX 580, GeForce GTX 570, GeForce GTX 560 Ti, GeForce GTX 560 SE, GeForce GTX 560, GeForce GTX 555, GeForce GTX 550 Ti, GeForce GT 545, GeForce GT 530, GeForce GT 520, GeForce 510
+* GeForce 400 Series:
+	* GeForce GTX 480, GeForce GTX 470, GeForce GTX 465, GeForce GTX 460 SE v2, GeForce GTX 460 SE, GeForce GTX 460, GeForce GTS 450, GeForce GT 440, GeForce GT 430, GeForce GT 420
+
+**install_nvidia_notebook.bat**
+* GeForce MX100 Series (Notebook):
+	* GeForce MX150, GeForce MX130, GeForce MX110
+* GeForce 10 Series (Notebooks):
+	* GeForce GTX 1080, GeForce GTX 1070, GeForce GTX 1060, GeForce GTX 1050 Ti, GeForce GTX 1050
+* GeForce 900M Series (Notebooks):
+	* GeForce GTX 980, GeForce GTX 980M, GeForce GTX 970M, GeForce GTX 965M, GeForce GTX 960M, GeForce GTX 950M, GeForce 945M, GeForce 940MX, GeForce 930MX, GeForce 920MX, GeForce 940M, GeForce 930M, GeForce 920M, GeForce 910M
+* GeForce 800M Series (Notebooks):
+	* GeForce GTX 880M, GeForce GTX 870M, GeForce GTX 860M, GeForce GTX 850M, GeForce 845M, GeForce 840M, GeForce 830M, GeForce 825M, GeForce 820M, GeForce 810M, GeForce 800M
+* GeForce 700M Series (Notebooks):
+	* GeForce GTX 780M, GeForce GTX 770M, GeForce GTX 765M, GeForce GTX 760M, GeForce GT 755M, GeForce GT 750M, GeForce GT 745M, GeForce GT 740M, GeForce GT 735M, GeForce GT 730M, GeForce GT 720M, GeForce GT 710M, GeForce 710M, GeForce 705M
+* GeForce 600M Series (Notebooks):
+	* GeForce GTX 680MX, GeForce GTX 680M, GeForce GTX 675MX, GeForce GTX 675M, GeForce GTX 670MX, GeForce GTX 670M, GeForce GTX 660M, GeForce GT 650M, GeForce GT 645M, GeForce GT 640M, GeForce GT 640M LE, GeForce GT 635M, GeForce GT 630M, GeForce GT 625M, GeForce GT 620M, GeForce 610M
+* GeForce 500M Series (Notebooks):
+	* GeForce GTX 580M, GeForce GTX 570M, GeForce GTX 560M, GeForce GT 555M, GeForce GT 550M, GeForce GT 540M, GeForce GT 525M, GeForce GT 520M, GeForce GT 520MX
+* GeForce 400M Series (Notebooks):
+	* GeForce GTX 485M, GeForce GTX 480M, GeForce GTX 470M, GeForce GTX 460M, GeForce GT 445M, GeForce GT 435M, GeForce GT 425M, GeForce GT 420M, GeForce GT 415M, GeForce 410M
 
 ### <img src="https://i.imgur.com/wRX6xc1.png" width="64">Perl5
 

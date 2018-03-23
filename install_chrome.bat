@@ -1,8 +1,8 @@
 ::
-::  install_nvidia_desktop.bat
+::  install_chrome.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 03. 23...
+::  Created by kimbomm on 2018. 03. 24...
 ::  Copyright 2018 kimbomm. All rights reserved.
 ::
 @echo off
@@ -22,12 +22,12 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
 CD /D "%~dp0"
 
-echo install nvidia driver for desktop
+echo install_chrome
 echo Downloading...
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/w8u3zok1o8nj1wv/nvidia-desktop.exe?dl=1','%TEMP%\nvidia-desktop.exe')"
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/jhl6ki977z935w7/ChromeSetup.exe?dl=1','%TEMP%\ChromeSetup.exe')"
 echo Installing...
 cd "%TEMP%"
-call nvidia-desktop.exe -s -noreboot
-del "%TEMP%\nvidia-desktop.exe"
+call ChromeSetup.exe /silent /install
+del "%TEMP%\ChromeSetup.exe"
 echo Finish!!
 pause
