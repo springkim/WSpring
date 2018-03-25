@@ -74,7 +74,7 @@ You can use atom for writing markdown documents instead of Haroopad. It supports
 
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
-**[Google Chrome](https://www.google.co.kr/chrome/index.html)** is a freeware web browser developed by Google.[11] It was first released in September 2008, for Microsoft Windows, and was later ported to Linux, macOS, iOS and Android. Google Chrome is also the main component of Chrome OS, where it serves as a platform for running web apps.
+**[Google Chrome](https://www.google.co.kr/chrome/index.html)** is a freeware web browser developed by Google. It was first released in September 2008, for Microsoft Windows, and was later ported to Linux, macOS, iOS and Android. Google Chrome is also the main component of Chrome OS, where it serves as a platform for running web apps.
 
 ### <img src="https://i.imgur.com/uYmBl2O.png" width="64">Clion
 
@@ -227,6 +227,19 @@ This script will install Python3.6 at `C:\Python36\`. You can run python3.X as `
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[TeamViewer](www.teamviewer.com)** is a proprietary computer software package for remote control, desktop sharing, online meetings, web conferencing and file transfer between computers.
+
+### <img src="https://i.imgur.com/DMUfMlR.png" width="64">Visual Studio 2015
+
+<img src="https://i.imgur.com/3e4vFBw.png" height="20">
+
+Microsoft **[Visual Studio](https://www.visualstudio.com/)** is an integrated development environment (IDE) from Microsoft. It is used to develop computer programs, as well as web sites, web apps, web services and mobile apps. Visual Studio uses Microsoft software development platforms such as Windows API, Windows Forms, Windows Presentation Foundation, Windows Store and Microsoft Silverlight. It can produce both native code and managed code.
+
+**Included package**
+* Visual C++
+
+**Not included package**
+* Python
+* Visual F#
 
 ### <img src="https://i.imgur.com/hhUBdwn.png" width="64">WSL
 

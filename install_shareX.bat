@@ -41,6 +41,8 @@ powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%SystemDrive%\Pro
 powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\ShareX.lnk');$s.TargetPath='%UserProfile%\ShareX-Portable\ShareX.exe';$s.Save()"
 
 DEL "%TEMP%\ShareX.zip"
+DEL "sharex_latest.txt"
+DEL "sharex_url.txt"
 echo Finish!!
 pause
 exit /b
