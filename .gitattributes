@@ -1,2 +1,4 @@
 # Windows Batch File
 *.bat   eol=crlf
+*.txt   eol=crlf
+*.cpp   eol=crlf

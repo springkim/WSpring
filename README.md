@@ -102,6 +102,8 @@ You can use atom for writing markdown documents instead of Haroopad. It supports
 
 **[CUDA](https://developer.nvidia.com/cuda-downloads)** is a parallel computing platform and programming model developed by NVIDIA for general computing on graphical processing units (GPUs). With CUDA, developers are able to dramatically speed up computing applications by harnessing the power of GPUs.
 
+And this script converts cuda include files to UNICODE. Because, Visual Studio(Korean ver) shows sooooo many encoding warnings if it used original encoding files.
+
 ### <img src="https://i.imgur.com/x2ZPqkd.png" width="64">FileZilla
 
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
