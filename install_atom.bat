@@ -20,13 +20,12 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
+CD /D "%~dp0"
 
 ::start
-echo install_atom
+title install_atom
 echo Downloading...
 cd %TEMP%
-::powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/atom/atom/releases/latest' -UseBasicParsing;($HTML.ParsedHtml.getElementsByTagName('a') | %% href) > atom_latest.txt"
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/atom/atom/releases/latest' -UseBasicParsing;($HTML.Links.href) > atom_latest.txt"
 powershell "get-content atom_latest.txt -ReadCount 1000 | foreach { $_ -match 'AtomSetup-x64' } | out-file -encoding ascii atom_url.txt"
 set /p "url="<"atom_url.txt"

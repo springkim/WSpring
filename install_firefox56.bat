@@ -20,13 +20,14 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-	
-	
+CD /D "%~dp0"
+
+
 ::::::::::::install
-echo install_firefox
+title install_firefox
 echo Downloading...
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xs1lhslyc76mp7p/Firefox%20Setup%2056.0.2.exe?dl=1','%TEMP%\firefox56.exe')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xs1lhslyc76mp7p/Firefox%20Setup%2056.0.2.exe?dl=1','%TEMP%\firefox56.exe')"
+
 echo Installing...
 "%TEMP%\firefox56.exe" -ms
 DEL "%TEMP%\firefox56.exe"

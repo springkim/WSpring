@@ -22,9 +22,9 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
 CD /D "%~dp0"
 
-echo install_chrome
+title install_chrome
 echo Downloading...
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/jhl6ki977z935w7/ChromeSetup.exe?dl=1','%TEMP%\ChromeSetup.exe')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/jhl6ki977z935w7/ChromeSetup.exe?dl=1','%TEMP%\ChromeSetup.exe')"
 echo Installing...
 cd "%TEMP%"
 call ChromeSetup.exe /silent /install

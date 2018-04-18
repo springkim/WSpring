@@ -24,15 +24,18 @@ CD /D "%~dp0"
 
 
 pushd "%CD%"
-echo install cuda8.0
+title install cuda8.0
 echo Downloading...
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/j8xul4vcvh6bmwf/cuda_8.0.61_win10.exe?dl=1','%TEMP%\cuda8.0.exe')"
+
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/j8xul4vcvh6bmwf/cuda_8.0.61_win10.exe?dl=1','%TEMP%\cuda8.0.exe')"
+
 echo Installing...
 cd "%TEMP%"
 call cuda8.0.exe -s -noreboot
 del "%TEMP%\cuda8.0.exe"
 popd
 ::Encoding convert
+call :DownloadIConv
 ::ASCII -> Unicode
 set dst="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\include"
 set ascii=ASCII
@@ -56,3 +59,14 @@ for /f "delims=" %%f in ('dir %dst% /a-d /s /b') do (
 
 echo Finish!!
 pause
+
+:DownloadIConv
+where iconv
+if %ERRORLEVEL% NEQ 0 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/2ybjknzhc1cjdj3/iconv.exe?dl=1','%WINDIR%\system32\iconv.exe')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xvsdm13dg9yu1x3/libcharset1.dll?dl=1','%WINDIR%\system32\libcharset1.dll')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ixynh3op3sf8h0x/libiconv2.dll?dl=1','%WINDIR%\system32\libiconv2.dll')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/2zkuv5kinarqb9j/libintl3.dll?dl=1','%WINDIR%\system32\libintl3.dll')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/vg7ou16vs0qytxi/enca.exe?dl=1','%WINDIR%\system32\enca.exe')"
+)
+exit /b

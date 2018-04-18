@@ -20,10 +20,10 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-	
+CD /D "%~dp0"
+
 ::::::::::::install
-echo Downloading...
+title Downloading...
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://download.teamviewer.com/download/TeamViewer_Setup.exe','%TEMP%\TeamViewer_Setup.exe')"
 echo Installing...
 cd %TEMP%

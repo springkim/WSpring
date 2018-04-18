@@ -20,13 +20,14 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-	
-	
+CD /D "%~dp0"
+
+
 ::start
-echo install_hddb
-echo Downloading... 
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/oaz0gdo0cgj37ou/hddb_4.4.0.x64.zip?dl=1','%TEMP%\hddb_4.4.0.x64.zip')"
+title install_hddb
+echo Downloading...
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/oaz0gdo0cgj37ou/hddb_4.4.0.x64.zip?dl=1','%TEMP%\hddb_4.4.0.x64.zip')"
+
 echo Unzipping...
 call :SafeRMDIR "%UserProfile%\hddb"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\hddb_4.4.0.x64.zip', '%UserProfile%\hddb'); }"

@@ -23,10 +23,9 @@ pushd "%CD%"
 CD /D "%~dp0"
 
 ::start
-::move "C:\Program Files\CMake\" "C:\Program Files\CMake\cmake-3.10.2-win64-x64\bin\"
-echo install_cmake
+title install_cmake
 pushd "%CD%"
-echo Verify latest version...
+echo Downloading...
 powershell "$HTML=Invoke-WebRequest -Uri 'https://cmake.org/download/' -UseBasicParsing;($HTML.Links.href) > %TEMP%\parse_cmake.txt"
 ::find win64-x64.zip
 powershell "get-content %TEMP%\parse_cmake.txt -ReadCount 1000 | foreach { $_ -match 'win64-x64.zip' } | out-file -encoding ascii %TEMP%\parse_cmake1.txt"
@@ -35,8 +34,8 @@ powershell "get-content %TEMP%\parse_cmake1.txt -ReadCount 1000 | foreach { $_ -
 
 set /p "url="<"%TEMP%\parse_cmake2.txt"
 ::echo %url%
-echo Downloading...
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://cmake.org%url%','%TEMP%\CMake.zip')"
+
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://cmake.org%url%','%TEMP%\CMake.zip')"
 echo Unzipping...
 call :SafeRMDIR "%SystemDrive%\Program Files\CMake"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\CMake.zip', '%SystemDrive%\Program Files\CMake'); }"
@@ -48,6 +47,7 @@ move doc ..\
 move man ..\
 move share ..\
 popd
+call :DownloadSetw
 setw "C:\Program Files\CMake\bin"
 DEL "%TEMP%\CMake.zip"
 DEL "%TEMP%\parse_cmake.txt"
@@ -64,5 +64,12 @@ exit /b
 :SafeRMDIR
 IF EXIST "%~1" (
 	RMDIR /S /Q "%~1"
+)
+exit /b
+
+:DownloadSetw
+where setw
+if %ERRORLEVEL% NEQ 0 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/6m35ug7psddzh96/setw.exe?dl=1','%WINDIR%\system32\setw.exe')"
 )
 exit /b

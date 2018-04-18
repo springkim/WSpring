@@ -21,10 +21,10 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
 pushd "%CD%"
     CD /D "%~dp0"
-	
-	
+
+
 ::start
-echo install_tinyxml2
+title install_tinyxml2
 echo Downloading...
 cd %TEMP%
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/9h1s7kgpw0onblb/tinyxml2%28wspring%29.zip?dl=1','tinyxml2(wspring).zip')"

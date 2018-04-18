@@ -20,15 +20,16 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-	
-	
+CD /D "%~dp0"
+
+
 ::start
-echo install_honeyview
+title install_honeyview
 echo Downloading...
 powershell "Set-ExecutionPolicy RemoteSigned -Force"
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.bandisoft.co.kr/honeyview/dl.php?web','%TEMP%\HONEYVIEW-SETUP-KR.EXE')"
-cd %TEMP% 
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.bandisoft.co.kr/honeyview/dl.php?web','%TEMP%\HONEYVIEW-SETUP-KR.EXE')"
+
+cd %TEMP%
 echo Installing...
 start /wait HONEYVIEW-SETUP-KR.EXE /S
 DEL "%TEMP%\HONEYVIEW-SETUP-KR.EXE"

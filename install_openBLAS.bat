@@ -20,9 +20,9 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-	
-	
+CD /D "%~dp0"
+
+
 ::start
 echo install_openblas
 echo Downloading...

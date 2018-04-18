@@ -20,16 +20,16 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-	
+CD /D "%~dp0"
+
 ::start
-echo install_python3.6.4
+title install_python3.6.4
 echo Downloading...
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/cap76ed6uepnch5/Python36.zip?dl=1','%TEMP%\Python36.zip')"
 echo Unzipping...
 call :SafeRMDIR "C:\Python36"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\Python36.zip', 'C:\Python36'); }"
-
+call :DownloadSetw
 setw "C:\Python36\"
 setw "C:\Python36\Scripts"
 
@@ -45,3 +45,10 @@ IF EXIST "%~1" (
 exit /b
 
 ::http://enjoytools.net/xe/board_nfRq49/4816
+
+:DownloadSetw
+where setw
+if %ERRORLEVEL% NEQ 0 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/6m35ug7psddzh96/setw.exe?dl=1','%WINDIR%\system32\setw.exe')"
+)
+exit /b

@@ -49,7 +49,7 @@ This option is actually not important. But consider if you want use independent 
 Programming Language & Tools
 ----------------------------
 
-### <img src="http://i65.tinypic.com/2mw85xz.png" width="64">Atom
+### <img src="https://i.imgur.com/Mh4nvJc.png" width="64">Atom
 
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
@@ -63,7 +63,7 @@ You can use atom for writing markdown documents instead of Haroopad. It supports
 
 **[Bandizip](https://www.bandisoft.co.kr/bandizip/)** is a lightweight, fast and free All-In-One Zip Archiver. Bandizip has a very fast Zip algorithm for compression & extraction with Fast Drag and Drop, High Speed Archiving, and Multi-core compression. It handles the most popular compression formats, including Zip, 7z, Rar, and so on.
 
-### <img src="https://i.imgur.com/KzmuxTx.png" width="64">Bomi
+### <img src="https://i.imgur.com/4MojGw4.png" width="64">Bomi
 
 <img src="http://i63.tinypic.com/5308qv.png" height="20">
 
@@ -78,13 +78,13 @@ You can use atom for writing markdown documents instead of Haroopad. It supports
 
 ### <img src="https://i.imgur.com/uYmBl2O.png" width="64">Clion
 
-<img src="http://i64.tinypic.com/33oqss3.png" height="20">
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[CLion](https://www.jetbrains.com/clion/)** is a smart C and C++ editor. It using CMake as a project model, CLion handles your changes in CMake files automatically, using all the information from there during code editing and refactorings.
 
 ### <img src="https://i.imgur.com/NcmwReI.png" width="64">Clover
 
-<img src="https://i.imgur.com/0EBKf6C.png" height="20">
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[Clover](http://en.ejie.me/)** is an extension of the Windows Explorer, to add multi-tab functionality similar to Google Chrome browser. After install Clover, you will be able to open multiple folders within the same window, and you can also add folder bookmarks.
 
@@ -94,7 +94,7 @@ You can use atom for writing markdown documents instead of Haroopad. It supports
 
 **[CMake](https://cmake.org/)** is an open-source, cross-platform tools to build. Maybe you are using cmake as CLI(Command-Line-Interface) in Linux. Windows is same with Linux. You have to install this script before every build scripts.
 
-### <img src="https://i.imgur.com/RsbLrCE.png" width="64">CUDA8.0
+### <img src="https://i.imgur.com/wevjJG0.png" width="64">CUDA8.0
 
 <img src="http://i67.tinypic.com/16hiyph.png" height="20">
 
@@ -130,9 +130,9 @@ Mozilla **[Firefox](https://www.mozilla.org/ko/firefox/new/)** (or simply Firefo
 
 Git is easy to learn and has a tiny footprint with lightning fast performance. It outclasses SCM tools like Subversion, CVS, Perforce, and ClearCase with features like cheap local branching, convenient staging areas, and multiple workflows.
 
-### <img src="https://i.imgur.com/ZjBfB2r.png" width="64">Haroopad
+### <img src="https://i.imgur.com/qDUGgVC.png" width="64">Haroopad
 
-<img src="http://i67.tinypic.com/nyxqag.png" height="20">
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[Haroopad](http://pad.haroopress.com/user.html)** is a markdown enabled document processor for creating web-friendly documents.
 
@@ -150,19 +150,19 @@ Hddb is a capable search tool which will quickly find files on any NTFS drive.
 
 ### <img src="https://i.imgur.com/C81lSQn.png" width="64">MinGW64
 
-<img src="http://i66.tinypic.com/2q87by9.png" height="20">
+<img src="https://i.imgur.com/IW0yr7j.png" height="20">
 
 **[MinGW-w64](https://mingw-w64.org/doku.php)** is an advancement of the original mingw.org project, Created to support the GCC compiler on Windows system. You can use this compiler on Windows **[CLion](https://www.jetbrains.com/clion/)**.
 
 ### <img src="https://i.imgur.com/ffVpuxv.png" width="64">Notepad++
 
-<img src="https://i.imgur.com/YOYI2lX.png" height="20">
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[Notepad++](https://notepad-plus-plus.org/)** is a free (as in "free speech" and also as in "free beer") source code editor and Notepad replacement that supports several languages. Running in the MS Windows environment, its use is governed by GPL License.
 
-### <img src="https://i.imgur.com/RsbLrCE.png" width="64">NVIDIA driver
+### <img src="https://i.imgur.com/wevjJG0.png" width="64">NVIDIA driver
 
-<img src="https://i.imgur.com/bodbMbL.png" height="20">
+<img src="https://i.imgur.com/Y9ba2xD.png" height="20">
 
 Install drivers for NVIDIA products including GeForce graphics cards.
 
@@ -181,8 +181,6 @@ Install drivers for NVIDIA products including GeForce graphics cards.
 	* GeForce GTX 590, GeForce GTX 580, GeForce GTX 570, GeForce GTX 560 Ti, GeForce GTX 560 SE, GeForce GTX 560, GeForce GTX 555, GeForce GTX 550 Ti, GeForce GT 545, GeForce GT 530, GeForce GT 520, GeForce 510
 * GeForce 400 Series:
 	* GeForce GTX 480, GeForce GTX 470, GeForce GTX 465, GeForce GTX 460 SE v2, GeForce GTX 460 SE, GeForce GTX 460, GeForce GTS 450, GeForce GT 440, GeForce GT 430, GeForce GT 420
-
-**install_nvidia_notebook.bat**
 * GeForce MX100 Series (Notebook):
 	* GeForce MX150, GeForce MX130, GeForce MX110
 * GeForce 10 Series (Notebooks):
@@ -224,7 +222,7 @@ This script will install Python3.6 at `C:\Python36\`. You can run python3.X as `
 
 **[ShareX](https://getsharex.com/)** is an open source program that lets you take screenshots or screencasts of any selected area with a single key, save them in your clipboard, hard disk or instantly upload them to over 80 different file hosting services.
 
-### <img src="https://i.imgur.com/LtLnOh2.png" width="64">Teamviewer
+### <img src="https://i.imgur.com/sUf0Gcf.png" width="64">Teamviewer
 
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 

@@ -20,10 +20,10 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-	
+CD /D "%~dp0"
+
 ::::::::::::install
-echo install_perl
+title install_perl
 echo Downloading...
 cd %TEMP%
 powershell "(New-Object System.Net.WebClient).DownloadFile('http://strawberryperl.com/download/5.26.1.1/strawberry-perl-5.26.1.1-64bit.msi','strawberry-perl-5.26.1.1-64bit.msi')"

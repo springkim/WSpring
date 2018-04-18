@@ -1,7 +1,10 @@
-#include"ispring/File.h"
 #include<iostream>
 #include<Windows.h>
-bool SystemPathAdd(char* name) {
+bool DirectoryExist(std::string dir) {
+			DWORD ftyp = GetFileAttributesA(dir.c_str());
+			return ftyp == FILE_ATTRIBUTE_DIRECTORY;
+}
+bool SystemPathAdd(const char* name) {
 	const char* PATH = "Path";
 	const HKEY hkey = HKEY_LOCAL_MACHINE;
 	const char* sub_key_name = "System\\CurrentControlSet\\Control\\Session Manager\\Environment";
@@ -50,7 +53,7 @@ int main(int argc, char** argv) {
 				p.push_back(c);
 			}
 		}
-		if (ispring::File::DirectoryExist(p)) {
+		if (DirectoryExist(p)) {
 			SystemPathAdd(p.c_str());
 			return 0;
 		}

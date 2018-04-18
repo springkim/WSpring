@@ -20,12 +20,17 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-	
+CD /D "%~dp0"
+
 ::::::::::::install
-echo install_notepad++
+title install_notepad++
+cd %TEMP%
 echo Downloading...
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://notepad-plus-plus.org/repository/7.x/7.5.4/npp.7.5.4.Installer.x64.exe','%TEMP%\npp.exe')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://notepad-plus-plus.org/download' -UseBasicParsing;($HTML.Links.href) > npp_latest.txt"
+powershell "get-content npp_latest.txt -ReadCount 1000 | foreach { $_ -match 'Installer.x64.exe' } | out-file -encoding ascii npp_url.txt"
+set /p "url="<"npp_url.txt"
+
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://notepad-plus-plus.org/%url%','%TEMP%\npp.exe')"
 echo Installing...
 if exist "%programfiles%\Notepad++\uninstall.exe" "%programfiles%\Notepad++\uninstall.exe" /S
 if exist "%programfiles(x86)%\ Notepad++\uninstall.exe" "%programfiles(x86)%\ Notepad++\uninstall.exe" /S

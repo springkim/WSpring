@@ -1,5 +1,5 @@
 ::
-::  install_nvidia_desktop.bat
+::  install_nvidia_driver.bat
 ::  WSpring
 ::
 ::  Created by kimbomm on 2018. 03. 23...
@@ -22,7 +22,7 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
 CD /D "%~dp0"
 
-echo install nvidia driver for desktop
+title install nvidia driver
 echo Downloading...
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/w8u3zok1o8nj1wv/nvidia-desktop.exe?dl=1','%TEMP%\nvidia-desktop.exe')"
 echo Installing...

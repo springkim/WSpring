@@ -20,16 +20,16 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-	
+CD /D "%~dp0"
+
 ::start
-echo install_python2.7.14
+title install_python2.7.14
 echo Downloading...
 powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/cen5fyn3hnxjwgg/Python27.zip?dl=1','%TEMP%\Python27.zip')"
 echo Unzipping...
 call :SafeRMDIR "C:\Python27"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\Python27.zip', 'C:\Python27'); }"
-
+call :DownloadSetw
 setw "C:\Python27\"
 setw "C:\Python27\Scripts"
 
@@ -42,5 +42,12 @@ exit /b
 :SafeRMDIR
 IF EXIST "%~1" (
 	RMDIR /S /Q "%~1"
+)
+exit /b
+
+:DownloadSetw
+where setw
+if %ERRORLEVEL% NEQ 0 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/6m35ug7psddzh96/setw.exe?dl=1','%WINDIR%\system32\setw.exe')"
 )
 exit /b

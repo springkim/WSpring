@@ -23,7 +23,7 @@ pushd "%CD%"
 cd /D "%~dp0"
 
 ::start
-echo install_filezilla
+title install_filezilla
 if exist "%programfiles%\FileZilla FTP Client\uninstall.exe" "%programfiles%\FileZilla FTP Client\uninstall.exe" /S
 if exist "%programfiles(x86)%\FileZilla FTP Client\uninstall.exe" "%programfiles(x86)%\FileZilla FTP Client\uninstall.exe" /S
 echo Downloading...

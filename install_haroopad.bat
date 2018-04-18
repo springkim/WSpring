@@ -20,16 +20,24 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-	
+CD /D "%~dp0"
+
 ::::::::::::install
-echo install_haroopad
+title install_haroopad
+if exist "%AppData%\Haroo Studio\Haroopad\Uninstall.lnk" (
+	echo Remove old verison
+	"%AppData%\Haroo Studio\Haroopad\Uninstall.lnk" /qb
+)
 echo Downloading...
 cd %TEMP%
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://bitbucket.org/rhiokim/haroopad-download/downloads/Haroopad-v0.13.1-win-x64.msi','Haroopad-v0.13.1-win-x64.msi')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://bitbucket.org/rhiokim/haroopad-download/downloads/' -UseBasicParsing;($HTML.Links.href) > haroopad_latest.txt"
+powershell "get-content haroopad_latest.txt -ReadCount 1000 | foreach { $_ -match '/rhiokim/haroopad-download/downloads/Haroopad' } | out-file -encoding ascii haroopad_url.txt"
+powershell "get-content haroopad_url.txt -ReadCount 1000 | foreach { $_ -match 'msi' } | out-file -encoding ascii haroopad_url2.txt"
+set /p "url="<"haroopad_url2.txt"
+powershell "(New-Object System.Net.WebClient).DownloadFile('https://bitbucket.org/%url%','Haroopad.msi')"
 echo Installing...
-msiexec /i Haroopad-v0.13.1-win-x64.msi /qb
-del Haroopad-v0.13.1-win-x64.msi
+msiexec /i Haroopad.msi /qb
+del Haroopad.msi
 echo Finish!
 pause
 exit /b

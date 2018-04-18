@@ -23,7 +23,7 @@ pushd "%CD%"
     CD /D "%~dp0"
 
 ::start
-echo install_visual_studio_2015_community
+title install_visual_studio_2015_community
 echo Downloading...
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/zjgulyaambq5t9r/vs2015community.zip?dl=1','%TEMP%\vs2015community.zip')"
 echo Unzipping...

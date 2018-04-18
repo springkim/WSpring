@@ -20,12 +20,13 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-	
+CD /D "%~dp0"
+
 ::::::::::::install
-echo install_foxit
+title install_foxit
 echo Downloading...
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/w2mczugknccriop/FoxitReader90_L10N_Setup_Prom.exe?dl=1','%TEMP%\foxit.exe')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/w2mczugknccriop/FoxitReader90_L10N_Setup_Prom.exe?dl=1','%TEMP%\foxit.exe')"
+
 echo Installing...
 cd %TEMP%
 start /wait foxit.exe /ForceInstall /VERYSILENT DESKTOP_SHORTCUT="0" MAKEDEFAULT="0" VIEWINBROWSER="0" LAUNCHCHECKDEFAULT="0" AUTO_UPDATE="0" /passive /norestart
