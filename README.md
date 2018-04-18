@@ -166,7 +166,6 @@ Hddb is a capable search tool which will quickly find files on any NTFS drive.
 
 Install drivers for NVIDIA products including GeForce graphics cards.
 
-**install_nvidia_desktop.bat**
 * NVIDIA TITAN Series:
 	* NVIDIA TITAN V, NVIDIA TITAN Xp, NVIDIA TITAN X (Pascal), GeForce GTX TITAN X, GeForce GTX TITAN, GeForce GTX TITAN Black, GeForce GTX TITAN Z
 * GeForce 10 Series:
