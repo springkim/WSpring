@@ -218,7 +218,7 @@ Copy file paths as Unix format from Windows explorer's contextual menu which mea
 
 ### <img src="https://i.imgur.com/wRX6xc1.png" width="64">Perl5
 
-<img src="http://i68.tinypic.com/2eulyqb.png" height="20">
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[Strawberry Perl](http://strawberryperl.com/)** is a perl environment for MS Windows containing all you need to run and develop perl applications. It is designed to be as close as possible to perl environment on UNIX systems.
 
