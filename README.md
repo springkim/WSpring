@@ -240,6 +240,12 @@ This script will install Python3.6 at `C:\Python36\`. You can run python3.X as `
 
 **[ShareX](https://getsharex.com/)** is an open source program that lets you take screenshots or screencasts of any selected area with a single key, save them in your clipboard, hard disk or instantly upload them to over 80 different file hosting services.
 
+### <img src="https://i.imgur.com/tU8Vf31.png" width="64">Speccy
+
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
+**[Speccy](https://www.ccleaner.com/speccy)** is the place to start if you need to know what’s inside your PC. See a quick summary, or dive deeper into every aspect of your PCs hardware.
+
 ### <img src="https://i.imgur.com/sUf0Gcf.png" width="64">Teamviewer
 
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
