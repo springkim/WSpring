@@ -65,7 +65,7 @@ You can use atom for writing markdown documents instead of Haroopad. It supports
 
 ### <img src="https://i.imgur.com/4MojGw4.png" width="64">Bomi
 
-<img src="http://i63.tinypic.com/5308qv.png" height="20">
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[Bomi](https://bomi-player.github.io/)** is a multimedia player formerly known as CMPlayer, which is aimed for easy usage but also provides various powerful features and convenience functions. Just install and enjoy it! There will be already what you expect. If you don't like, you can configure almost everything.
 
@@ -155,6 +155,11 @@ Hddb is a capable search tool which will quickly find files on any NTFS drive.
 
 **[OpenJDK](http://openjdk.java.net/)** is the place to collaborate on an open-source implementation of the Java Platform, Standard Edition, and related projects.
 
+### <img src="https://i.imgur.com/XIgdV05.png" width="64">KakaoTalk
+
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
+**[KakaoTalk](https://www.kakaocorp.com/service/KakaoTalk)** is a free mobile instant messaging application for smartphones with free text and free call features.
 
 ### <img src="https://i.imgur.com/C81lSQn.png" width="64">MinGW64
 
@@ -204,6 +209,12 @@ Install drivers for NVIDIA products including GeForce graphics cards.
 	* GeForce GTX 580M, GeForce GTX 570M, GeForce GTX 560M, GeForce GT 555M, GeForce GT 550M, GeForce GT 540M, GeForce GT 525M, GeForce GT 520M, GeForce GT 520MX
 * GeForce 400M Series (Notebooks):
 	* GeForce GTX 485M, GeForce GTX 480M, GeForce GTX 470M, GeForce GTX 460M, GeForce GT 445M, GeForce GT 435M, GeForce GT 425M, GeForce GT 420M, GeForce GT 415M, GeForce 410M
+
+### <img src="https://i.imgur.com/kp7Jghr.png" width="64">Path Copy Copy
+
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
+Copy file paths as Unix format from Windows explorer's contextual menu which means you can use file path on C/C++ code directly!!.
 
 ### <img src="https://i.imgur.com/wRX6xc1.png" width="64">Perl5
 
