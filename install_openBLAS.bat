@@ -2,7 +2,7 @@
 ::  install_openblas.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 01. 22...
+::  Created by kimbomm on 2018. 04. 26...
 ::  Copyright 2017 kimbomm. All rights reserved.
 ::
 @echo off
@@ -24,43 +24,78 @@ CD /D "%~dp0"
 
 
 ::start
-echo install_openblas
+title install_openblas
 echo Downloading...
 cd %TEMP%
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/9ax0hovyachz9hh/openblas%28wspring%29.zip?dl=1','openblas(wspring).zip')"
-echo Unzipping...
-powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('openblas(wspring).zip', 'openblas(wspring)'); }"
-echo Installing...
-::Set dlls
-xcopy /Y "openblas(wspring)\MSVC14\bin\*.dll" "C:\Windows\System32\" >NUL
-::xcopy /Y "openblas(wspring)\MinGW64\bin\*.dll" "C:\Windows\System32\" >NUL
+call :SafeRMDIR "build_openblas"
+mkdir build_openblas
+cd build_openblas
+::GOTO DOWNLOADSKIP
+git clone https://github.com/xianyi/OpenBLAS
+:DOWNLOADSKIP
 
-setlocal EnableDelayedExpansion
-set msvc[0]=14
-set msvc[1]=12
-set msvc[2]=11
-set msvc[3]=10
-FOR /L %%i in (0,1,3) do (
-	set version=!msvc[%%i]!
-	set /A version2=version + 1
-	if exist "C:\Program Files (x86)\Microsoft Visual Studio !version!.0\VC\include" (
-		echo Install openblas in Visual Studio 20!version2!
-		xcopy /Y "openblas(wspring)\MSVC14\include\*.*" "C:\Program Files (x86)\Microsoft Visual Studio !version!.0\VC\include" /e /h /k >NUL
-		xcopy /Y "openblas(wspring)\MSVC14\lib\*.lib" "C:\Program Files (x86)\Microsoft Visual Studio !version!.0\VC\lib\amd64\" >NUL
-	)
+set CCC=0
+if exist "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include" (
+	set CC[%CCC%]="Visual Studio 12 2013 Win64"
+	set CMAKEDIR[%CCC%]="build_vc12"
+	set CCDIR[%CCC%]="vc12"
+	set dst_include_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\"
+	set dst_lib_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\amd64\"
+	set src_lib_dir[%CCC%]=vc12
+	set extension[%CCC%]=lib
+	set /a CCC=%CCC%+1
+)
+if exist "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include" (
+	set CC[%CCC%]="Visual Studio 14 2015 Win64"
+	set CMAKEDIR[%CCC%]="build_vc14"
+	set CCDIR[%CCC%]="vc14"
+	set dst_include_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\"
+	set dst_lib_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\amd64\"
+	set src_lib_dir[%CCC%]=vc14
+	set extension[%CCC%]=lib
+	set /a CCC=%CCC%+1
 )
 if exist "C:\MinGW64\" (
-	echo Install openblas in MinGW64
-	xcopy /Y "openblas(wspring)\MinGW64\include\*.*" "C:\MinGW64\x86_64-w64-mingw32\include" /e /h /k >NUL
-	xcopy /Y "openblas(wspring)\MinGW64\lib\*.*" "C:\MinGW64\x86_64-w64-mingw32\lib" >NUL
+	set CC[%CCC%]="MinGW Makefiles"
+	set CMAKEDIR[%CCC%]="build_mingw"
+	set CCDIR[%CCC%]=""
+	set dst_include_dir[%CCC%]="C:\MinGW64\x86_64-w64-mingw32\include\"
+	set dst_lib_dir[%CCC%]="C:\MinGW64\x86_64-w64-mingw32\lib\"
+	set src_lib_dir[%CCC%]=mingw
+	set extension[%CCC%]=a
+	set /a CCC=%CCC%+1
 )
-RMDIR /S /Q "openblas(wspring)"
-DEL "openblas(wspring).zip"
-echo Finish!!
+set /a CCC=%CCC%-1
+::CC = C Compiler
+::CCC = C Compiler Count
+
+setlocal EnableDelayedExpansion
+FOR /L %%i in (0,1,%CCC%) do (
+	if not exist !CMAKEDIR[%%i]! md !CMAKEDIR[%%i]!
+	cd !CMAKEDIR[%%i]!
+	cmake ..\OpenBLAS -G !CC[%%i]! -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=build -DUSE_THREAD=0
+
+	if !CC[%%i]! == "MinGW Makefiles"  (
+		cmake --build . --config Release
+		cmake --build . --target install
+	) else (
+		cmake --build . --config Release --target ALL_BUILD
+		cmake --build . --config Release --target INSTALL
+		echo. >> build\include\cblas.h
+		echo #pragma comment^(lib,"openblas.lib"^) >> build\include\cblas.h
+
+	)
+	xcopy /Y "build\include\*.*" !dst_include_dir[%%i]! /e /h /k 2>&1 >NUL
+	xcopy /Y "build\lib\*openblas*" !dst_lib_dir[%%i]! 2>&1 >NUL
+	if exist "build\bin\" (
+		xcopy /Y "build\bin\*openblas*" "C:\Windows\System32\" 2>&1 >NUL
+	)
+	cd ..
+)
+endlocal
+call :SafeRMDIR "build_openblas"
 pause
 exit /b
-
-
 
 :SafeRMDIR
 IF EXIST "%~1" (

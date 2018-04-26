@@ -7,8 +7,7 @@ Windows(x64) Programming Library & Tool Setup Project
 ### Global/Local
 
 Global install is installing library on compiler directory. It can run directly your source code without any settings. Local library is installing library on your project directory. You have to use local library if you consider move or release your project.
-
-For example in MSVC14(Visual Studio 2015), you need include directory and library directory. You can check below. This scripts will download modules in this directory.
+In this project will install library as global.
 
 ### x86/x64
 
@@ -276,17 +275,44 @@ Libraries
 
 ### <img src="https://i.imgur.com/G0kKdAQ.png" width="64">OpenCV
 
-<img src="http://i68.tinypic.com/33ljz1j.png" height="20"><img src="http://i68.tinypic.com/w0rf61.png" height="20">
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
-**[OpenCV](https://opencv.org/)** is open source computer vision library. Please install opencv correctly way. Many people installed opencv strange way *(e.g. C:/Opencv)* . Also OpenCV dropped C interface after version 3.0. So you need to install both 2.4.X and 3.X if you are C/C++ programmer. And i prepare contrib build scripts too. This script will install opencv3.X,2.4.X *(prebuilt)* library in **VS2015,VS2013,VS2012,VS2010,MinGW64,Python2** and **Python3**.
+**[OpenCV](https://opencv.org/)** is open source computer vision library. Please install opencv correctly way. Many people install opencv strange way *(e.g. C:/Opencv)* . Also OpenCV dropped C interface after version 3.0. So you need to install both 2.4.X and 3.X if you are C/C++ programmer.
 
-You don't have to any settings for Visual Studio and Python. But you need link libraries in MinGW64. It automatically selects opencv version. For example in gcc or Visual Studio(/TC) it will use opencv 2.4.X. and g++ or Visual Studio(/TP) it will use opencv 3.X.
+Usually, we use gcc(MinGW64), g++(MinGW64), Visual Studio(/TC), Visual Studio(/TP) in Windows OS for C/C++.  
+It will install opencv2.x for C compiler and install opencv3.x(contrib,world) for C++ compiler.
+
+This Installer will change something. That will select automatically correct version for your compiler.
+
+gcc and /TC will select OpenCV2.X.
+
+g++ and /TP will select OpenCV3.x(contrib).
+
+So, You don't have to any settings for Visual Studio. library link command(#pragma comment) is already wrote in opencv header file. and all dll is copied to System folder.
+
+But you need link libraries in MinGW64.
+Here is sample build command using environment variable.
+```batch
+gcc <...> %opencv2%
+```
+```batch
+g++ <...> %opencv3%
+```
 
 ### <img src="https://i.imgur.com/wNorNlH.png" width="64"> OpenBLAS
 
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[OpenBLAS](http://www.openblas.net/)** is an optimized BLAS library based on GotoBLAS2 1.13 BSD version. Usually we use BLAS for Matrix Multiplication in C. C++ has [Eigen](eigen.tuxfamily.org/) and Python has numpy.
+
+Likewise library link command is in cblas.h. You just need to include. and if you are using gcc then link below command.
+
+```batch
+gcc <...> -lopenblas
+```
+
+There is a example code in [tests/OpenBLAS_Tests](tests/OpenBLAS_Tests).
+
 
 ### <img src="https://i.imgur.com/hd7oERx.png" width="64"> TinyXML2
 

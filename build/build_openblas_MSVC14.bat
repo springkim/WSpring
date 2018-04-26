@@ -13,7 +13,8 @@ cd build
 cmake ..\OpenBLAS^
  -G "Visual Studio 14 2015 Win64"^
  -DCMAKE_BUILD_TYPE=RELEASE^
- -DCMAKE_INSTALL_PREFIX=build
+ -DCMAKE_INSTALL_PREFIX=build^
+ -DUSE_THREAD=0
 cmake --build . --config Release --target ALL_BUILD
 cmake --build . --config Release --target INSTALL
 pause

@@ -40,6 +40,7 @@ call :DownloadIConv
 set dst="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\include"
 set ascii=ASCII
 set utf8=UTF-8
+set unknown=unkno
 SETLOCAL EnableDelayedExpansion
 for /f "delims=" %%f in ('dir %dst% /a-d /s /b') do (
 	call enca -L none -e "%%f" > tmp.txt
@@ -53,20 +54,24 @@ for /f "delims=" %%f in ('dir %dst% /a-d /s /b') do (
 		iconv -c -f UTF-8 -t UTF-16LE "%%f" > "%%f.txt"
 		move /Y "%%f.txt" "%%f" >nul
 	)
+	if !encoding! EQU %unknown% (
+		iconv -c -f UTF-8 -t UTF-16LE "%%f" > "%%f.txt"
+		move /Y "%%f.txt" "%%f" >nul
+	)
 	del tmp.txt
 )
-
+endlocal
 
 echo Finish!!
 pause
 
 :DownloadIConv
-where iconv
-if %ERRORLEVEL% NEQ 0 (
+::Do not use [where] command for search iconv. Because Strawberry has also iconv.
+if not exist "%WINDIR%\system32te\iconv.exe" (
 	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/2ybjknzhc1cjdj3/iconv.exe?dl=1','%WINDIR%\system32\iconv.exe')"
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xvsdm13dg9yu1x3/libcharset1.dll?dl=1','%WINDIR%\system32\libcharset1.dll')"
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ixynh3op3sf8h0x/libiconv2.dll?dl=1','%WINDIR%\system32\libiconv2.dll')"
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/2zkuv5kinarqb9j/libintl3.dll?dl=1','%WINDIR%\system32\libintl3.dll')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xvsdm13dg9yu1x3/libcharset1.dll?dl=1','%WINDIR%\SysWOW64\libcharset1.dll')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ixynh3op3sf8h0x/libiconv2.dll?dl=1','%WINDIR%\SysWOW64\libiconv2.dll')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/2zkuv5kinarqb9j/libintl3.dll?dl=1','%WINDIR%\SysWOW64\libintl3.dll')"
 	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/vg7ou16vs0qytxi/enca.exe?dl=1','%WINDIR%\system32\enca.exe')"
 )
 exit /b
