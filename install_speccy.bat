@@ -29,7 +29,7 @@ echo Downloading...
 cd %TEMP%
 powershell "$HTML=Invoke-WebRequest -Uri 'https://www.ccleaner.com/speccy/download/standard' -UseBasicParsing;($HTML.Links.href) > speccy_latest.txt"
 powershell "get-content speccy_latest.txt -ReadCount 1000 | foreach { $_ -match 'spsetup' } | out-file -encoding ascii speccy_url.txt"
-set /p "url="<"speccy_url1.txt"
+set /p "url="<"speccy_url.txt"
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('%url%','spsetup.exe')"
 echo Installing...
 start /wait spsetup.exe /S
