@@ -320,6 +320,12 @@ There is a example code in [tests/OpenBLAS_Tests](tests/OpenBLAS_Tests).
 
 **[TinyXML-2](http://www.grinninglizard.com/tinyxml2/)** is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs.
 
+### <img src="https://i.imgur.com/z2u0qum.png" width="64"> glog
+
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
+**[glog](https://github.com/google/glog)** is google logging library.
+
 Uninstaller
 -----------
 ### <img src="https://i.imgur.com/SFeo4v6.png" width="64"> Uninstall Onedrive
