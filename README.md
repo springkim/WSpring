@@ -93,9 +93,9 @@ You can use atom for writing markdown documents instead of Haroopad. It supports
 
 **[CMake](https://cmake.org/)** is an open-source, cross-platform tools to build. Maybe you are using cmake as CLI(Command-Line-Interface) in Linux. Windows is same with Linux. You have to install this script before every build scripts.
 
-### <img src="https://i.imgur.com/wevjJG0.png" width="64">CUDA8.0
+### <img src="https://i.imgur.com/wevjJG0.png" width="64">CUDA
 
-<img src="http://i67.tinypic.com/16hiyph.png" height="20">
+<img src="https://i.imgur.com/KqRY1G8.png" height="20"><img src="https://i.imgur.com/BCC1yEF.png" height="20"><img src="https://i.imgur.com/iY2RBqG.png" height="20">
 
 **You have to install nvidia-driver before install cuda.**
 
@@ -174,7 +174,7 @@ Hddb is a capable search tool which will quickly find files on any NTFS drive.
 
 ### <img src="https://i.imgur.com/wevjJG0.png" width="64">NVIDIA driver
 
-<img src="https://i.imgur.com/Y9ba2xD.png" height="20">
+<img src="https://i.imgur.com/4Wotq9G.png" height="20"> 2018.4.25
 
 Install drivers for NVIDIA products including GeForce graphics cards.
 

@@ -1,8 +1,8 @@
 ::
-::  install_cuda8.0.bat
+::  install_cuda9.1.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 03. 23...
+::  Created by kimbomm on 2018. 05. 08...
 ::  Copyright 2018 kimbomm. All rights reserved.
 ::
 @echo off
@@ -24,23 +24,29 @@ CD /D "%~dp0"
 
 
 pushd "%CD%"
-title install cuda8.0
+title install cuda9.0
 echo Downloading...
 
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/j8xul4vcvh6bmwf/cuda_8.0.61_win10.exe?dl=1','%TEMP%\cuda8.0.exe')"
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/i10t4fp3ojzdc7j/cuda_8.0.61.2_windows.exe?dl=1','%TEMP%\cuda8.0_1.exe')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/5gg807h0fqiwsdr/cuda_9.1.85_win10.exe?dl=1','%TEMP%\cuda9.1.exe')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/f9su9eiufbxhtje/cuda_9.1.85.1_windows.exe?dl=1','%TEMP%\cuda9.1_1.exe')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/i56ifbeto23aw5h/cuda_9.1.85.2_windows.exe?dl=1','%TEMP%\cuda9.1_2.exe')"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/dvc3q8aglpuus9f/cuda_9.1.85.3_windows.exe?dl=1','%TEMP%\cuda9.1_3.exe')"
 
 echo Installing...
 cd "%TEMP%"
-call cuda8.0.exe -s -noreboot
-call cuda8.0_1.exe -s -noreboot
-del "%TEMP%\cuda8.0.exe"
-del "%TEMP%\cuda8.0_1.exe"
+call cuda9.1.exe -s -noreboot
+call cuda9.1_1.exe -s -noreboot
+call cuda9.1_2.exe -s -noreboot
+call cuda9.1_3.exe -s -noreboot
+del "%TEMP%\cuda9.1.exe"
+del "%TEMP%\cuda9.1_1.exe"
+del "%TEMP%\cuda9.1_2.exe"
+del "%TEMP%\cuda9.1_2.exe"
 popd
 ::Encoding convert
 call :DownloadIConv
 ::ASCII -> Unicode
-set dst="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v8.0\include"
+set dst="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.1\include"
 set ascii=ASCII
 set utf8=UTF-8
 set unknown=unkno
