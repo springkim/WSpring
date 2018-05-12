@@ -3,7 +3,7 @@
 ::  WSpring
 ::
 ::  Created by kimbomm on 2018. 03. 26...
-::  Copyright 2017 kimbomm. All rights reserved.
+::  Copyright 2017-2018 kimbomm. All rights reserved.
 ::
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
@@ -20,32 +20,17 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-
+CD /D "%~dp0"
+call :AbsoluteDownloadCurl
 ::start
 title install_visual_studio_2015_community
 echo Downloading...
-
-set DIR=%TEMP%
-
-call :SafeDownload "https://www.dropbox.com/s/57s8z52xq5vfjra/vs2015community.7z.001?dl=1" "%DIR%\vs2015community.7z.001"
-call :SafeDownload "https://www.dropbox.com/s/9xo6v4omymmitvg/vs2015community.7z.002?dl=1" "%DIR%\vs2015community.7z.002"
-call :SafeDownload "https://www.dropbox.com/s/597anec8ig0jc70/vs2015community.7z.003?dl=1" "%DIR%\vs2015community.7z.003"
-call :SafeDownload "https://www.dropbox.com/s/nhcfnfbykvdlkc4/vs2015community.7z.004?dl=1" "%DIR%\vs2015community.7z.004"
-call :SafeDownload "https://www.dropbox.com/s/0bdnhj2z2c9fv24/vs2015community.7z.005?dl=1" "%DIR%\vs2015community.7z.005"
-call :SafeDownload "https://www.dropbox.com/s/rhy8ax8mtgatf5l/vs2015community.7z.006?dl=1" "%DIR%\vs2015community.7z.006"
-call :SafeDownload "https://www.dropbox.com/s/ibt3diko3aaen6t/vs2015community.7z.007?dl=1" "%DIR%\vs2015community.7z.007"
-call :SafeDownload "https://www.dropbox.com/s/7y8bg7atkchyv7d/vs2015community.7z.008?dl=1" "%DIR%\vs2015community.7z.008"
-call :SafeDownload "https://www.dropbox.com/s/ib1v1ctthljfajz/vs2015community.7z.009?dl=1" "%DIR%\vs2015community.7z.009"
-call :SafeDownload "https://www.dropbox.com/s/fxxz7ce84ncb927/vs2015community.7z.010?dl=1" "%DIR%\vs2015community.7z.010"
-call :SafeDownload "https://www.dropbox.com/s/l75rkoj4qxe3jwr/vs2015community.7z.011?dl=1" "%DIR%\vs2015community.7z.011"
-call :SafeDownload "https://www.dropbox.com/s/8cohrdxoz5i75z6/vs2015community.7z.012?dl=1" "%DIR%\vs2015community.7z.012"
-call :SafeDownload "https://www.dropbox.com/s/xo3th2sxcuy7xl2/vs2015community.7z.013?dl=1" "%DIR%\vs2015community.7z.013"
+curlw -L "https://www.dropbox.com/s/1spk9799fqie7bg/vs2015community.7z?dl=1" "%TEMP%\vs2015community.7z"
 
 echo Unzipping...
 cd %TEMP%
 call :Download7z
-7z x vs2015community.7z.001 -y -o"%TEMP%"
+7z x vs2015community.7z -y -o"%TEMP%"
 echo Installing...
 cd "%TEMP%\vs2015community"
 call vs_community.exe /AdminFile %CD%\AdminDeployment.xml /s
@@ -70,22 +55,27 @@ exit /b
 ::https://social.msdn.microsoft.com/Forums/vstudio/en-US/826e52b6-a32b-4ef4-9bab-ed3c62038284/is-there-a-way-to-install-a-vsix-file-in-quitesilent-mode?forum=vsx
 
 :Download7z
-where 7z
-if %ERRORLEVEL% NEQ 0 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/z4sj3yf0rn3k6nk/7z.dll?dl=1','%WINDIR%\system32\7z.dll')"
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/utcz5y6rqf6j0zq/7z.exe?dl=1','%WINDIR%\system32\7z.exe')"
-)
+if not exist "%WINDIR%\system32\7z.exe" curlw -L "https://www.dropbox.com/s/utcz5y6rqf6j0zq/7z.exe?dl=1" -o "%WINDIR%\system32\7z.exe"
+if not exist "%WINDIR%\system32\7z.dll" curlw -L "https://www.dropbox.com/s/z4sj3yf0rn3k6nk/7z.dll?dl=1" -o "%WINDIR%\system32\7z.dll"
 exit /b
 
-:SafeDownload
-if not exist "%~2" (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; try {(New-Object System.Net.WebClient).DownloadFile('%~1','%~2')}catch [System.Net.WebException]{}"
+
+::Download CURL
+:GetFileSize
+if exist  %~1 set FILESIZE=%~z1
+if not exist %~1 set FILESIZE=-1
+exit /b
+:AbsoluteDownloadCurl
+:loop_adc1
+call :GetFileSize "%SystemRoot%\System32\curlw.exe"
+if %FILESIZE% neq 2070016 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	goto :loop_adc1
 )
-:loop
-if not exist "%~2" (
-	echo Retry...
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; try {(New-Object System.Net.WebClient).DownloadFile('%~1','%~2')}catch [System.Net.WebException]{}"
+:loop_adc2
+call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
+if %FILESIZE% neq 261889 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	goto :loop_adc2
 )
-if not exist "%~2" goto loop
-echo %~2 success
 exit /b

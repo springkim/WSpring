@@ -3,7 +3,7 @@
 ::  WSpring
 ::
 ::  Created by kimbomm on 2018. 02. 03...
-::  Copyright 2018 kimbomm. All rights reserved.
+::  Copyright 2017-2018 kimbomm. All rights reserved.
 ::
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
@@ -20,7 +20,7 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
+CD /D "%~dp0"
 
 
 ::::::::::::install

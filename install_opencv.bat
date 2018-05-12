@@ -3,7 +3,7 @@
 ::  WSpring
 ::
 ::  Created by kimbomm on 2018. 04. 26...
-::  Copyright 2018 kimbomm. All rights reserved.
+::  Copyright 2017-2018 kimbomm. All rights reserved.
 ::
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
@@ -21,7 +21,7 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
 pushd "%CD%"
 CD /D "%~dp0"
-
+call :AbsoluteDownloadCurl
 ::start
 title install_opencv
 echo Downloading...
@@ -36,10 +36,10 @@ powershell "get-content opencv_link_zip.txt -ReadCount 1000 | foreach { $_ -matc
 powershell "get-content opencv_link_zip.txt -ReadCount 1000 | foreach { $_ -match '/2.' } | out-file -encoding ascii opencv_link2.txt"
 set /p "cv2="<"opencv_link2.txt"
 set /p "cv3="<"opencv_link3.txt"
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com%cv3:~6%','cv3.zip')"
+curlw -L "https://github.com%cv3:~6%" -o "cv3.zip"
 set cv3c=/opencv/opencv_contrib%cv3:~20%
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com%cv3c%','cv3c.zip')"
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com%cv2:~6%','cv2.zip')"
+curlw -L "https://github.com%cv3c%" -o "cv3c.zip"
+curlw -L "https://github.com%cv2:~6%" -o "cv2.zip"
 
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('cv2.zip', 'build_opencv'); }"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('cv3c.zip', 'build_opencv'); }"
@@ -320,11 +320,11 @@ exit /b
 :DownloadIConv
 ::Do not use [where] command for search iconv. Because Strawberry has also iconv.
 if not exist "%WINDIR%\system32te\iconv.exe" (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/2ybjknzhc1cjdj3/iconv.exe?dl=1','%WINDIR%\system32\iconv.exe')"
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xvsdm13dg9yu1x3/libcharset1.dll?dl=1','%WINDIR%\SysWOW64\libcharset1.dll')"
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ixynh3op3sf8h0x/libiconv2.dll?dl=1','%WINDIR%\SysWOW64\libiconv2.dll')"
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/2zkuv5kinarqb9j/libintl3.dll?dl=1','%WINDIR%\SysWOW64\libintl3.dll')"
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/vg7ou16vs0qytxi/enca.exe?dl=1','%WINDIR%\system32\enca.exe')"
+	curlw -L "https://www.dropbox.com/s/2ybjknzhc1cjdj3/iconv.exe?dl=1" -o "%WINDIR%\system32\iconv.exe"
+	curlw -L "https://www.dropbox.com/s/xvsdm13dg9yu1x3/libcharset1.dll?dl=1" -o "%WINDIR%\SysWOW64\libcharset1.dll"
+	curlw -L "https://www.dropbox.com/s/ixynh3op3sf8h0x/libiconv2.dll?dl=1" -o "%WINDIR%\SysWOW64\libiconv2.dll"
+	curlw -L "https://www.dropbox.com/s/2zkuv5kinarqb9j/libintl3.dll?dl=1" -o "%WINDIR%\SysWOW64\libintl3.dll"
+	curlw -L "https://www.dropbox.com/s/vg7ou16vs0qytxi/enca.exe?dl=1" -o "%WINDIR%\system32\enca.exe"
 )
 exit /b
 ::::::::::::::::::::::::::::::FUNCTION::::::::::::::::::::::::::::::
@@ -353,4 +353,24 @@ for /f "delims=" %%f in ('dir %dst% /a-d /s /b') do (
 	del tmp.txt
 )
 endlocal
+exit /b
+
+::Download CURL
+:GetFileSize
+if exist  %~1 set FILESIZE=%~z1
+if not exist %~1 set FILESIZE=-1
+exit /b
+:AbsoluteDownloadCurl
+:loop_adc1
+call :GetFileSize "%SystemRoot%\System32\curlw.exe"
+if %FILESIZE% neq 2070016 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	goto :loop_adc1
+)
+:loop_adc2
+call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
+if %FILESIZE% neq 261889 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	goto :loop_adc2
+)
 exit /b

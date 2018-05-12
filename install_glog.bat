@@ -3,7 +3,7 @@
 ::  WSpring
 ::
 ::  Created by kimbomm on 2018. 04. 26...
-::  Copyright 2017 kimbomm. All rights reserved.
+::  Copyright 2017-2018 kimbomm. All rights reserved.
 ::
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"

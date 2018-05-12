@@ -3,7 +3,7 @@
 ::  WSpring
 ::
 ::  Created by kimbomm on 2018. 02. 04...
-::  Copyright 2018 kimbomm. All rights reserved.
+::  Copyright 2017-2018 kimbomm. All rights reserved.
 ::
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
@@ -20,8 +20,8 @@ if '%errorlevel%' NEQ '0' (
     exit /B
 :gotAdmin
 pushd "%CD%"
-    CD /D "%~dp0"
-
+CD /D "%~dp0"
+call :AbsoluteDownloadCurl
 
 ::::::::::::install
 title install_clion
@@ -36,12 +36,12 @@ set /p "VER="<"clion_ver2.txt"
 if not exist "%SystemDrive%\Program Files\JetBrains" md "%SystemDrive%\Program Files\JetBrains"
 
 ::#section=windows
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://download.jetbrains.com/cpp/CLion-%VER%.zip','%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip')"
+curlw -L "https://download.jetbrains.com/cpp/CLion-%VER%.zip" -o "%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip"
 echo Unzipping...
 call :SafeRMDIR "%SystemDrive%\Program Files\JetBrains\CLion-%VER%"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip', '%SystemDrive%\Program Files\JetBrains\CLion-%VER%'); }"
 echo Download settings
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/j6clpd1r9yfv2vk/settings.jar?dl=1','%SystemDrive%\Program Files\JetBrains\CLion-%VER%\settings.jar')"
+curlw -L "https://www.dropbox.com/s/j6clpd1r9yfv2vk/settings.jar?dl=1" -o "%SystemDrive%\Program Files\JetBrains\CLion-%VER%\settings.jar"
 
 del "%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip"
 DEL "%TEMP%\clion_latest.txt"
@@ -51,17 +51,32 @@ if not exist "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\Je
 powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains\JetBrains CLion %VER%.lnk');$s.TargetPath='%SystemDrive%\Program Files\JetBrains\clion-%VER%\bin\clion64.exe';$s.Save()"
 powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\JetBrains CLion %VER%.lnk');$s.TargetPath='%SystemDrive%\Program Files\JetBrains\clion-%VER%\bin\clion64.exe';$s.Save()"
 
-
-
-
 echo Finish!!
 pause
 exit /b
 
-
-
 :SafeRMDIR
 IF EXIST "%~1" (
 	RMDIR /S /Q "%~1"
+)
+exit /b
+
+::Download CURL
+:GetFileSize
+if exist  %~1 set FILESIZE=%~z1
+if not exist %~1 set FILESIZE=-1
+exit /b
+:AbsoluteDownloadCurl
+:loop_adc1
+call :GetFileSize "%SystemRoot%\System32\curlw.exe"
+if %FILESIZE% neq 2070016 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	goto :loop_adc1
+)
+:loop_adc2
+call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
+if %FILESIZE% neq 261889 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	goto :loop_adc2
 )
 exit /b

@@ -3,7 +3,7 @@
 ::  WSpring
 ::
 ::  Created by kimbomm on 2018. 02. 14...
-::  Copyright 2018 kimbomm. All rights reserved.
+::  Copyright 2017-2018 kimbomm. All rights reserved.
 ::
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
@@ -21,6 +21,7 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
 pushd "%CD%"
 CD /D "%~dp0"
+call :AbsoluteDownloadCurl
 
 ::::::::::::install
 title install_notepad++
@@ -30,7 +31,7 @@ powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolT
 powershell "get-content npp_latest.txt -ReadCount 1000 | foreach { $_ -match 'Installer.x64.exe' } | out-file -encoding ascii npp_url.txt"
 set /p "url="<"npp_url.txt"
 
-powershell "(New-Object System.Net.WebClient).DownloadFile('https://notepad-plus-plus.org/%url%','%TEMP%\npp.exe')"
+curlw -L "https://notepad-plus-plus.org/%url%" -o "%TEMP%\npp.exe"
 echo Installing...
 if exist "%programfiles%\Notepad++\uninstall.exe" "%programfiles%\Notepad++\uninstall.exe" /S
 if exist "%programfiles(x86)%\ Notepad++\uninstall.exe" "%programfiles(x86)%\ Notepad++\uninstall.exe" /S
@@ -39,4 +40,24 @@ start /wait npp.exe /S
 del "%TEMP%\npp.exe"
 echo Finish!!
 pause
+exit /b
+
+::Download CURL
+:GetFileSize
+if exist  %~1 set FILESIZE=%~z1
+if not exist %~1 set FILESIZE=-1
+exit /b
+:AbsoluteDownloadCurl
+:loop_adc1
+call :GetFileSize "%SystemRoot%\System32\curlw.exe"
+if %FILESIZE% neq 2070016 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	goto :loop_adc1
+)
+:loop_adc2
+call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
+if %FILESIZE% neq 261889 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	goto :loop_adc2
+)
 exit /b

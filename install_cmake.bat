@@ -3,7 +3,7 @@
 ::  WSpring
 ::
 ::  Created by kimbomm on 2018. 02 22...
-::  Copyright 2017 kimbomm. All rights reserved.
+::  Copyright 2017-2018 kimbomm. All rights reserved.
 ::
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
@@ -21,7 +21,7 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
 pushd "%CD%"
 CD /D "%~dp0"
-
+call :AbsoluteDownloadCurl
 ::start
 title install_cmake
 pushd "%CD%"
@@ -35,7 +35,7 @@ powershell "get-content %TEMP%\parse_cmake1.txt -ReadCount 1000 | foreach { $_ -
 set /p "url="<"%TEMP%\parse_cmake2.txt"
 ::echo %url%
 
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://cmake.org%url%','%TEMP%\CMake.zip')"
+curlw -L "https://cmake.org%url%" -o "%TEMP%\CMake.zip"
 echo Unzipping...
 call :SafeRMDIR "%SystemDrive%\Program Files\CMake"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\CMake.zip', '%SystemDrive%\Program Files\CMake'); }"
@@ -68,8 +68,25 @@ IF EXIST "%~1" (
 exit /b
 
 :DownloadSetw
-where setw
-if %ERRORLEVEL% NEQ 0 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/6m35ug7psddzh96/setw.exe?dl=1','%WINDIR%\system32\setw.exe')"
+if not exist "%WINDIR%\system32\setw.exe" curlw -L "https://www.dropbox.com/s/6m35ug7psddzh96/setw.exe?dl=1" -o "%WINDIR%\system32\setw.exe"
+exit /b
+
+::Download CURL
+:GetFileSize
+if exist  %~1 set FILESIZE=%~z1
+if not exist %~1 set FILESIZE=-1
+exit /b
+:AbsoluteDownloadCurl
+:loop_adc1
+call :GetFileSize "%SystemRoot%\System32\curlw.exe"
+if %FILESIZE% neq 2070016 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	goto :loop_adc1
+)
+:loop_adc2
+call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
+if %FILESIZE% neq 261889 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	goto :loop_adc2
 )
 exit /b

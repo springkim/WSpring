@@ -21,7 +21,7 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
 pushd "%CD%"
 CD /D "%~dp0"
-
+call :AbsoluteDownloadCurl
 
 pushd "%CD%"
 title install cudnn7.1
@@ -30,17 +30,17 @@ cd %TEMP%
 nvcc -V | findstr /C:"release 8.0" > cuda_ver.txt
 set /p "ver80="<"cuda_ver.txt"
 if not "%ver80%" equ "" (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/fcro8sch6hdylxy/cudnn-8.0-windows10-x64-v7.1.zip?dl=1','cudnn.zip')"
+	curlw -L "https://www.dropbox.com/s/fcro8sch6hdylxy/cudnn-8.0-windows10-x64-v7.1.zip?dl=1" -o "cudnn.zip"
 )
 nvcc -V | findstr /C:"release 9.0" > cuda_ver.txt
 set /p "ver90="<"cuda_ver.txt"
 if not "%ver90%" equ "" (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ypatpohwadnsfcl/cudnn-9.0-windows10-x64-v7.1.zip?dl=1','cudnn.zip')"
+	curlw -L "https://www.dropbox.com/s/ypatpohwadnsfcl/cudnn-9.0-windows10-x64-v7.1.zip?dl=1" -o "cudnn.zip"
 )
 nvcc -V | findstr /C:"release 9.1" > cuda_ver.txt
 set /p "ver91="<"cuda_ver.txt"
 if not "%ver91%" equ "" (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/uunuql87laxb6lj/cudnn-9.1-windows10-x64-v7.1.zip?dl=0','cudnn.zip')"
+	curlw -L "https://www.dropbox.com/s/uunuql87laxb6lj/cudnn-9.1-windows10-x64-v7.1.zip?dl=1" -o "cudnn.zip"
 )
 DEL cuda_ver.txt
 echo Installing...
@@ -59,5 +59,25 @@ exit /b
 :SafeRMDIR
 IF EXIST "%~1" (
 	RMDIR /S /Q "%~1"
+)
+exit /b
+
+::Download CURL
+:GetFileSize
+if exist  %~1 set FILESIZE=%~z1
+if not exist %~1 set FILESIZE=-1
+exit /b
+:AbsoluteDownloadCurl
+:loop_adc1
+call :GetFileSize "%SystemRoot%\System32\curlw.exe"
+if %FILESIZE% neq 2070016 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	goto :loop_adc1
+)
+:loop_adc2
+call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
+if %FILESIZE% neq 261889 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	goto :loop_adc2
 )
 exit /b
