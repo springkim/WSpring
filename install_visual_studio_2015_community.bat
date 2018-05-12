@@ -25,7 +25,7 @@ call :AbsoluteDownloadCurl
 ::start
 title install_visual_studio_2015_community
 echo Downloading...
-curlw -L "https://www.dropbox.com/s/1spk9799fqie7bg/vs2015community.7z?dl=1" "%TEMP%\vs2015community.7z"
+curlw -L "https://www.dropbox.com/s/1spk9799fqie7bg/vs2015community.7z?dl=1" -o "%TEMP%\vs2015community.7z"
 
 echo Unzipping...
 cd %TEMP%
