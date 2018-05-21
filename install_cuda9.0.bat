@@ -27,9 +27,9 @@ pushd "%CD%"
 title install cuda9.0
 echo Downloading...
 
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/u81h7uw5dc4j8z7/cuda_9.0.176_win10.exe?dl=1','%TEMP%\cuda9.0.exe')"
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/lr8ut0gnvq8h197/cuda_9.0.176.1_windows.exe?dl=1','%TEMP%\cuda9.0_1.exe')"
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/0rcdol9an4ezl3y/cuda_9.0.176.2_windows.exe?dl=1','%TEMP%\cuda9.0_2.exe')"
+curlw -L "https://www.dropbox.com/s/u81h7uw5dc4j8z7/cuda_9.0.176_win10.exe?dl=1" -o "%TEMP%\cuda9.0.exe"
+curlw -L "https://www.dropbox.com/s/lr8ut0gnvq8h197/cuda_9.0.176.1_windows.exe?dl=1" -o "%TEMP%\cuda9.0_1.exe"
+curlw -L "https://www.dropbox.com/s/0rcdol9an4ezl3y/cuda_9.0.176.2_windows.exe?dl=1" -o "%TEMP%\cuda9.0_2.exe"
 
 echo Installing...
 cd "%TEMP%"
