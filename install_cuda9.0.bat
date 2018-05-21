@@ -70,7 +70,7 @@ endlocal
 
 echo Finish!!
 pause
-
+exit /b
 :DownloadIConv
 ::Do not use [where] command for search iconv. Because Strawberry has also iconv.
 if not exist "%WINDIR%\system32te\iconv.exe" (
