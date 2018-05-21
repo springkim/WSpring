@@ -39,7 +39,7 @@ powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Des
 start /wait "VSIX" "%SystemDrive%\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\VSIXInstaller.exe" -q "ColorThemeEditor.vsix"
 start /wait "VSIX" "%SystemDrive%\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\VSIXInstaller.exe" -q "Open Command Line v2.1.179.vsix"
 
-DEL "%TEMP%\vs2015community.zip"
+DEL "%TEMP%\vs2015community.7z"
 call :SafeRMDIR "%TEMP%\vs2015community"
 
 echo Finish!!
