@@ -1,3 +1,10 @@
+::
+::  enable_remote_desktop.bat
+::  WSpring
+::
+::  Created by kimbomm on 2018. 05. 22...
+::  Copyright 2017-2018 kimbomm. All rights reserved.
+::
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if '%errorlevel%' NEQ '0' (
@@ -14,8 +21,12 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
 pushd "%CD%"
 CD /D "%~dp0"
+title enable_remote_desktop
+echo Setting...
 powershell "Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server' -Name 'fDenyTSConnections' -Type DWord -Value 0"
 powershell "Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name 'UserAuthentication' -Type DWord -Value 0"
 powershell "Enable-NetFirewallRule -Name 'RemoteDesktop*'"
 powershell "Set-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services' -Name 'fEnableVirtualizedGraphics' -Type DWord -Value 0"
+echo Finish!!
 pause
+exit /b

@@ -2,4 +2,5 @@
 set /p msg=Enter MSG:
 git add -A
 git commit -m "%msg%"
-git push origin master 
+git push origin master
+pause

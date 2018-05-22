@@ -42,6 +42,9 @@ start /wait "VSIX" "%SystemDrive%\Program Files (x86)\Microsoft Visual Studio 14
 DEL "%TEMP%\vs2015community.7z"
 call :SafeRMDIR "%TEMP%\vs2015community"
 
+cd %TEMP%
+curlw -L "https://www.dropbox.com/s/cyn30avw5rkvpt4/%EC%82%B0%EB%8F%8C%EB%AF%B8%EC%83%9D%EC%B2%B4%28SDMiSaeng%29.ttf?dl=1" -o "SDMS.ttf"
+call :FontInstall "SDMS.ttf"
 echo Finish!!
 pause
 exit /b
@@ -78,4 +81,14 @@ if %FILESIZE% neq 261889 (
 	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
 	goto :loop_adc2
 )
+exit /b
+
+:FontInstall
+SET FFILE=%~n1%~x1
+SET FNAME=%~n1
+SET FNAME=%FNAME:-= %
+IF "%~x1"==".otf" SET FTYPE=(OpenType)
+IF "%~x1"==".ttf" SET FTYPE=(TrueType)
+COPY /Y "%~n1%~x1" "%SystemRoot%\Fonts\" >nul
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts" /v "%FNAME% %FTYPE%" /t REG_SZ /d "%FFILE%" /f >nul
 exit /b

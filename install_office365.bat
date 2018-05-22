@@ -1,5 +1,5 @@
 ::
-::  install_vmware.bat
+::  install_office365.bat
 ::  WSpring
 ::
 ::  Created by kimbomm on 2018. 05. 22...
@@ -22,16 +22,14 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
 CD /D "%~dp0"
 call :AbsoluteDownloadCurl
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::       https://www.vmware.com/support/ws5/doc/ws_install_silent.html
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ::start
-title install_vmware
+title install_office365
 echo Downloading...
 cd %TEMP%
-curlw -L "https://www.dropbox.com/s/trq6r1lowszo412/vmware.exe?dl=1" -o "vmware.exe"
+curlw -L "https://www.dropbox.com/s/kthgasy4qtxq3tg/office365x64.exe?dl=1" -o "office365x64.exe"
 echo Installing...
-start /wait /MIN office365x64.exe
+start /wait office365x64.exe
 DEL "office365x64.exe"
 
 echo Finish!!
