@@ -46,7 +46,9 @@ powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.F
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('cv3c.zip', 'build_opencv'); }"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('cv3.zip', 'build_opencv'); }"
 cd build_opencv
-git clone https://github.com/RLovelett/eigen
+if exist "C:\Program Files\Mercurial\hg.exe" (
+	hg clone https://bitbucket.org/eigen/eigen/
+)
 cd ..
 :DOWNLOADSKIP
 
@@ -105,8 +107,13 @@ set cv_dir[0]=%cv2_dir%
 set cv_dir[1]=%cv3_dir%
 set cv_dir[2]=%cv3_dir%
 set op_eigen[0]=
-set op_eigen[1]=-DEIGEN_INCLUDE_PATH=../../eigen
-set op_eigen[2]=-DEIGEN_INCLUDE_PATH=../../eigen
+if exist "C:\Program Files\Mercurial\hg.exe" (
+	set op_eigen[1]=-DEIGEN_INCLUDE_PATH=../../eigen
+	set op_eigen[2]=-DEIGEN_INCLUDE_PATH=../../eigen
+) else (
+	set op_eigen[1]=
+	set op_eigen[2]=
+)
 set op_world[0]=
 set op_world[1]=-DBUILD_opencv_world=OFF
 set op_world[2]=-DBUILD_opencv_world=ON

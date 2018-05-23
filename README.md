@@ -166,6 +166,12 @@ Hddb is a capable search tool which will quickly find files on any NTFS drive.
 
 **[KakaoTalk](https://www.kakaocorp.com/service/KakaoTalk)** is a free mobile instant messaging application for smartphones with free text and free call features.
 
+### <img src="https://i.imgur.com/bbEAyID.png" width="64">Mercurial
+
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
+**[Mercurial](https://www.mercurial-scm.org/)** is a free, distributed source control management tool. It efficiently handles projects of any size and offers an easy and intuitive interface.
+
 ### <img src="https://i.imgur.com/C81lSQn.png" width="64">MinGW64
 
 <img src="https://i.imgur.com/IW0yr7j.png" height="20">
@@ -215,11 +221,23 @@ Install drivers for NVIDIA products including GeForce graphics cards.
 * GeForce 400M Series (Notebooks):
 	* GeForce GTX 485M, GeForce GTX 480M, GeForce GTX 470M, GeForce GTX 460M, GeForce GT 445M, GeForce GT 435M, GeForce GT 425M, GeForce GT 420M, GeForce GT 415M, GeForce 410M
 
+### <img src="https://i.imgur.com/hl2TZSo.png" width="64">Office365
+
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
+Office 365 is the brand name Microsoft uses for a group of subscriptions that provides productivity software and a related services. And you need serial key. This script is not illegal. I don't provide any serial key.
+
 ### <img src="https://i.imgur.com/kp7Jghr.png" width="64">Path Copy Copy
 
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 Copy file paths as Unix format from Windows explorer's contextual menu which means you can use file path on C/C++ code directly!!.
+
+### <img src="https://i.imgur.com/cS4lcLP.png" width="64">Potplayer
+
+<img src="http://i68.tinypic.com/f0n7mv.png" height="20">
+
+**[PotPlayer](https://tv.kakao.com/guide/potplayer)** is a multimedia software player developed for the Microsoft Windows operating system by South Korean Internet company Kakao (formerly Daum Communications).
 
 ### <img src="https://i.imgur.com/wRX6xc1.png" width="64">Perl5
 

@@ -1,5 +1,5 @@
 ::
-::  install_vmware.bat
+::  install_mercurial.bat
 ::  WSpring
 ::
 ::  Created by kimbomm on 2018. 05. 24...
@@ -22,19 +22,27 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
 CD /D "%~dp0"
 call :AbsoluteDownloadCurl
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::       https://www.vmware.com/support/ws5/doc/ws_install_silent.html
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::start
-title install_vmware
+::::::::::::install
+title install_mercurial
 echo Downloading...
 cd %TEMP%
-curlw -L "https://www.dropbox.com/s/trq6r1lowszo412/vmware.exe?dl=1" -o "vmware.exe"
-echo Installing...
-start /wait vmware.exe /s /v /qn
-DEL "vmware.exe"
 
-echo Finish!!
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://www.mercurial-scm.org/release/windows/' -UseBasicParsing;($HTML.Links.href) > hg_latest.txt"
+
+powershell "get-content hg_latest.txt -ReadCount 1000 | foreach { $_ -match 'mercurial' } | out-file -encoding ascii hg_url.txt"
+powershell "get-content hg_url.txt -ReadCount 1000 | foreach { $_ -match 'x64.msi' } | out-file -encoding ascii hg_url2.txt"
+powershell "$x = Get-Content -Path hd_url2.txt; Set-Content -Path hd_url2.txt -Value ($x[($x.Length-1)..0])"
+set /p "url="<"hd_url2.txt"
+
+curlw -L "https://www.mercurial-scm.org/release/windows/%url%" -o "mercurial.msi"
+echo Installing...
+start /wait msiexec /i mercurial.msi /qb
+
+del mercurial.msi
+del hg_latest.txt
+del hg_url.txt
+del hg_url2.txt
+echo Finish!
 pause
 exit /b
 
