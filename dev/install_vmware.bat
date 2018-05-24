@@ -29,9 +29,9 @@ call :AbsoluteDownloadCurl
 title install_vmware
 echo Downloading...
 cd %TEMP%
-curlw -L "https://www.dropbox.com/s/trq6r1lowszo412/vmware.exe?dl=1" -o "vmware.exe"
+curlw -L "https://www.dropbox.com/s/83bd4mrhtf12f2n/VMware-player-14.0.0-6661328.exe?dl=1" -o "VMware-player-14.0.0-6661328.exe"
 echo Installing...
-start /wait vmware.exe /s /v /qn
+start /wait VMware-player-14.0.0-6661328.exe /s /v /qn
 DEL "vmware.exe"
 
 echo Finish!!

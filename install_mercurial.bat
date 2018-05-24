@@ -32,7 +32,7 @@ powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolT
 powershell "get-content hg_latest.txt -ReadCount 1000 | foreach { $_ -match 'mercurial' } | out-file -encoding ascii hg_url.txt"
 powershell "get-content hg_url.txt -ReadCount 1000 | foreach { $_ -match 'x64.msi' } | out-file -encoding ascii hg_url2.txt"
 powershell "$x = Get-Content -Path hd_url2.txt; Set-Content -Path hd_url2.txt -Value ($x[($x.Length-1)..0])"
-set /p "url="<"hd_url2.txt"
+set /p "url="<"hg_url2.txt"
 
 curlw -L "https://www.mercurial-scm.org/release/windows/%url%" -o "mercurial.msi"
 echo Installing...
