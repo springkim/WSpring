@@ -17,35 +17,8 @@ Drop x86(32bit application). x86 is past technology on desktop computer. Actuall
 
 This option is actually not important. But consider if you want use independent executable file. But static library depends on compiler. MSVC14's library will not work on MSVC15. So we use shared library.
 
-### Global directories
 
-**Dll location** : `C:\Windows\System32`
-
-##### MSVC14(Visual Studio 2015)
-
-**Include directory** : `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\`
-
-**Library directory** : `C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\amd64\`
-
-##### MSVC12(Visual Studio 2013)
-
-**Include directory** : `C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\`
-
-**Library directory** : `C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\amd64\`
-
-##### MinGW64
-
-**Include directory** : `C:\MinGW64\x86_64-w64-mingw32\include\`
-
-**Library directory** : `C:\MinGW64\x86_64-w64-mingw32\lib\`
-
-### Program directories
-
-**Program directory** : `C:\Program Files`
-
-**Startup directory** : `C:\ProgramData\Microsoft\Windows\Start Menu\Programs`
-
-Programming Language & Tools
+Installer
 ----------------------------
 
 ### <img src="https://i.imgur.com/Mh4nvJc.png" width="64">Atom
@@ -349,6 +322,12 @@ There is a example code in [tests/OpenBLAS_Tests](tests/OpenBLAS_Tests).
 <img src="http://i68.tinypic.com/f0n7mv.png" height="20">
 
 **[glog](https://github.com/google/glog)** is google logging library.
+
+## Enabler
+
+### <img src="https://i.imgur.com/z2a38t1.png" width="64"> Enable Remote Desktop
+
+RDP is the best tool of Remote PC controller.
 
 Uninstaller
 -----------

@@ -21,7 +21,11 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
 pushd "%CD%"
 CD /D "%~dp0"
-
+::dependency
+if not exist "C:\Strawberry\perl\bin\perl.exe" (
+	echo OpenBLAS installer needs perl.
+	if exist "install_perl.bat" call install_perl.bat
+)
 
 ::start
 title install_openblas

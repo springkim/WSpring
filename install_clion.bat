@@ -28,20 +28,36 @@ title install_clion
 cd %TEMP%
 echo Downloading...
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://confluence.jetbrains.com/display/CLION/Release+notes'; $HTML.Links.outerText > clion_latest.txt"
-powershell "get-content clion_latest.txt -ReadCount 1000 | foreach { $_ -match '^CLion [\d\.]+ ' } | foreach { $_.Split(' ')[1] } | out-file -encoding ascii clion_ver.txt"
+powershell "get-content clion_latest.txt -ReadCount 1000 | foreach { $_ -match '^CLion [\d\.]+[, ]' } | foreach { $_.Split(' ')[1].Split(',')[0] } | out-file -encoding ascii clion_ver.txt"
 powershell "get-content clion_ver.txt | sort -Descending | get-unique | out-file -encoding ascii clion_ver2.txt"
-set /p "VER="<"clion_ver2.txt"
-
-
+::verify laster verison of CLion
 if not exist "%SystemDrive%\Program Files\JetBrains" md "%SystemDrive%\Program Files\JetBrains"
+set VER=
+set %FILESIZE%=-1
+cd "%SystemDrive%\Program Files\JetBrains\"
+setlocal EnableDelayedExpansion
+for /f "tokens=*" %%a in (%TEMP%\clion_ver2.txt) do (
+	set VER=%%a
+	curlw -L "https://download.jetbrains.com/cpp/CLion-!VER!.zip" -o "CLion-!VER!.zip"
+	call :GetFileSize CLion-!VER!.zip
+	if !FILESIZE! gtr 10000 (
+
+		goto VERIFYVER
+	)
+	del "CLion-!VER!.zip"
+)
+:VERIFYVER
+
+echo %VER% is latest version of windows clion.
+
 
 ::#section=windows
-curlw -L "https://download.jetbrains.com/cpp/CLion-%VER%.zip" -o "%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip"
+
 echo Unzipping...
 call :SafeRMDIR "%SystemDrive%\Program Files\JetBrains\CLion-%VER%"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip', '%SystemDrive%\Program Files\JetBrains\CLion-%VER%'); }"
 echo Download settings
-curlw -L "https://www.dropbox.com/s/j6clpd1r9yfv2vk/settings.jar?dl=1" -o "%SystemDrive%\Program Files\JetBrains\CLion-%VER%\settings.jar"
+curlw -L "https://www.dropbox.com/s/j6clpd1r9yfv2vk/settings.jar?dl=1" -o "%UserProfile%\.CLion-%VER%\config\settings.jar"
 
 del "%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip"
 DEL "%TEMP%\clion_latest.txt"
@@ -52,6 +68,7 @@ powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%SystemDrive%\Pro
 powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\JetBrains CLion %VER%.lnk');$s.TargetPath='%SystemDrive%\Program Files\JetBrains\clion-%VER%\bin\clion64.exe';$s.Save()"
 
 echo Finish!!
+endlocal
 pause
 exit /b
 
