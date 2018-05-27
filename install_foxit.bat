@@ -26,7 +26,7 @@ call :AbsoluteDownloadCurl
 ::::::::::::install
 title install_foxit
 echo Downloading...
-curlw -L "https://www.dropbox.com/s/w2mczugknccriop/FoxitReader90_L10N_Setup_Prom.exe?dl=1" -o "%TEMP%\foxit.exe"
+curlw -L "https://www.dropbox.com/s/jqxrhlk9kupd3js/FoxitReader91_L10N_Setup_Prom.exe?dl=1" -o "%TEMP%\foxit.exe"
 
 echo Installing...
 cd %TEMP%

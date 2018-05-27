@@ -96,7 +96,7 @@ Mozilla **[Firefox](https://www.mozilla.org/ko/firefox/new/)** (or simply Firefo
 
 ### <img src="https://i.imgur.com/jYQT0W7.png" width="64">Foxit PDF Reader
 
-<img src="https://i.imgur.com/kg9Laf9.png" height="20">
+<img src="https://i.imgur.com/Ofhva9n.png" height="20">
 
 **[Foxit Reader](https://www.foxitsoftware.com/pdf-reader/)** is the PDF Reader which enables you to become part of the connected world. Provide authors with comments on documents, be notified when new document versions become available, discuss interesting topics right in the document, or securely open protected documents.
 
