@@ -57,7 +57,7 @@ echo Unzipping...
 call :SafeRMDIR "%SystemDrive%\Program Files\JetBrains\CLion-%VER%"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip', '%SystemDrive%\Program Files\JetBrains\CLion-%VER%'); }"
 echo Download settings
-curlw -L "https://www.dropbox.com/s/j6clpd1r9yfv2vk/settings.jar?dl=1" -o "%UserProfile%\.CLion-%VER%\config\settings.jar"
+curlw -L "https://www.dropbox.com/s/j6clpd1r9yfv2vk/settings.jar?dl=1" -o "%UserProfile%\.CLion%VER%\config\settings.jar"
 
 del "%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip"
 DEL "%TEMP%\clion_latest.txt"
