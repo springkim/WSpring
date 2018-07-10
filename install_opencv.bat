@@ -28,19 +28,20 @@ echo Downloading...
 cd %TEMP%
 call :SafeRMDIR "build_opencv"
 ::GOTO DOWNLOADSKIP
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/opencv/opencv/releases';($HTML.ParsedHtml.getElementsByTagName('a') | %% href) > opencv.txt"
+
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/opencv/opencv/releases' -UseBasicParsing;($HTML.Links.href) > opencv.txt"
 powershell "get-content opencv.txt -ReadCount 1000 | foreach { $_ -match 'archive' } | out-file -encoding ascii opencv_link.txt"
 powershell "get-content opencv_link.txt -ReadCount 1000 | foreach { $_ -match 'zip' } | out-file -encoding ascii opencv_link_zip.txt"
-powershell "get-content opencv_link.txt -ReadCount 1000 | foreach { $_ -notmatch 'cvsdk' } | out-file -encoding ascii opencv_link_zip2.txt"
+powershell "get-content opencv_link_zip.txt -ReadCount 1000 | foreach { $_ -notmatch 'cvsdk' } | out-file -encoding ascii opencv_link_zip2.txt"
 ::Verify latest opecv 3 and 2.
 powershell "get-content opencv_link_zip2.txt -ReadCount 1000 | foreach { $_ -match '/3.' } | out-file -encoding ascii opencv_link3.txt"
 powershell "get-content opencv_link_zip2.txt -ReadCount 1000 | foreach { $_ -match '/2.' } | out-file -encoding ascii opencv_link2.txt"
 set /p "cv2="<"opencv_link2.txt"
 set /p "cv3="<"opencv_link3.txt"
-curlw -L "https://github.com%cv3:~6%" -o "cv3.zip"
-set cv3c=/opencv/opencv_contrib%cv3:~20%
+curlw -L "https://github.com%cv3%" -o "cv3.zip"
+set cv3c=/opencv/opencv_contrib%cv3:~14%
 curlw -L "https://github.com%cv3c%" -o "cv3c.zip"
-curlw -L "https://github.com%cv2:~6%" -o "cv2.zip"
+curlw -L "https://github.com%cv2%" -o "cv2.zip"
 
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('cv2.zip', 'build_opencv'); }"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('cv3c.zip', 'build_opencv'); }"
@@ -51,7 +52,6 @@ if exist "C:\Program Files\Mercurial\hg.exe" (
 )
 cd ..
 :DOWNLOADSKIP
-
 cd build_opencv
 
 
@@ -142,6 +142,8 @@ FOR /L %%i in (0,1,%CCC%) do (
 		 -DBUILD_SHARED_LIBS=ON^
 		 -DWITH_CUDA=OFF^
 		 -DWITH_OPENCL=OFF^
+		 -DWITH_IPP=OFF^
+		 -DWITH_MSMF=OFF^
 		 -DBUILD_opencv_python=OFF^
 		 -DCPU_DISPATCH=AVX,AVX2^
 		 !op_eigen[%%j]!^
