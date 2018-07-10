@@ -1,15 +1,16 @@
 ::
-::  install_opencv.bat
+::  build_opencv.bat
 ::  WSpring
 ::
 ::  Created by kimbom on 2017. 12. 2...
 ::  Copyright 2017 kimbom. All rights reserved.
 ::
-mkdir opencv_contrib_dynamic
-cd opencv_contrib_dynamic
+
+mkdir opencv_build
+cd opencv_build
 git clone https://github.com/opencv/opencv
 git clone https://github.com/opencv/opencv_contrib
-git clone https://github.com/RLovelett/eigen
+hg clone https://bitbucket.org/eigen/eigen/
 ::git clone https://github.com/01org/tbb
 mkdir build_release
 cd build_release
@@ -25,7 +26,7 @@ cmake ../opencv^
  -DBUILD_opencv_world=OFF^
  -DOPENCV_EXTRA_MODULES_PATH=../opencv_contrib/modules^
  -DEIGEN_INCLUDE_PATH=../eigen^
- -DWITH_OPENMP=ON^
+ -DWITH_OPENMP=OFF^
  -DBUILD_opencv_saliency=OFF^
  -DWITH_CUBLAS=ON^
  -DWITH_OPENCL_SVM=ON^
