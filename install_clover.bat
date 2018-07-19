@@ -26,10 +26,13 @@ call :AbsoluteDownloadCurl
 ::start
 title install_clover
 cd %TEMP%
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'http://en.ejie.me/'; $HTML.Parsedhtml.getElementsByTagName('small') > clover_tags.txt"
-powershell "get-content clover_tags.txt -ReadCount 1000 | foreach { $_ -match 'outerText' } | foreach { $_.Split(':')[1]} | out-file -encoding ascii clover_ver.txt"
+call :AbsoluteDownloadHtmlAgilityPack
+
+powershell "$wc = New-Object System.Net.WebClient;$html=$wc.DownloadString('http://en.ejie.me/');add-type -Path %WINDIR%\System32\HtmlAgilityPack.dll;$doc = New-Object HtmlAgilityPack.HtmlDocument;$doc.LoadHtml($html);$doc.DocumentNode.SelectSingleNode('html').SelectSingleNode('body').SelectSingleNode('div').SelectSingleNode('div').SelectSingleNode('div').SelectSingleNode('div').SelectSingleNode('div').InnerText -replace '\t','' > clover_tags.txt;"
+powershell "get-content clover_tags.txt -ReadCount 1000 | foreach { $_ -match '^[0-9\.]+' | out-file -encoding ascii clover_ver.txt }"
+
 set /p "VER="<"clover_ver.txt"
-curlw -L "http://cn.ejie.me/uploads/setup_clover@%VER:~1%.exe" -o "%TEMP%\clover.exe"
+curlw -L "http://cn.ejie.me/uploads/setup_clover@%VER%.exe" -o "%TEMP%\clover.exe"
 
 echo Installing...
 start /wait clover.exe /S
@@ -40,6 +43,7 @@ exit /b
 
 ::http://en.ejie.me/
 ::http://cn.ejie.me/uploads/setup_clover@3.4.3.exe
+::https://social.msdn.microsoft.com/Forums/en-US/eaadff1f-7bfc-49be-9e9a-3139c3dbe473/invoke-web-request-return-empty-parsed-html-field
 ::Download CURL
 :GetFileSize
 if exist  %~1 set FILESIZE=%~z1
@@ -57,5 +61,13 @@ call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
 if %FILESIZE% neq 261889 (
 	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
 	goto :loop_adc2
+)
+exit /b
+:AbsoluteDownloadHtmlAgilityPack
+:loop_adhap
+call :GetFileSize "%SystemRoot%\System32\HtmlAgilityPack.dll"
+if %FILESIZE% neq 134656 (
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/bh8jras7at7m6lu/HtmlAgilityPack.dll?dl=1','%WINDIR%\System32\HtmlAgilityPack.dll')"
+	goto :loop_adhap
 )
 exit /b
