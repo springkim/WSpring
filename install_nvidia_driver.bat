@@ -32,6 +32,8 @@ cd "%TEMP%"
 call nvidia-desktop.exe -s -noreboot
 del "%TEMP%\nvidia-desktop.exe"
 echo Finish!!
+echo You have to restart your PC.
+
 pause
 
 ::Download CURL

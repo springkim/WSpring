@@ -28,15 +28,15 @@ pushd "%CD%"
 title install cuda8.0
 echo Downloading...
 
-curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_8.0.61_win10.exe" -o "%TEMP%\cuda8.0.exe"
-curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_8.0.61.2_windows.exe" -o "%TEMP%\cuda8.0_1.exe"
+::curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_8.0.61_win10.exe" -o "%TEMP%\cuda8.0.exe"
+::curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_8.0.61.2_windows.exe" -o "%TEMP%\cuda8.0_1.exe"
 
 echo Installing...
 cd "%TEMP%"
 call cuda8.0.exe -s -noreboot
 call cuda8.0_1.exe -s -noreboot
-del "%TEMP%\cuda8.0.exe"
-del "%TEMP%\cuda8.0_1.exe"
+::del "%TEMP%\cuda8.0.exe"
+::del "%TEMP%\cuda8.0_1.exe"
 popd
 ::Encoding convert
 call :DownloadIConv
@@ -71,7 +71,7 @@ pause
 exit /b
 :DownloadIConv
 ::Do not use [where] command for search iconv. Because Strawberry has also iconv.
-if not exist "%WINDIR%\system32te\iconv.exe" (
+if not exist "%WINDIR%\system32\iconv.exe" (
 	curlw -L "https://github.com/springkim/WSpring/releases/download/bin/iconv.exe" -o "%WINDIR%\system32\iconv.exe"
 	curlw -L "https://github.com/springkim/WSpring/releases/download/bin/libcharset1.dll" -o "%WINDIR%\SysWOW64\libcharset1.dll"
 	curlw -L "https://github.com/springkim/WSpring/releases/download/bin/libiconv2.dll" -o "%WINDIR%\SysWOW64\libiconv2.dll"

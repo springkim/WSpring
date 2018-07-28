@@ -46,23 +46,26 @@ if exist "install_git.bat" (
 if exist "install_cmake.bat" (
 	call "install_cmake.bat"
 )
-where git
-if %ERRORLEVEL% EQU 0 (
-	where cmake
-	if %ERRORLEVEL% EQU 0 (
-		git clone https://github.com/uncrustify/uncrustify
-		cd uncrustify
-		mkdir build
-		cd build
-		cmake -DCMAKE_BUILD_TYPE=RELEASE ..
-		cmake --build . --config Release
-		move Release\uncrustify.exe "%SystemDrive%\Windows\System32"
-		call :SafeRMDIR "%TEMP%\uncrustify"
-		::install cfg files
-		md C:\Atom
-		powershell "(New-Object System.Net.WebClient).DownloadFile('https://gist.githubusercontent.com/springkim/756f0aa50ee265f28e2465e83f70b613/raw/531e6e7fee132c86a4f03dbfca4d2c19660a3f71/uncrustify-cpp.cfg','C:\Atom\uncrustify-cpp.cfg')"
-	)
+call :ProgramExistInit
+call :ProgramExistTest python
+call :ProgramExistTest cmake
+call :ProgramExistTest git
+
+if %PEI% EQU 0 (
+	call :SafeRMDIR "%TEMP%\uncrustify"
+	git clone https://github.com/uncrustify/uncrustify
+	cd uncrustify
+	mkdir build
+	cd build
+	cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+	cmake --build . --config Release
+	move Release\uncrustify.exe "%SystemDrive%\Windows\System32"
+	call :SafeRMDIR "%TEMP%\uncrustify"
+	::install cfg files
+	md C:\Atom
+	powershell "(New-Object System.Net.WebClient).DownloadFile('https://gist.githubusercontent.com/springkim/756f0aa50ee265f28e2465e83f70b613/raw/531e6e7fee132c86a4f03dbfca4d2c19660a3f71/uncrustify-cpp.cfg','C:\Atom\uncrustify-cpp.cfg')"
 )
+
 echo Finish!!
 pause
 exit /b
@@ -91,4 +94,11 @@ if %FILESIZE% neq 261889 (
 	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/ca-bundle.crt','%WINDIR%\System32\ca-bundle.crt')"
 	goto :loop_adc2
 )
+exit /b
+:ProgramExistInit
+set PEI=0
+exit /b
+:ProgramExistTest
+where %~1 >nul 2>&1
+set /a PEI=%PEI%+%ERRORLEVEL%
 exit /b

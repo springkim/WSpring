@@ -31,9 +31,9 @@ powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolT
 powershell "get-content %TEMP%\clion_latest.txt -ReadCount 1000 | foreach { $_ -match '^/display/' -notMatch 'EAP' -notMatch 'RC' -match 'build'} | out-file -encoding ascii %TEMP%\clion_ver.txt"
 
 powershell "get-content %TEMP%\clion_ver.txt | sort -Descending | get-unique | out-file -encoding ascii %TEMP%\clion_ver2.txt"
-echo hello
+
 powershell "get-content %TEMP%\clion_ver2.txt -ReadCount 1000 | foreach { $_.Split('+')[1].Split('%%')[0] } | out-file -encoding ascii %TEMP%\clion_ver3.txt"
-echo world
+
 ::verify laster verison of CLion
 if not exist "%SystemDrive%\Program Files\JetBrains" md "%SystemDrive%\Program Files\JetBrains"
 
@@ -57,7 +57,7 @@ del "%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip"
 DEL "%TEMP%\clion_latest.txt"
 DEL "%TEMP%\clion_ver.txt"
 DEL "%TEMP%\clion_ver2.txt"
-DEL "%TEMP%\clion_ver3md.txt"
+DEL "%TEMP%\clion_ver3.txt"
 if not exist "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains" md "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains"
 powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains\JetBrains CLion %VER%.lnk');$s.TargetPath='%SystemDrive%\Program Files\JetBrains\clion-%VER%\bin\clion64.exe';$s.Save()"
 powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\JetBrains CLion %VER%.lnk');$s.TargetPath='%SystemDrive%\Program Files\JetBrains\clion-%VER%\bin\clion64.exe';$s.Save()"

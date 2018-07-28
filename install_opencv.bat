@@ -329,7 +329,7 @@ exit /b
 ::::::::::::::::::::::::::::::FUNCTION::::::::::::::::::::::::::::::
 :DownloadIConv
 ::Do not use [where] command for search iconv. Because Strawberry has also iconv.
-if not exist "%WINDIR%\system32te\iconv.exe" (
+if not exist "%WINDIR%\system32\iconv.exe" (
 	curlw -L "https://github.com/springkim/WSpring/releases/download/bin/iconv.exe" -o "%WINDIR%\system32\iconv.exe"
 	curlw -L "https://github.com/springkim/WSpring/releases/download/bin/libcharset1.dll" -o "%WINDIR%\SysWOW64\libcharset1.dll"
 	curlw -L "https://github.com/springkim/WSpring/releases/download/bin/libiconv2.dll" -o "%WINDIR%\SysWOW64\libiconv2.dll"
