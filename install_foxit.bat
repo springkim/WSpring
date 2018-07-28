@@ -26,7 +26,7 @@ call :AbsoluteDownloadCurl
 ::::::::::::install
 title install_foxit
 echo Downloading...
-curlw -L "https://www.dropbox.com/s/jqxrhlk9kupd3js/FoxitReader91_L10N_Setup_Prom.exe?dl=1" -o "%TEMP%\foxit.exe"
+curlw -L "https://github.com/springkim/WSpring/releases/download/program/FoxitReader92_L10N_Setup.exe" -o "%TEMP%\foxit.exe"
 
 echo Installing...
 cd %TEMP%
@@ -46,13 +46,13 @@ exit /b
 :loop_adc1
 call :GetFileSize "%SystemRoot%\System32\curlw.exe"
 if %FILESIZE% neq 2070016 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/curl.exe','%WINDIR%\System32\curlw.exe')"
 	goto :loop_adc1
 )
 :loop_adc2
 call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
 if %FILESIZE% neq 261889 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/ca-bundle.crt','%WINDIR%\System32\ca-bundle.crt')"
 	goto :loop_adc2
 )
 exit /b

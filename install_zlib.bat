@@ -28,7 +28,7 @@ call :AbsoluteDownloadCurl
 title install_zlib
 echo Downloading...
 cd %TEMP%
-curlw -L "https://www.dropbox.com/s/uufx18u2pva7d1j/zlib-1.2.3-lib.zip?dl=1" -o "zlib.zip"
+curlw -L "https://github.com/springkim/WSpring/releases/download/library/zlib-1.2.3-lib.zip" -o "zlib.zip"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\zlib.zip', '%TEMP%\zlib'); }"
 set CCC=0
 if exist "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include" (
@@ -89,13 +89,13 @@ exit /b
 :loop_adc1
 call :GetFileSize "%SystemRoot%\System32\curlw.exe"
 if %FILESIZE% neq 2070016 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/curl.exe','%WINDIR%\System32\curlw.exe')"
 	goto :loop_adc1
 )
 :loop_adc2
 call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
 if %FILESIZE% neq 261889 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/ca-bundle.crt','%WINDIR%\System32\ca-bundle.crt')"
 	goto :loop_adc2
 )
 exit /b

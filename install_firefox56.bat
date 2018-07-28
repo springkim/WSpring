@@ -26,7 +26,7 @@ call :AbsoluteDownloadCurl
 ::::::::::::install
 title install_firefox
 echo Downloading...
-curlw -L "https://www.dropbox.com/s/xs1lhslyc76mp7p/Firefox%20Setup%2056.0.2.exe?dl=1" -o "%TEMP%\firefox56.exe"
+curlw -L "https://github.com/springkim/WSpring/releases/download/program/Firefox.Setup.56.0.2.exe" -o "%TEMP%\firefox56.exe"
 
 echo Installing...
 "%TEMP%\firefox56.exe" -ms
@@ -44,13 +44,13 @@ exit /b
 :loop_adc1
 call :GetFileSize "%SystemRoot%\System32\curlw.exe"
 if %FILESIZE% neq 2070016 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/curl.exe','%WINDIR%\System32\curlw.exe')"
 	goto :loop_adc1
 )
 :loop_adc2
 call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
 if %FILESIZE% neq 261889 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/ca-bundle.crt','%WINDIR%\System32\ca-bundle.crt')"
 	goto :loop_adc2
 )
 exit /b

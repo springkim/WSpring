@@ -27,26 +27,19 @@ call :AbsoluteDownloadCurl
 title install_clion
 cd %TEMP%
 echo Downloading...
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://confluence.jetbrains.com/display/CLION/Release+notes'; $HTML.Links.outerText > clion_latest.txt"
-powershell "get-content clion_latest.txt -ReadCount 1000 | foreach { $_ -match '^CLion [\d\.]+[, ]' } | foreach { $_.Split(' ')[1].Split(',')[0] } | out-file -encoding ascii clion_ver.txt"
-powershell "get-content clion_ver.txt | sort -Descending | get-unique | out-file -encoding ascii clion_ver2.txt"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://confluence.jetbrains.com/display/CLION/Release+notes' -UseBasicParsing; $HTML.Links.href > %TEMP%\clion_latest.txt"
+powershell "get-content %TEMP%\clion_latest.txt -ReadCount 1000 | foreach { $_ -match '^/display/' -notMatch 'EAP' -notMatch 'RC' -match 'build'} | out-file -encoding ascii %TEMP%\clion_ver.txt"
+
+powershell "get-content %TEMP%\clion_ver.txt | sort -Descending | get-unique | out-file -encoding ascii %TEMP%\clion_ver2.txt"
+echo hello
+powershell "get-content %TEMP%\clion_ver2.txt -ReadCount 1000 | foreach { $_.Split('+')[1].Split('%%')[0] } | out-file -encoding ascii %TEMP%\clion_ver3.txt"
+echo world
 ::verify laster verison of CLion
 if not exist "%SystemDrive%\Program Files\JetBrains" md "%SystemDrive%\Program Files\JetBrains"
-set VER=
-set %FILESIZE%=-1
-cd "%SystemDrive%\Program Files\JetBrains\"
-setlocal EnableDelayedExpansion
-for /f "tokens=*" %%a in (%TEMP%\clion_ver2.txt) do (
-	set VER=%%a
-	curlw -L "https://download.jetbrains.com/cpp/CLion-!VER!.zip" -o "CLion-!VER!.zip"
-	call :GetFileSize CLion-!VER!.zip
-	if !FILESIZE! gtr 10000 (
 
-		goto VERIFYVER
-	)
-	del "CLion-!VER!.zip"
-)
-:VERIFYVER
+cd "%SystemDrive%\Program Files\JetBrains\"
+set /p "VER="<"%TEMP%\clion_ver3.txt"
+curlw -L "https://download.jetbrains.com/cpp/CLion-%VER%.zip" -o "CLion-%VER%.zip"
 
 echo %VER% is latest version of windows clion.
 
@@ -58,12 +51,13 @@ call :SafeRMDIR "%SystemDrive%\Program Files\JetBrains\CLion-%VER%"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip', '%SystemDrive%\Program Files\JetBrains\CLion-%VER%'); }"
 echo Download settings
 
-curlw -L "https://www.dropbox.com/s/j6clpd1r9yfv2vk/settings.jar?dl=1" -o "%SystemDrive%\Program Files\JetBrains\CLion-%VER%\settings.jar"
+curlw -L "https://github.com/springkim/WSpring/releases/download/program/clion_settings.jar" -o "%SystemDrive%\Program Files\JetBrains\CLion-%VER%\settings.jar"
 
 del "%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip"
 DEL "%TEMP%\clion_latest.txt"
 DEL "%TEMP%\clion_ver.txt"
 DEL "%TEMP%\clion_ver2.txt"
+DEL "%TEMP%\clion_ver3md.txt"
 if not exist "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains" md "%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains"
 powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains\JetBrains CLion %VER%.lnk');$s.TargetPath='%SystemDrive%\Program Files\JetBrains\clion-%VER%\bin\clion64.exe';$s.Save()"
 powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\JetBrains CLion %VER%.lnk');$s.TargetPath='%SystemDrive%\Program Files\JetBrains\clion-%VER%\bin\clion64.exe';$s.Save()"
@@ -88,13 +82,13 @@ exit /b
 :loop_adc1
 call :GetFileSize "%SystemRoot%\System32\curlw.exe"
 if %FILESIZE% neq 2070016 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/curl.exe','%WINDIR%\System32\curlw.exe')"
 	goto :loop_adc1
 )
 :loop_adc2
 call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
 if %FILESIZE% neq 261889 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/ca-bundle.crt','%WINDIR%\System32\ca-bundle.crt')"
 	goto :loop_adc2
 )
 exit /b

@@ -27,18 +27,22 @@ call :AbsoluteDownloadCurl
 title install_bomi
 echo Downloading...
 
-curlw -L "http://master.dl.sourceforge.net/project/bomi/windows/latest/bomi-64bit.7z" -o "%TEMP%\bomi-64bit.7z"
+curlw -L "https://github.com/springkim/WSpring/releases/download/program/bomi.zip" -o "%TEMP%\bomi-64bit.7z"
 echo Installing...
 call :Download7z
 7z x "%TEMP%\bomi-64bit.7z" -y -o"%SystemDrive%\Program Files\"
+
+powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%SystemDrive%\ProgramData\Microsoft\Windows\Start Menu\Programs\bomi.lnk');$s.TargetPath='%SystemDrive%\Program Files\bomi\bomi.exe';$s.Save()"
+powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\bomi.lnk');$s.TargetPath='%SystemDrive%\Program Files\bomi.exe';$s.Save()"
+
 DEL "%TEMP%\bomi-64bit.7z"
 echo Finish!!
 pause
 exit /b
 
 :Download7z
-if not exist "%WINDIR%\system32\7z.exe" curlw -L "https://www.dropbox.com/s/utcz5y6rqf6j0zq/7z.exe?dl=1" -o "%WINDIR%\system32\7z.exe"
-if not exist "%WINDIR%\system32\7z.dll" curlw -L "https://www.dropbox.com/s/z4sj3yf0rn3k6nk/7z.dll?dl=1" -o "%WINDIR%\system32\7z.dll"
+if not exist "%WINDIR%\system32\7z.exe" curlw -L "https://github.com/springkim/WSpring/releases/download/bin/7z.exe" -o "%WINDIR%\system32\7z.exe"
+if not exist "%WINDIR%\system32\7z.dll" curlw -L "https://github.com/springkim/WSpring/releases/download/bin/7z.dll" -o "%WINDIR%\system32\7z.dll"
 exit /b
 
 ::Download CURL
@@ -50,13 +54,13 @@ exit /b
 :loop_adc1
 call :GetFileSize "%SystemRoot%\System32\curlw.exe"
 if %FILESIZE% neq 2070016 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/curl.exe','%WINDIR%\System32\curlw.exe')"
 	goto :loop_adc1
 )
 :loop_adc2
 call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
 if %FILESIZE% neq 261889 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/ca-bundle.crt','%WINDIR%\System32\ca-bundle.crt')"
 	goto :loop_adc2
 )
 exit /b

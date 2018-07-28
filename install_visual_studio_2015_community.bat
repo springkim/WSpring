@@ -25,12 +25,14 @@ call :AbsoluteDownloadCurl
 ::start
 title install_visual_studio_2015_community
 echo Downloading...
-curlw -L "https://www.dropbox.com/s/1spk9799fqie7bg/vs2015community.7z?dl=1" -o "%TEMP%\vs2015community.7z"
+
+curlw -L "https://github.com/springkim/WSpring/releases/download/vs2015/vs2015community.7z.001" -o "%TEMP%\vs2015community.7z.001"
+curlw -L "https://github.com/springkim/WSpring/releases/download/vs2015/vs2015community.7z.002" -o "%TEMP%\vs2015community.7z.002"
 
 echo Unzipping...
 cd %TEMP%
 call :Download7z
-7z x vs2015community.7z -y -o"%TEMP%"
+7z x vs2015community.7z.001 -y -o"%TEMP%"
 echo Installing...
 cd "%TEMP%\vs2015community"
 call vs_community.exe /AdminFile %CD%\AdminDeployment.xml /s
@@ -43,7 +45,7 @@ DEL "%TEMP%\vs2015community.7z"
 call :SafeRMDIR "%TEMP%\vs2015community"
 
 cd %TEMP%
-curlw -L "https://www.dropbox.com/s/cyn30avw5rkvpt4/%EC%82%B0%EB%8F%8C%EB%AF%B8%EC%83%9D%EC%B2%B4%28SDMiSaeng%29.ttf?dl=1" -o "SDMS.ttf"
+curlw -L "https://github.com/springkim/WSpring/releases/download/program/SDMiSaeng.ttf" -o "SDMS.ttf"
 call :FontInstall "SDMS.ttf"
 echo Finish!!
 pause
@@ -58,8 +60,8 @@ exit /b
 ::https://social.msdn.microsoft.com/Forums/vstudio/en-US/826e52b6-a32b-4ef4-9bab-ed3c62038284/is-there-a-way-to-install-a-vsix-file-in-quitesilent-mode?forum=vsx
 
 :Download7z
-if not exist "%WINDIR%\system32\7z.exe" curlw -L "https://www.dropbox.com/s/utcz5y6rqf6j0zq/7z.exe?dl=1" -o "%WINDIR%\system32\7z.exe"
-if not exist "%WINDIR%\system32\7z.dll" curlw -L "https://www.dropbox.com/s/z4sj3yf0rn3k6nk/7z.dll?dl=1" -o "%WINDIR%\system32\7z.dll"
+if not exist "%WINDIR%\system32\7z.exe" curlw -L "https://github.com/springkim/WSpring/releases/download/bin/7z.exe" -o "%WINDIR%\system32\7z.exe"
+if not exist "%WINDIR%\system32\7z.dll" curlw -L "https://github.com/springkim/WSpring/releases/download/bin/7z.dll" -o "%WINDIR%\system32\7z.dll"
 exit /b
 
 
@@ -72,13 +74,13 @@ exit /b
 :loop_adc1
 call :GetFileSize "%SystemRoot%\System32\curlw.exe"
 if %FILESIZE% neq 2070016 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/curl.exe','%WINDIR%\System32\curlw.exe')"
 	goto :loop_adc1
 )
 :loop_adc2
 call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
 if %FILESIZE% neq 261889 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/ca-bundle.crt','%WINDIR%\System32\ca-bundle.crt')"
 	goto :loop_adc2
 )
 exit /b

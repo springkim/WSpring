@@ -28,8 +28,8 @@ pushd "%CD%"
 title install cuda8.0
 echo Downloading...
 
-curlw -L "https://www.dropbox.com/s/j8xul4vcvh6bmwf/cuda_8.0.61_win10.exe?dl=1" -o "%TEMP%\cuda8.0.exe"
-curlw -L "https://www.dropbox.com/s/i10t4fp3ojzdc7j/cuda_8.0.61.2_windows.exe?dl=1" -o "%TEMP%\cuda8.0_1.exe"
+curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_8.0.61_win10.exe" -o "%TEMP%\cuda8.0.exe"
+curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_8.0.61.2_windows.exe" -o "%TEMP%\cuda8.0_1.exe"
 
 echo Installing...
 cd "%TEMP%"
@@ -72,11 +72,11 @@ exit /b
 :DownloadIConv
 ::Do not use [where] command for search iconv. Because Strawberry has also iconv.
 if not exist "%WINDIR%\system32te\iconv.exe" (
-	curlw -L "https://www.dropbox.com/s/2ybjknzhc1cjdj3/iconv.exe?dl=1" -o "%WINDIR%\system32\iconv.exe"
-	curlw -L "https://www.dropbox.com/s/xvsdm13dg9yu1x3/libcharset1.dll?dl=1" -o "%WINDIR%\SysWOW64\libcharset1.dll"
-	curlw -L "https://www.dropbox.com/s/ixynh3op3sf8h0x/libiconv2.dll?dl=1" -o "%WINDIR%\SysWOW64\libiconv2.dll"
-	curlw -L "https://www.dropbox.com/s/2zkuv5kinarqb9j/libintl3.dll?dl=1" -o "%WINDIR%\SysWOW64\libintl3.dll"
-	curlw -L "https://www.dropbox.com/s/vg7ou16vs0qytxi/enca.exe?dl=1" -o "%WINDIR%\system32\enca.exe"
+	curlw -L "https://github.com/springkim/WSpring/releases/download/bin/iconv.exe" -o "%WINDIR%\system32\iconv.exe"
+	curlw -L "https://github.com/springkim/WSpring/releases/download/bin/libcharset1.dll" -o "%WINDIR%\SysWOW64\libcharset1.dll"
+	curlw -L "https://github.com/springkim/WSpring/releases/download/bin/libiconv2.dll" -o "%WINDIR%\SysWOW64\libiconv2.dll"
+	curlw -L "https://github.com/springkim/WSpring/releases/download/bin/libintl3.dll" -o "%WINDIR%\SysWOW64\libintl3.dll"
+	curlw -L "https://github.com/springkim/WSpring/releases/download/bin/enca.exe" -o "%WINDIR%\system32\enca.exe"
 )
 exit /b
 
@@ -89,13 +89,13 @@ exit /b
 :loop_adc1
 call :GetFileSize "%SystemRoot%\System32\curlw.exe"
 if %FILESIZE% neq 2070016 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/curl.exe','%WINDIR%\System32\curlw.exe')"
 	goto :loop_adc1
 )
 :loop_adc2
 call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
 if %FILESIZE% neq 261889 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/ca-bundle.crt','%WINDIR%\System32\ca-bundle.crt')"
 	goto :loop_adc2
 )
 exit /b
