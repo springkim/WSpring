@@ -1,9 +1,8 @@
 ::
-::  install_shareX.bat
+::  install_honeycam.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 01. 22...
-::  Contribute by Woochoel on 2018.08.01...
+::  Created by Woocheol on 2018. 08. 01...
 ::  Copyright 2017-2018 kimbomm. All rights reserved.
 ::
 @echo off
@@ -23,26 +22,29 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
 CD /D "%~dp0"
 call :AbsoluteDownloadCurl
+
 ::start
-title install_shareX
-taskkill /im ShareX.exe
+title install_honeycam
 echo Downloading...
+powershell "Set-ExecutionPolicy RemoteSigned -Force"
+
+curlw -L "https://kr.bandisoft.com/honeycam/dl.php?web-kr" -o "%TEMP%\HONEYCAM-SETUP-KR.EXE"
+
 cd %TEMP%
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/ShareX/ShareX/releases/latest' -UseBasicParsing;($HTML.Links.href) > sharex_latest.txt"
-powershell "get-content sharex_latest.txt -ReadCount 1000 | foreach { $_ -match 'setup.exe' } | out-file -encoding ascii sharex_url.txt"
-set /p "url="<"sharex_url.txt"
-echo %url:~6%
-
-curlw -L "https://github.com%url%" -o "%TEMP%\ShareX_Setup.exe"
-
 echo Installing...
-start /wait ShareX_Setup.exe /VERYSILENT
-DEL "%TEMP%\ShareX_Setup.exe"
-DEL "sharex_latest.txt"
-DEL "sharex_url.txt"
+start /wait HONEYCAM-SETUP-KR.EXE /S
+DEL "%TEMP%\HONEYCAM-SETUP-KR.EXE"
 echo Finish!!
 pause
 exit /b
+::Power shell hidden option
+::https://stackoverflow.com/questions/1802127/how-to-run-a-powershell-script-without-displaying-a-window
+
+::power shell run on admin
+::https://social.technet.microsoft.com/Forums/ie/en-US/acf70a31-ceb4-4ea5-bac1-be2b25eb5560/how-to-run-as-admin-powershellps1-file-calling-in-batch-file?forum=winserverpowershell
+
+::powershell mouse event
+::https://stackoverflow.com/questions/39353073/how-i-can-send-mouse-click-in-powershell
 
 ::Download CURL
 :GetFileSize
