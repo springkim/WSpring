@@ -120,6 +120,12 @@ Git is easy to learn and has a tiny footprint with lightning fast performance. I
 
 Hddb is a capable search tool which will quickly find files on any NTFS drive.
 
+### <img src="img/honeycam.png" width="64">HoneyCam
+
+<img src="img/ver_latest.png" height="20">
+
+**[Honeycam](https://kr.bandisoft.com/honeycam/)** is a High-quality animated GIF maker and editor. Make your animation files of gameplay, video highlights, and PC tutorials.
+
 ### <img src="img/honeyview.png" width="64">HoneyView
 
 <img src="img/ver_latest.png" height="20">
@@ -199,6 +205,12 @@ Install drivers for NVIDIA products including GeForce graphics cards.
 <img src="img/ver_latest.png" height="20">
 
 Office 365 is the brand name Microsoft uses for a group of subscriptions that provides productivity software and a related services. And you need serial key. This script is not illegal. I don't provide any serial key.
+
+### <img src="img/opera.png" width="64">Opera
+
+<img src="img/ver_latest.png" height="20">
+
+**[Opera](https://www.opera.com/ko)** is a web browser for Windows, macOS, and Linux operating systems developed by Opera Software AS. It uses the Blink layout engine. An earlier version using the Presto layout engine is still available and runs on FreeBSD systems
 
 ### <img src="img/pathcopycopy.png" width="64">Path Copy Copy
 
@@ -322,6 +334,18 @@ There is a example code in [tests/OpenBLAS_Tests](tests/OpenBLAS_Tests).
 <img src="img/ver_latest.png" height="20">
 
 **[glog](https://github.com/google/glog)** is google logging library.
+
+### <img src="img/hdf5.png" width="64"> hdf5
+
+<img src="img/ver_latest.png" height="20">
+
+Hierarchical Data Format is a set of file formats designed to store and organize large amounts of data.
+
+### <img src="img/zlib.png" width="64"> zlib
+
+<img src="img/ver_latest.png" height="20">
+
+zlib is a software library used for data compression. zlib was written by Jean-loup Gailly and Mark Adler and is an abstraction of the DEFLATE compression algorithm used in their gzip file compression program.
 
 ## Enabler
 
