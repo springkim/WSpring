@@ -31,7 +31,6 @@ cd %TEMP%
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/ShareX/ShareX/releases/latest' -UseBasicParsing;($HTML.Links.href) > sharex_latest.txt"
 powershell "get-content sharex_latest.txt -ReadCount 1000 | foreach { $_ -match 'setup.exe' } | out-file -encoding ascii sharex_url.txt"
 set /p "url="<"sharex_url.txt"
-echo %url:~6%
 
 curlw -L "https://github.com%url%" -o "%TEMP%\ShareX_Setup.exe"
 
