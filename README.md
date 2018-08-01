@@ -345,7 +345,7 @@ Hierarchical Data Format is a set of file formats designed to store and organize
 
 <img src="img/ver_latest.png" height="20">
 
-zlib is a software library used for data compression. zlib was written by Jean-loup Gailly and Mark Adler and is an abstraction of the DEFLATE compression algorithm used in their gzip file compression program.
+zlib is a software library used for data compression. zlib was written by Jean-loup Gailly and Mark Adler and is an abstraction of the DEFLATE compression algorithm used in their gzip file compression program.w
 
 ## Enabler
 
