@@ -1,9 +1,9 @@
 ::
-::  install_python3.6.4.bat
+::  install_python3.bat
 ::  WSpring
 ::
-::  Created by kimbomm on 2018. 01. 22...
-::  Copyright 2017-2018 kimbomm. All rights reserved.
+::  Created by kimbomm on 2018. 08. 02...
+::  Copyright 2018 kimbomm. All rights reserved.
 ::
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
@@ -23,28 +23,38 @@ pushd "%CD%"
 CD /D "%~dp0"
 call :AbsoluteDownloadCurl
 ::start
-title install_python3.6.4
+title install_python3
 echo Downloading...
-curlw -L "https://github.com/springkim/WSpring/releases/download/language/Python36.zip" -o "%TEMP%\Python36.zip"
-echo Unzipping...
-call :SafeRMDIR "C:\Python36"
-powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\Python36.zip', 'C:\Python36'); }"
-call :DownloadSetw
-setw "C:\Python36\"
-setw "C:\Python36\Scripts"
+cd %TEMP%
 
-DEL "%TEMP%\Python36.zip"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://www.python.org/downloads/' -UseBasicParsing;($HTML.Links.href) > python_html.txt"
+powershell "get-content python_html.txt -ReadCount 10000 | foreach { $_ -match '/downloads/release/python-3' } | out-file -encoding ascii python_url.txt"
+set /p "url="<"python_url.txt"
+echo latest version of python3 is %url:~26,3%
+
+curlw -L "https://www.python.org/ftp/python/%url:~26,1%.%url:~27,1%.%url:~28,1%/python-%url:~26,1%.%url:~27,1%.%url:~28,1%-amd64.exe" -o "%TEMP%\Python3_installer.exe"
+
+
+echo Installing...
+start /wait Python3_installer.exe /uninstall /quiet
+start /wait Python3_installer.exe /simple /quiet
+
+::C:\Users\username\AppData\Local\Programs\Python\Python37
+::Remove old python
+for /D %%f in (%SYSTEMDRIVE%\Python3*) do @rmdir /S /Q %%f
+::Move latest python to C:\
+for /D %%f in (%LOCALAPPDATA%\Programs\Python\Python3*) do move %%f %SYSTEMDRIVE%\
+
+setw "C:\Python%url:~26,2%\"
+setw "C:\Python%url:~26,2%\Scripts"
+
+DEL python_url.txt
+DEL python_html.txt
+::DEL "%TEMP%\Python3_installer.exe"
 echo Finish!!
 pause
 exit /b
 
-:SafeRMDIR
-IF EXIST "%~1" (
-	RMDIR /S /Q "%~1"
-)
-exit /b
-
-::http://enjoytools.net/xe/board_nfRq49/4816
 
 :DownloadSetw
 if not exist "%WINDIR%\system32\setw.exe" curlw -L "https://github.com/springkim/WSpring/releases/download/bin/setw.exe" -o "%WINDIR%\system32\setw.exe"

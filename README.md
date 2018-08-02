@@ -230,17 +230,12 @@ Copy file paths as Unix format from Windows explorer's contextual menu which mea
 
 **[Strawberry Perl](http://strawberryperl.com/)** is a perl environment for MS Windows containing all you need to run and develop perl applications. It is designed to be as close as possible to perl environment on UNIX systems.
 
-### <img src="img/python2.png" width="64">Python2.7
 
-<img src="img/python2_ver.png" height="20">
+### <img src="img/python3.png" width="64">Python3
 
-**[Python](https://www.python.org/)** is light-weight script language. I don't like python. But many interfaces of deep-learning libraries are python2 or python3. So we need both of them as python2.exe and python3.exe. This script will install Python2.7.14 at `C:\Python27\`. You can run python2.X as `python2.exe` and `pip2.exe`.
+<img src="img/ver_latest.png" height="20">
 
-### <img src="img/python3.png" width="64">Python3.6.4
-
-<img src="img/python3_ver.png" height="20">
-
-This script will install Python3.6 at `C:\Python36\`. You can run python3.X as `python3.exe` and `pip3.exe`.
+**[Python](https://www.python.org/)** is light-weight script language. I don't like python. But many interfaces of deep-learning libraries are python2 or python3. So we need both of them as python2.exe and python3.exe. This script will install Python3.6 at `C:\Python36\`. You can run python3.X as `python3.exe` and `pip3.exe`.
 
 ### <img src="img/sharex.png" width="64">ShareX
 
