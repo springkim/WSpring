@@ -153,7 +153,7 @@ Hddb is a capable search tool which will quickly find files on any NTFS drive.
 
 ### <img src="img/mingw64.png" width="64">MinGW64
 
-<img src="img/mingw64_ver.png" height="20">
+<img src="img/ver_latest.png" height="20">
 
 **[MinGW-w64](https://mingw-w64.org/doku.php)** is an advancement of the original mingw.org project, Created to support the GCC compiler on Windows system. You can use this compiler on Windows **[CLion](https://www.jetbrains.com/clion/)**.
 

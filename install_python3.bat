@@ -22,6 +22,7 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
 CD /D "%~dp0"
 call :AbsoluteDownloadCurl
+call :DownloadSetw
 ::start
 title install_python3
 echo Downloading...

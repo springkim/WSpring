@@ -23,18 +23,21 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
 CD /D "%~dp0"
 call :AbsoluteDownloadCurl
-
+call :DownloadSetw
+call :Download7z
 ::start
+cd %TEMP%
 title install_mingw64
 echo Downloading...
-curlw -L "https://github.com/springkim/WSpring/releases/download/language/MinGW64.zip" -o "%TEMP%\MinGW64.zip"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://sourceforge.net/projects/mingw-w64/files/?source=navbar' -UseBasicParsing;($HTML.Links.href) > MinGW64_html.txt"
+powershell "get-content MinGW64_html.txt -ReadCount 10000 | foreach { $_ -match 'release-win32-seh-rt' } | out-file -encoding ascii MinGW64_url.txt"
+set /p "url="<"MinGW64_url.txt"
+curlw -L "%url%" -o "mingw64.7z"
 echo Unzipping...
-call :SafeRMDIR "%SystemDrive%\MinGW64"
-powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\MinGW64.zip', '%SystemDrive%\MinGW64'); }"
-call :DownloadSetw
-setw "C:\MinGW64\bin\"
-
-DEL "%TEMP%\MinGW64.zip"
+call :SafeRMDIR "%SystemDrive%\mingw64"
+7z x "mingw64.7z" -y -o"%SystemDrive%\"
+setw "C:\mingw64\bin\"
+DEL "mingw64.7z"
 echo Finish!!
 pause
 exit /b
@@ -43,6 +46,11 @@ exit /b
 IF EXIST "%~1" (
 	RMDIR /S /Q "%~1"
 )
+exit /b
+
+:Download7z
+if not exist "%WINDIR%\system32\7z.exe" curlw -L "https://github.com/springkim/WSpring/releases/download/bin/7z.exe" -o "%WINDIR%\system32\7z.exe"
+if not exist "%WINDIR%\system32\7z.dll" curlw -L "https://github.com/springkim/WSpring/releases/download/bin/7z.dll" -o "%WINDIR%\system32\7z.dll"
 exit /b
 
 :DownloadSetw
