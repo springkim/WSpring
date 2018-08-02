@@ -30,7 +30,7 @@ cd %TEMP%
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/atom/atom/releases/latest' -UseBasicParsing;($HTML.Links.href) > atom_latest.txt"
 powershell "get-content atom_latest.txt -ReadCount 1000 | foreach { $_ -match 'AtomSetup-x64' } | out-file -encoding ascii atom_url.txt"
 set /p "url="<"atom_url.txt"
-::echo %url:~6%
+
 curlw -L "https://github.com%url%" -o "AtomSetup-x64.exe"
 echo Installing...
 start /wait AtomSetup-x64.exe --silent

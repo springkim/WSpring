@@ -33,6 +33,9 @@ powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolT
 powershell "get-content MinGW64_html.txt -ReadCount 10000 | foreach { $_ -match 'release-win32-seh-rt' } | out-file -encoding ascii MinGW64_url.txt"
 set /p "url="<"MinGW64_url.txt"
 curlw -L "%url%" -o "mingw64.7z"
+DEL "MinGW64_html.txt"
+DEL "MinGW64_url.txt"
+
 echo Unzipping...
 call :SafeRMDIR "%SystemDrive%\mingw64"
 7z x "mingw64.7z" -y -o"%SystemDrive%\"
