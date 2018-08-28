@@ -255,6 +255,14 @@ Copy file paths as Unix format from Windows explorer's contextual menu which mea
 
 **[TeamViewer](www.teamviewer.com)** is a proprietary computer software package for remote control, desktop sharing, online meetings, web conferencing and file transfer between computers.
 
+
+### <img src="img/vim.png" width="64">Vim
+
+<img src="img/ver_manually_latest.png" height="20">
+
+[Vim](https://www.vim.org/download.php) is a clone, with additions, of Bill Joy's vi text editor program for Unix. It was written by Bram Moolenaar based on source for a port of the Stevie editor to the Amiga and first released publicly in 1991.
+
+
 ### <img src="img/vs2015.png" width="64">Visual Studio 2015
 
 <img src="img/vs2015_ver.png" height="20">
