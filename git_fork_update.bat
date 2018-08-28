@@ -14,6 +14,7 @@ powershell "$SRC=get-content gfu_url2.txt -ReadCount 1;[regex]::match($SRC,'\"(.
 set /p "origin_url="<"gfu_url3.txt"
 
 DEL gfu_html.txt
+DEL git_url.txt
 DEL gfu_url.txt
 DEL gfu_url2.txt
 DEL gfu_url3.txt
