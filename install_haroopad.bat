@@ -34,7 +34,7 @@ powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolT
 powershell "get-content haroopad_latest.txt -ReadCount 1000 | foreach { $_ -match '/rhiokim/haroopad-download/downloads/Haroopad' } | out-file -encoding ascii haroopad_url.txt"
 powershell "get-content haroopad_url.txt -ReadCount 1000 | foreach { $_ -match 'msi' } | out-file -encoding ascii haroopad_url2.txt"
 set /p "url="<"haroopad_url2.txt"
-curlw -L "https://bitbucket.org/%url%" -o "Haroopad.msi"
+curlw -L "https://bitbucket.org%url%" -o "Haroopad.msi"
 echo Installing...
 msiexec /i Haroopad.msi /qb
 del Haroopad.msi
