@@ -30,7 +30,8 @@ curlw -L "https://github.com/springkim/WSpring/releases/download/program/FoxitRe
 
 echo Installing...
 cd %TEMP%
-start /wait foxit.exe /ForceInstall /VERYSILENT DESKTOP_SHORTCUT="0" MAKEDEFAULT="0" VIEWINBROWSER="0" LAUNCHCHECKDEFAULT="0" AUTO_UPDATE="0" /passive /norestart
+::start /wait foxit.exe /ForceInstall /VERYSILENT DESKTOP_SHORTCUT="0" MAKEDEFAULT="0" VIEWINBROWSER="0" LAUNCHCHECKDEFAULT="0" AUTO_UPDATE="0" /passive /norestart
+start /wait foxit.exe /quiet
 
 del "%TEMP%\foxit.exe"
 echo Finish!!
