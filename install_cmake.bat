@@ -26,7 +26,7 @@ call :AbsoluteDownloadCurl
 title install_cmake
 pushd "%CD%"
 echo Downloading...
-powershell "$HTML=Invoke-WebRequest -Uri 'https://cmake.org/download/' -UseBasicParsing;($HTML.Links.href) > %TEMP%\parse_cmake.txt"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://cmake.org/download/' -UseBasicParsing;($HTML.Links.href) > %TEMP%\parse_cmake.txt"
 ::find win64-x64.zip
 powershell "get-content %TEMP%\parse_cmake.txt -ReadCount 1000 | foreach { $_ -match 'win64-x64.zip' } | out-file -encoding ascii %TEMP%\parse_cmake1.txt"
 ::without RC version
