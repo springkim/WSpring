@@ -55,6 +55,21 @@ if exist "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include" (
 	set extension[%CCC%]=lib
 	set /a CCC=%CCC%+1
 )
+if exist 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC' (
+	pushd %cd%
+	cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\"
+	dir /B > "%TEMP%\msvc2017path.txt"
+	set /p "msvcnum="<"%TEMP%\msvc2017path.txt"
+	popd
+	set CC[%CCC%]="Visual Studio 15 2017 Win64"
+	set CMAKEDIR[%CCC%]="build_vc15"
+	set CCDIR[%CCC%]="vc15"
+	set dst_include_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\%msvcnum%\include\"
+	set dst_lib_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\%msvcnum%\lib\x64\"
+	set src_lib_dir[%CCC%]=vc15
+	set extension[%CCC%]=lib
+	set /a CCC=%CCC%+1
+)
 if exist "C:\MinGW64\" (
 	set CC[%CCC%]="MinGW Makefiles"
 	set CMAKEDIR[%CCC%]="build_mingw"

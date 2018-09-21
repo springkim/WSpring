@@ -29,6 +29,9 @@ cd %TEMP%
 call :SafeRMDIR "build_opencv"
 ::GOTO DOWNLOADSKIP
 
+::set fixver3=opencv/opencv/archive/3.4.1.zip
+::set fixver2=opencv/opencv/archive/2.4.13.6.zip
+
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/opencv/opencv/releases' -UseBasicParsing;($HTML.Links.href) > opencv.txt"
 powershell "get-content opencv.txt -ReadCount 1000 | foreach { $_ -match 'archive' } | out-file -encoding ascii opencv_link.txt"
 powershell "get-content opencv_link.txt -ReadCount 1000 | foreach { $_ -match 'zip' } | out-file -encoding ascii opencv_link_zip.txt"
@@ -38,10 +41,24 @@ powershell "get-content opencv_link_zip2.txt -ReadCount 1000 | foreach { $_ -mat
 powershell "get-content opencv_link_zip2.txt -ReadCount 1000 | foreach { $_ -match '/2.' } | out-file -encoding ascii opencv_link2.txt"
 set /p "cv2="<"opencv_link2.txt"
 set /p "cv3="<"opencv_link3.txt"
-curlw -L "https://github.com%cv3%" -o "cv3.zip"
 set cv3c=/opencv/opencv_contrib%cv3:~14%
+
+
+if not "%fixver3%"=="" (
+	set cv3=%fixver3%
+)
+if not "%fixver2%"=="" (
+	set cv2=%fixver2%
+)
+
+echo opencv3.x : %cv3:~23%
+echo opencv2.x : %cv2:~23%
+
+curlw -L "https://github.com%cv3%" -o "cv3.zip"
 curlw -L "https://github.com%cv3c%" -o "cv3c.zip"
 curlw -L "https://github.com%cv2%" -o "cv2.zip"
+
+
 
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('cv2.zip', 'build_opencv'); }"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('cv3c.zip', 'build_opencv'); }"
@@ -72,6 +89,20 @@ if exist "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include" (
 	set dst_include_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\"
 	set dst_lib_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\amd64\"
 	set src_lib_dir[%CCC%]=vc14
+	set extension[%CCC%]=lib
+	set /a CCC=%CCC%+1
+)
+if exist 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC' (
+	pushd %cd%
+	cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\"
+	dir /B > "%TEMP%\msvc2017path.txt"
+	set /p "msvcnum="<"%TEMP%\msvc2017path.txt"
+	popd
+	set CC[%CCC%]="Visual Studio 15 2017 Win64"
+	set CCDIR[%CCC%]="vc15"
+	set dst_include_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\%msvcnum%\include\"
+	set dst_lib_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\%msvcnum%\lib\x64\"
+	set src_lib_dir[%CCC%]=vc15
 	set extension[%CCC%]=lib
 	set /a CCC=%CCC%+1
 )
@@ -121,8 +152,8 @@ set op_contrib[0]=-DOPENCV_EXTRA_MODULES_PATH=
 set op_contrib[1]=-DOPENCV_EXTRA_MODULES_PATH=../../%cv3c_dir%/modules
 set op_contrib[2]=-DOPENCV_EXTRA_MODULES_PATH=
 
-del "C:\Windows\System32\opencv_*" 2>&1 >NUL
-del "C:\Windows\System32\libopencv_*" 2>&1 >NUL
+del "C:\Windows\System32\opencv_*" >nul 2>&1
+del "C:\Windows\System32\libopencv_*" >nul 2>&1
 
 FOR /L %%i in (0,1,%CCC%) do (
 	if not exist !CC[%%i]! md !CC[%%i]!

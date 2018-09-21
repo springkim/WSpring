@@ -59,6 +59,21 @@ if exist "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include" (
 	set extension[%CCC%]=lib
 	set /a CCC=%CCC%+1
 )
+if exist 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC' (
+	pushd %cd%
+	cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\"
+	dir /B > "%TEMP%\msvc2017path.txt"
+	set /p "msvcnum="<"%TEMP%\msvc2017path.txt"
+	popd
+	set CC[%CCC%]="Visual Studio 15 2017 Win64"
+	set CMAKEDIR[%CCC%]="build_vc15"
+	set CCDIR[%CCC%]="vc15"
+	set dst_include_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\%msvcnum%\include\"
+	set dst_lib_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\%msvcnum%\lib\x64\"
+	set src_lib_dir[%CCC%]=vc15
+	set extension[%CCC%]=lib
+	set /a CCC=%CCC%+1
+)
 if exist "C:\MinGW64\" (
 	set CC[%CCC%]="MinGW Makefiles"
 	set CMAKEDIR[%CCC%]="build_mingw"
@@ -77,7 +92,7 @@ setlocal EnableDelayedExpansion
 FOR /L %%i in (0,1,%CCC%) do (
 	if not exist !CMAKEDIR[%%i]! md !CMAKEDIR[%%i]!
 	cd !CMAKEDIR[%%i]!
-	cmake ..\OpenBLAS -G !CC[%%i]! -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=build -DUSE_THREAD=0
+	cmake ..\OpenBLAS -G !CC[%%i]! -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=build -DUSE_THREAD=0 -DCMAKE_DEBUG_POSTFIX=d
 
 	if !CC[%%i]! == "MinGW Makefiles"  (
 		cmake --build . --config Release
@@ -85,11 +100,26 @@ FOR /L %%i in (0,1,%CCC%) do (
 	) else (
 		cmake --build . --config Release --target ALL_BUILD
 		cmake --build . --config Release --target INSTALL
-		echo. >> build\include\cblas.h
-		echo #pragma comment^(lib,"openblas.lib"^) >> build\include\cblas.h
-
+		cmake --build . --config Debug --target ZERO_CHECK
+		cmake --build . --config Debug --target driver_level2
+		cmake --build . --config Debug --target driver_level3
+		cmake --build . --config Debug --target driver_others
+		cmake --build . --config Debug --target interface
+		cmake --build . --config Debug --target kernel
+		cmake --build . --config Debug --target openblas
+		xcopy /Y "lib\DEBUG\openblasd.dll" "build\bin\"
+		xcopy /Y "lib\DEBUG\openblasd.lib" "build\lib\"
+		echo. >> build\include\openblas\cblas.h
+		echo #ifdef _DEBUG >> build\include\openblas\cblas.h
+		echo. >> build\include\openblas\cblas.h
+		echo #pragma comment^(lib,"openblasd.lib"^) >> build\include\openblas\cblas.h
+		echo. >> build\include\openblas\cblas.h
+		echo #else >> build\include\openblas\cblas.h
+		echo. >> build\include\openblas\cblas.h
+		echo #pragma comment^(lib,"openblas.lib"^) >> build\include\openblas\cblas.h
+		echo #endif >> build\include\openblas\cblas.h
 	)
-	xcopy /Y "build\include\*.*" !dst_include_dir[%%i]! /e /h /k 2>&1 >NUL
+	xcopy /Y "build\include\openblas\*.*" !dst_include_dir[%%i]! /e /h /k 2>&1 >NUL
 	xcopy /Y "build\lib\*openblas*" !dst_lib_dir[%%i]! 2>&1 >NUL
 	if exist "build\bin\" (
 		xcopy /Y "build\bin\*openblas*" "C:\Windows\System32\" 2>&1 >NUL
@@ -97,7 +127,7 @@ FOR /L %%i in (0,1,%CCC%) do (
 	cd ..
 )
 endlocal
-call :SafeRMDIR "build_openblas"
+
 pause
 exit /b
 

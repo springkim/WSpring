@@ -300,6 +300,7 @@ Libraries
 
 <img src="img/ver_latest.png" height="20">
 
+
 **[OpenCV](https://opencv.org/)** is open source computer vision library. Please install opencv correctly way. Many people install opencv strange way *(e.g. C:/Opencv)* . Also OpenCV dropped C interface after version 3.0. So you need to install both 2.4.X and 3.X if you are C/C++ programmer.
 
 Usually, we use gcc(MinGW64), g++(MinGW64), Visual Studio(/TC), Visual Studio(/TP) in Windows OS for C/C++.  
