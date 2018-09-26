@@ -25,14 +25,18 @@ call :AbsoluteDownloadCurl
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::       https://www.vmware.com/support/ws5/doc/ws_install_silent.html
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+::https://download3.vmware.com/software/player/file/VMware-player-15.0.0-10134415.exe
 ::start
 title install_vmware
 echo Downloading...
+set VMWARE=VMware-player-15.0.0-10134415.exe
 cd %TEMP%
-curlw -L "https://www.dropbox.com/s/83bd4mrhtf12f2n/VMware-player-14.0.0-6661328.exe?dl=1" -o "VMware-player-14.0.0-6661328.exe"
+curlw -L "https://github.com/springkim/WSpring/releases/download/program/%VMWARE%" -o "%VMWARE%"
 echo Installing...
-start /wait VMware-player-14.0.0-6661328.exe /s /v /qn
-DEL "vmware.exe"
+start /wait %VMWARE% /s /v /qn
+DEL %VMWARE%
 
 echo Finish!!
 pause
@@ -47,13 +51,13 @@ exit /b
 :loop_adc1
 call :GetFileSize "%SystemRoot%\System32\curlw.exe"
 if %FILESIZE% neq 2070016 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/xytowp38v6d61lh/curl.exe?dl=1','%WINDIR%\System32\curlw.exe')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/curl.exe','%WINDIR%\System32\curlw.exe')"
 	goto :loop_adc1
 )
 :loop_adc2
 call :GetFileSize "%SystemRoot%\System32\ca-bundle.crt"
 if %FILESIZE% neq 261889 (
-	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://www.dropbox.com/s/ibgh7o7do1voctb/ca-bundle.crt?dl=1','%WINDIR%\System32\ca-bundle.crt')"
+	powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; (New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/releases/download/bin/ca-bundle.crt','%WINDIR%\System32\ca-bundle.crt')"
 	goto :loop_adc2
 )
 exit /b
