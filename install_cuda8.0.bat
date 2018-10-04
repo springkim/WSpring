@@ -28,8 +28,8 @@ pushd "%CD%"
 title install cuda8.0
 echo Downloading...
 
-::curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_8.0.61_win10.exe" -o "%TEMP%\cuda8.0.exe"
-::curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_8.0.61.2_windows.exe" -o "%TEMP%\cuda8.0_1.exe"
+curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_8.0.61_win10.exe" -o "%TEMP%\cuda8.0.exe"
+curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_8.0.61.2_windows.exe" -o "%TEMP%\cuda8.0_1.exe"
 
 echo Installing...
 cd "%TEMP%"
