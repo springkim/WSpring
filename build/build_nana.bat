@@ -1,21 +1,14 @@
+@if (@CodeSection == @Batch) @then
 ::
-::  build/build_nana.bat
+::  build_nana.bat
 ::  WSpring
 ::
 ::  Created by kimbomm on 2018. 10. 04...
 ::  Copyright 2018 kimbomm. All rights reserved.
 ::
 @echo off
+call :CCSelect
 
-::set COMPILER=vc2017
-set COMPILER=vc2015
-::set COMPILER=vc2013
-::set COMPILER=mingw
-
-::                       ::
-:: PRE-DEFINED VARIABLES ::
-::                       ::
-:: url : http://nanapro.org/common/api/download.php?ver=1.6.2
 call :AbsoluteDownloadHtmlAgilityPack
 set NAME=nana
 call :SafeRMDIR "build_%NAME%"
@@ -30,18 +23,21 @@ echo "http://nanapro.org/common/api/download.php?ver=%nanaver%"
 curlw -L "http://nanapro.org/common/api/download.php?ver=%nanaver%" -o "nana.zip"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('nana.zip', '.'); }"
 
-if %COMPILER% == mingw (
-	cmake ..
-) else (
-	cd nana\build\%COMPILER%
-	if %COMPILER% == vc2013 (
+if not x%COMPILER:MinGW=%==x%COMPILER% ( 
+	cd nana\build
+	cmake .. -G "MinGW Makefiles"
+) else ( 
+	if not x%COMPILER:2013=%==x%COMPILER% (
+		cd nana\build\vc2013
 		"%VS120COMNTOOLS%vsvars32.bat"
 	)
-	if %COMPILER% == vc2015 (
+	if not x%COMPILER:2015=%==x%COMPILER% (
+		cd nana\build\vc2015
 		"%VS140COMNTOOLS%vsvars32.bat"
 	)
-	if %COMPILER% == vc2017 (
-		"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+	if not x%COMPILER:2017=%==x%COMPILER% (
+		cd nana\build\vc2017
+		"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
 	)
 	msbuild nana.sln /p:Configuration=Debug /p:Platform=x64
 	msbuild nana.sln /p:Configuration=Release /p:Platform=x64
@@ -69,3 +65,48 @@ if %FILESIZE% neq 134656 (
 	goto :loop_adhap
 )
 exit /b
+::::::::::::::::::::::::::::::FUNCTION::::::::::::::::::::::::::::::
+::reference : http://reboot.pro/topic/20968-basic-batch-menu-using-arrows-keys/
+:CCSelect
+setlocal EnableDelayedExpansion
+set numOpts=0
+if "%1" equ "" set OPT="Visual Studio 2017 x64" "Visual Studio 2015 x64" "Visual Studio 2013 x64" "MinGW x64" "Visual Studio 2017 x86" "Visual Studio 2015 x86" "Visual Studio 2013 x86" "MinGW x86"
+if not "%1" equ "" set OPT=%*
+for %%a in (%OPT%) do (
+   set /A numOpts+=1
+   set aa=%%a
+   set option[!numOpts!]=!aa:"=!
+)
+set /A numOpts+=1
+set "option[!numOpts!]=exit"
+rem Clear previous doskey history
+doskey /LISTSIZE=!numOpts!
+rem Fill doskey history with menu options
+cscript //nologo /E:JScript "%~f0" EnterOpts
+for /L %%i in (1,1,%numOpts%) do set /P "COMPILER="
+:nextOpt
+cls
+rem echo MULTI-LINE MENU WITH OPTIONS SELECTION
+rem echo/
+rem Send a F7 key to open the selection menu
+cscript //nologo /E:JScript "%~f0" > nul
+set COMPILER=
+set /P "COMPILER=Select the desired option: " > nul
+endlocal & set COMPILER="%COMPILER%"
+doskey /LISTSIZE=0
+cls
+goto :eof
+@end
+var wshShell = WScript.CreateObject("WScript.Shell"),
+    envVar = wshShell.Environment("Process"),
+    numOpts = parseInt(envVar("numOpts"));
+if ( WScript.Arguments.Length ) {
+   // Enter menu options
+   for ( var i=1; i <= numOpts; i++ ) {
+      wshShell.SendKeys(envVar("option["+i+"]")+"{ENTER}");
+   }
+} else {
+   // Enter a F7 to open the menu
+   wshShell.SendKeys("{F7}");
+   wshShell.SendKeys("{HOME}");
+}
