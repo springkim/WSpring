@@ -75,7 +75,7 @@ You can use atom for writing markdown documents instead of Haroopad. It supports
 
 ### <img src="img/cuda.png" width="64">CUDA
 
-<img src="img/cuda8.0_ver.png" height="20"><img src="img/cuda9.0_ver.png" height="20"><img src="img/cuda9.1_ver.png" height="20">
+<img src="img/cuda8.0_ver.png" height="20"><img src="img/cuda9.0_ver.png" height="20"><img src="img/cuda9.1_ver.png" height="20"><img src="img/cuda10.0_ver.png" height="20">
 
 **You have to install nvidia-driver before install cuda.**
 
@@ -85,9 +85,16 @@ And this script converts cuda include files to UNICODE. Because, Visual Studio(K
 
 ### <img src="img/cuda.png" width="64">cudnn
 
-<img src="img/cudnn_ver.png" height="20">
+<img src="img/cudnn7.1_ver.png" height="20"><img src="img/cudnn7.3.1_ver.png" height="20">
 
 The NVIDIA CUDA® Deep Neural Network library (**[cuDNN](https://developer.nvidia.com/cudnn)**) is a GPU-accelerated library of primitives for deep neural networks. cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers. cuDNN is part of the NVIDIA Deep Learning SDK.
+
+### <img src="img/ditto.png" width="64">ditto
+
+<img src="img/ver_latest.png" height="20">
+
+**[Ditto](https://ditto-cp.sourceforge.io/)** is an extension to the standard windows clipboard. It saves each item placed on the clipboard allowing you access to any of those items at a later time. Ditto allows you to save any type of information that can be put on the clipboard, text, images, html, custom formats, .....
+
 
 ### <img src="img/filezilla.png" width="64">FileZilla
 

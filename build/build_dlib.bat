@@ -88,17 +88,12 @@ exit /b
 ::::::::::::::::::::::::::::::FUNCTION::::::::::::::::::::::::::::::
 ::reference : http://reboot.pro/topic/20968-basic-batch-menu-using-arrows-keys/
 :CCSelect
+TITLE C-CompilerSelecter
 setlocal EnableDelayedExpansion
 set numOpts=0
 if "%1" equ "" set OPT="Visual Studio 2017 x64" "Visual Studio 2015 x64" "Visual Studio 2013 x64" "MinGW x64" "Visual Studio 2017 x86" "Visual Studio 2015 x86" "Visual Studio 2013 x86" "MinGW x86"
 if not "%1" equ "" set OPT=%*
-for %%a in (%OPT%) do (
-   set /A numOpts+=1
-   set aa=%%a
-   set option[!numOpts!]=!aa:"=!
-)
-set /A numOpts+=1
-set "option[!numOpts!]=exit"
+for %%a in (%OPT%) do set /A numOpts+=1&&set option[!numOpts!]=%%~a
 rem Clear previous doskey history
 doskey /LISTSIZE=!numOpts!
 rem Fill doskey history with menu options
