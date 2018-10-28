@@ -1,5 +1,6 @@
 @echo off
-set /p msg=Enter MSG:
+title github upload
+set /p msg=Enter commit msg:
 git add -A
 git commit -m "%msg%"
 git push origin master
