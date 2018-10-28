@@ -1,0 +1,11 @@
+﻿  opencv_test.cpp
+c:\users\spring\documents\git\wspring\tests\opencv_tests\opencv_test.cpp(117): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'std::size_t'입니다.
+  c:\users\spring\documents\git\wspring\tests\opencv_tests\opencv_test.cpp(117): note: 서식 문자열에서 '%zd'을(를) 사용하는 것이 좋습니다.
+c:\users\spring\documents\git\wspring\tests\opencv_tests\opencv_test.cpp(118): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'std::size_t'입니다.
+  c:\users\spring\documents\git\wspring\tests\opencv_tests\opencv_test.cpp(118): note: 서식 문자열에서 '%zd'을(를) 사용하는 것이 좋습니다.
+c:\users\spring\documents\git\wspring\tests\opencv_tests\opencv_test.cpp(123): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 'fopen' 선언을 참조하십시오.
+c:\users\spring\documents\git\wspring\tests\opencv_tests\opencv_test.cpp(124): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 'fopen' 선언을 참조하십시오.
+  OpenCV_Tests.vcxproj -> C:\Users\spring\Documents\Git\WSpring\tests\OpenCV_Tests\x64\Debug\OpenCV_Tests.exe
+  OpenCV_Tests.vcxproj -> C:\Users\spring\Documents\Git\WSpring\tests\OpenCV_Tests\x64\Debug\OpenCV_Tests.pdb (Full PDB)

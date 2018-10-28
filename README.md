@@ -265,6 +265,13 @@ Copy file paths as Unix format from Windows explorer's contextual menu which mea
 
 **[TeamViewer](www.teamviewer.com)** is a proprietary computer software package for remote control, desktop sharing, online meetings, web conferencing and file transfer between computers.
 
+### <img src="img/cmd.png" width="64">Terminal-Theme
+
+<img src="img/ver_latest.png" height="20">
+
+**[ColorTool](https://github.com/Microsoft/console)** - A tool for changing the color scheme of the Windows console.
+
+<img src="img/cmd-solarized-light.png" height="200"><img src="img/cmd-solarized-dark.png" height="200"><img src="img/cmd-onehalfdark.png" height="200"><img src="img/cmd-onehalflight.png" height="200">
 
 ### <img src="img/vim.png" width="64">Vim
 

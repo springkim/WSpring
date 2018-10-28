@@ -5,7 +5,6 @@
 ::  Created by kimbomm on 2017. 12. 16...
 ::  Copyright 2017-2018 kimbomm. All rights reserved.
 ::
-:: 7.2.0
 @echo off
 >nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
 if '%errorlevel%' NEQ '0' (
@@ -30,7 +29,7 @@ cd %TEMP%
 title install_mingw64
 echo Downloading...
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://sourceforge.net/projects/mingw-w64/files/?source=navbar' -UseBasicParsing;($HTML.Links.href) > MinGW64_html.txt"
-powershell "get-content MinGW64_html.txt -ReadCount 10000 | foreach { $_ -match 'release-win32-seh-rt' } | out-file -encoding ascii MinGW64_url.txt"
+powershell "get-content MinGW64_html.txt -ReadCount 10000 | foreach { $_ -match 'release-posix-seh-rt' } | out-file -encoding ascii MinGW64_url.txt"
 set /p "url="<"MinGW64_url.txt"
 curlw -L "%url%" -o "mingw64.7z"
 DEL "MinGW64_html.txt"

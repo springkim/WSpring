@@ -8,7 +8,7 @@
 @echo off
 call :AbsoluteDownloadCurl
 set name=build_opencv3_mingw64_world_static
-set opencv_version=3.4.3
+set opencv_version=3.4.0
 call :SafeRMDIR %name%
 mkdir %name%
 cd %name%
