@@ -33,7 +33,7 @@ set /p "url="<"pcc_url.txt"
 curlw -L "https://github.com%url%" -o "PathCopyCopy.exe"
 echo Installing...
 start /wait PathCopyCopy.exe /VERYSILENT
-DEL "%TEMP%\PathCopyCopy.exe.txt"
+DEL "%TEMP%\PathCopyCopy.exe"
 DEL "%TEMP%\pcc_latest.txt"
 DEL "%TEMP%\pcc_url.txt"
 echo Finish!!
