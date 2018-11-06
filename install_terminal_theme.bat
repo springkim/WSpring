@@ -37,10 +37,12 @@ curlw -L "https://github.com/springkim/WSpring/releases/download/program/colorto
 powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('colortool.zip', '.'); }"
 setw %DIR%
 reg add "HKCU\Software\Microsoft\Command Processor" /v AutoRun ^
-  /t REG_EXPAND_SZ /d "%"USERPROFILE"%\init.cmd" /f
+  /t REG_EXPAND_SZ /d "runcolortool.cmd" /f
 
-echo @echo off > %USRPROFILE%\init.cmd
-echo colortool.exe -q %TERMINALTHEME%.itermcolors >> %USRPROFILE%\init.cmd
+  
+
+echo @echo off > %WINDIR%\System32\runcolortool.cmd
+echo colortool.exe -q %TERMINALTHEME%.itermcolors >> %WINDIR%\System32\runcolortool.cmd
 
 echo Finish!!
 pause

@@ -142,6 +142,13 @@ Hddb is a capable search tool which will quickly find files on any NTFS drive.
 
 **[Honeyview](https://www.bandisoft.com/honeyview/)** is a very fast image viewer supporting various formats. It also supports viewing the images in compressed ZIP, RAR, or 7z files without extraction. If an image has GPS information, the location can be viewed on Google Maps, and users can store preferred photos.
 
+### <img src="img/HxD.png" width="64">HxD
+
+<img src="img/ver_latest.png" height="20">
+
+**[HxD](https://mh-nexus.de/en/programs.php)** is a carefully designed and fast hex editor which, additionally to raw disk editing and modifying of main memory (RAM), handles files of any size.
+
+The easy to use interface offers features such as searching and replacing, exporting, checksums/digests, insertion of byte patterns, a file shredder, concatenation or splitting of files, statistics and much more.
 
 ### <img src="img/java.png" width="64">JAVA
 

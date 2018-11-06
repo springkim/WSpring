@@ -29,8 +29,8 @@ cd %TEMP%
 call :SafeRMDIR "build_opencv"
 ::GOTO DOWNLOADSKIP
 
-set fixver3=/opencv/opencv/archive/3.4.0.zip
-set fixver2=/opencv/opencv/archive/2.4.13.6.zip
+::set fixver3=opencv/opencv/archive/3.4.1.zip
+::set fixver2=opencv/opencv/archive/2.4.13.6.zip
 
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/opencv/opencv/releases' -UseBasicParsing;($HTML.Links.href) > opencv.txt"
 powershell "get-content opencv.txt -ReadCount 1000 | foreach { $_ -match 'archive' } | out-file -encoding ascii opencv_link.txt"
@@ -41,7 +41,7 @@ powershell "get-content opencv_link_zip2.txt -ReadCount 1000 | foreach { $_ -mat
 powershell "get-content opencv_link_zip2.txt -ReadCount 1000 | foreach { $_ -match '/2.' } | out-file -encoding ascii opencv_link2.txt"
 set /p "cv2="<"opencv_link2.txt"
 set /p "cv3="<"opencv_link3.txt"
-
+set cv3c=/opencv/opencv_contrib%cv3:~14%
 
 
 if not "%fixver3%"=="" (
@@ -50,7 +50,6 @@ if not "%fixver3%"=="" (
 if not "%fixver2%"=="" (
 	set cv2=%fixver2%
 )
-set cv3c=/opencv/opencv_contrib%cv3:~14%
 
 echo opencv3.x : %cv3:~23%
 echo opencv2.x : %cv2:~23%
@@ -75,7 +74,7 @@ cd build_opencv
 
 setlocal EnableDelayedExpansion
 set CCC=0
-if exist "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" (
+if exist "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\amd64\MSBuild.exe" (
 	set CC[%CCC%]="Visual Studio 12 2013 Win64"
 	set CCDIR[%CCC%]="vc12"
 	set dst_include_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\"
@@ -84,7 +83,7 @@ if exist "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" (
 	set extension[%CCC%]=lib
 	set /a CCC=%CCC%+1
 )
-if exist "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" (
+if exist "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\MSBuild.exe" (
 	set CC[%CCC%]="Visual Studio 14 2015 Win64"
 	set CCDIR[%CCC%]="vc14"
 	set dst_include_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\"
@@ -93,7 +92,7 @@ if exist "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" (
 	set extension[%CCC%]=lib
 	set /a CCC=%CCC%+1
 )
-if exist "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe" (
+if exist 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe' (
 	pushd %cd%
 	cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\"
 	dir /B > "%TEMP%\msvc2017path.txt"
@@ -178,9 +177,6 @@ FOR /L %%i in (0,1,%CCC%) do (
 		 -DWITH_MSMF=OFF^
 		 -DBUILD_opencv_python=OFF^
 		 -DCPU_DISPATCH=AVX,AVX2^
-		 -DENABLE_PRECOMPILED_HEADERS=OFF^
-		 -DWITH_OPENEXR=OFF^
-		 -DBUILD_OPENEXR=OFF^
 		 !op_eigen[%%j]!^
 		 !op_world[%%j]!^
 		 !op_contrib[%%j]!
