@@ -23,7 +23,6 @@ if '%errorlevel%' NEQ '0' (
 pushd "%CD%"
 CD /D "%~dp0"
 call :TerminalThemeSelect
-exit /b
 call :AbsoluteDownloadCurl
 call :DownloadSetw
 ::start
