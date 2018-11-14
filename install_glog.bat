@@ -34,7 +34,7 @@ git clone https://github.com/google/glog
 :DOWNLOADSKIP
 
 set CCC=0
-if exist "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\amd64\MSBuild.exe" (
+if exist "C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe" (
 	set CC[%CCC%]="Visual Studio 12 2013 Win64"
 	set CMAKEDIR[%CCC%]="build_vc12"
 	set CCDIR[%CCC%]="vc12"
@@ -44,7 +44,7 @@ if exist "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\amd64\MSBui
 	set extension[%CCC%]=lib
 	set /a CCC=%CCC%+1
 )
-if exist "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\MSBuild.exe" (
+if exist "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" (
 	set CC[%CCC%]="Visual Studio 14 2015 Win64"
 	set CMAKEDIR[%CCC%]="build_vc14"
 	set CCDIR[%CCC%]="vc14"
@@ -54,7 +54,7 @@ if exist "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\MSBui
 	set extension[%CCC%]=lib
 	set /a CCC=%CCC%+1
 )
-if exist 'C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe' (
+if exist "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe" (
 	pushd %cd%
 	cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\"
 	dir /B > "%TEMP%\msvc2017path.txt"

@@ -89,6 +89,12 @@ And this script converts cuda include files to UNICODE. Because, Visual Studio(K
 
 The NVIDIA CUDA® Deep Neural Network library (**[cuDNN](https://developer.nvidia.com/cudnn)**) is a GPU-accelerated library of primitives for deep neural networks. cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers. cuDNN is part of the NVIDIA Deep Learning SDK.
 
+### <img src="img/depends.png" width="64">dependency_walker
+
+<img src="img/ver_latest.png" height="20">
+
+**[Dependency Walker](https://github.com/lucasg/Dependencies)** is a free utility that scans any 32-bit or 64-bit Windows module (exe, dll, ocx, sys, etc.) and builds a hierarchical tree diagram of all dependent modules. For each module found, it lists all the functions that are exported by that module, and which of those functions are actually being called by other modules. Another view displays the minimum set of required files, along with detailed information about each file including a full path to the file, base address, version numbers, machine type, debug information, and more.
+
 ### <img src="img/ditto.png" width="64">ditto
 
 <img src="img/ver_latest.png" height="20">
