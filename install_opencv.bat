@@ -385,15 +385,15 @@ for /f "delims=" %%f in ('dir %dst% /a-d /s /b') do (
 	set encoding=!encoding:~0,5!
 	if !encoding! EQU %ascii% (
 		iconv -c -f ASCII -t UTF-16LE "%%f" > "%%f.txt"
-		move /Y "%%f.txt" "%%f" >nul
+		move /Y "%%f.txt" "%%f" 2>&1 >NUL
 	)
 	if !encoding! EQU %utf8% (
 		iconv -c -f UTF-8 -t UTF-16LE "%%f" > "%%f.txt"
-		move /Y "%%f.txt" "%%f" >nul
+		move /Y "%%f.txt" "%%f" 2>&1 >NUL
 	)
 	if !encoding! EQU %unknown% (
 		iconv -c -f UTF-8 -t UTF-16LE "%%f" > "%%f.txt"
-		move /Y "%%f.txt" "%%f" >nul
+		move /Y "%%f.txt" "%%f" 2>&1 >NUL
 	)
 	del tmp.txt
 )
