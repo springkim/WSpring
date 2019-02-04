@@ -35,7 +35,7 @@ powershell "get-content %TEMP%\parse_cmake1.txt -ReadCount 1000 | foreach { $_ -
 set /p "url="<"%TEMP%\parse_cmake2.txt"
 ::echo %url%
 
-curlw -L "https://cmake.org%url%" -o "%TEMP%\CMake.zip"
+curlw -L "%url%" -o "%TEMP%\CMake.zip"
 echo Unzipping...
 call :SafeRMDIR "%SystemDrive%\Program Files\CMake"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\CMake.zip', '%SystemDrive%\Program Files\CMake'); }"

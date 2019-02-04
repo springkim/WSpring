@@ -36,7 +36,6 @@ curlw -L "http://cn.ejie.me/uploads/setup_clover@%VER%.exe" -o "%TEMP%\clover.ex
 
 echo Installing...
 start /wait clover.exe /S
-DEL "%TEMP%\clover.exe"
 echo Finish!!
 pause
 exit /b
