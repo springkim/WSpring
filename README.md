@@ -110,7 +110,7 @@ The NVIDIA CUDA® Deep Neural Network library (**[cuDNN](https://developer.nvidi
 
 
 
-### <img src="img/foxit.png" width="64">Foxit PDF Reader
+### <img src="img/foxit.png" width="64">Foxit PDF Reader → <img src="img/foxit-phantom.png" width="64"> **[Foxit Phantom PDF](https://www.microsoft.com/store/productId/9ND1JWBGZMQF)**(Microsoft Store)
 
 <img src="img/ver_manually_latest.png" height="20">
 
