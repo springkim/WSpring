@@ -306,6 +306,11 @@ Microsoft **[Visual Studio](https://www.visualstudio.com/)** is an integrated de
 * Python
 * Visual F#
 
+### <img src="img/vscode.png" width="64">Visual Studio Code
+
+<img src="img/ver_latest.png" height="20">
+
+**[Visual Studio Code](https://code.visualstudio.com/)** is a code editor redefined and optimized for building and debugging modern web and cloud applications.
 
 ### <img src="img/waterfox.png" width="64">Waterfox
 
