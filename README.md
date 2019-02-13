@@ -85,7 +85,7 @@ And this script converts cuda include files to UNICODE. Because, Visual Studio(K
 
 ### <img src="img/cuda.png" width="64">cudnn
 
-<img src="img/cudnn7.1_ver.png" height="20"><img src="img/cudnn7.3.1_ver.png" height="20">
+<img src="img/ver_latest.png" height="20">
 
 The NVIDIA CUDA® Deep Neural Network library (**[cuDNN](https://developer.nvidia.com/cudnn)**) is a GPU-accelerated library of primitives for deep neural networks. cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers. cuDNN is part of the NVIDIA Deep Learning SDK.
 
