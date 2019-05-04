@@ -26,10 +26,10 @@ call :AbsoluteDownloadCurl
 title install_opencv
 echo Downloading...
 cd %TEMP%
-call :SafeRMDIR "build_opencv"
-::GOTO DOWNLOADSKIP
 
-set fixver3=/opencv/opencv/archive/3.4.0.zip
+::GOTO DOWNLOADSKIP
+call :SafeRMDIR "build_opencv"
+set fixver3=/opencv/opencv/archive/3.4.6.zip
 set fixver2=/opencv/opencv/archive/2.4.13.6.zip
 
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/opencv/opencv/releases' -UseBasicParsing;($HTML.Links.href) > opencv.txt"
@@ -94,15 +94,16 @@ if exist "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" (
 	set /a CCC=%CCC%+1
 )
 if exist "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe" (
-	pushd %cd%
 	cd "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\"
 	dir /B > "%TEMP%\msvc2017path.txt"
 	set /p "msvcnum="<"%TEMP%\msvc2017path.txt"
-	popd
+	cd "%TEMP%\build_opencv"
 	set CC[%CCC%]="Visual Studio 15 2017 Win64"
 	set CCDIR[%CCC%]="vc15"
-	set dst_include_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\%msvcnum%\include\"
-	set dst_lib_dir[%CCC%]="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\%msvcnum%\lib\x64\"
+	echo "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\%msvcnum%\include\" > "%TEMP%\msvc2017include.txt"
+	set /p "dst_include_dir[%CCC%]="<"%TEMP%\msvc2017include.txt"
+	echo "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\%msvcnum%\lib\x64\" > "%TEMP%\msvc2017lib.txt"
+	set /p "dst_lib_dir[%CCC%]="<"%TEMP%\msvc2017lib.txt"
 	set src_lib_dir[%CCC%]=vc15
 	set extension[%CCC%]=lib
 	set /a CCC=%CCC%+1
@@ -176,12 +177,13 @@ FOR /L %%i in (0,1,%CCC%) do (
 		 -DWITH_OPENCL=OFF^
 		 -DWITH_IPP=OFF^
 		 -DWITH_MSMF=OFF^
+		 -DCPU_BASELINE=SSE2^
+		 -DCPU_DISPATCH=AVX^
+		 -DENABLE_INTRINSICS=OFF^
 		 -DBUILD_opencv_python=OFF^
-		 -DCPU_DISPATCH=AVX,AVX2^
 		 -DENABLE_PRECOMPILED_HEADERS=OFF^
 		 -DWITH_OPENEXR=OFF^
 		 -DBUILD_OPENEXR=OFF^
-		 !op_eigen[%%j]!^
 		 !op_world[%%j]!^
 		 !op_contrib[%%j]!
 
@@ -199,7 +201,7 @@ FOR /L %%i in (0,1,%CCC%) do (
 	if not !CCDIR[%%i]! == "" (
 		call :MakeOpenCVLib "!dir[0]!\build\x64\!CCDIR[%%i]!\lib" "..\..\..\..\..\lib2c.txt"
 		call :MakeOpenCVLib "!dir[1]!\build\x64\!CCDIR[%%i]!\lib" "..\..\..\..\..\lib3c.txt"
-	)else (
+	) else (
 		::for MinGW64
 		call :SetOpenCVEnvValue "build2\build\x64\!src_lib_dir[%%i]!\lib" opencv2
 		call :SetOpenCVEnvValue "build3c\build\x64\!src_lib_dir[%%i]!\lib" opencv3
@@ -209,10 +211,6 @@ FOR /L %%i in (0,1,%CCC%) do (
 		call :DownloadIConv
 		call :ChangeEncoding
 	)
-	call :SafeRMDIR "!dst_include_dir[%%i]:~1,-1!opencv"
-	call :SafeRMDIR "!dst_include_dir[%%i]:~1,-1!opencv2"
-	if exist "!dst_lib_dir[%%i]:~1,-1!opencv_*" del "!dst_lib_dir[%%i]:~1,-1!opencv_*" 2>&1 >NUL
-	if exist "!dst_lib_dir[%%i]:~1,-1!libopencv_*" del "!dst_lib_dir[%%i]:~1,-1!libopencv_*" 2>&1 >NUL
 
 
 	xcopy /Y "include\*.*" !dst_include_dir[%%i]! /e /h /k 2>&1 >NUL
@@ -225,15 +223,6 @@ FOR /L %%i in (0,1,%CCC%) do (
 	cd ..
 )
 endlocal
-cd ..
-del opencv.txt
-del opencv_link.txt
-del opencv_link_zip.txt
-del opencv_link2.txt
-del opencv_link3.txt
-del cv2.zip
-del cv3.zip
-del cv3c.zip
 pause
 exit /b
 
