@@ -11,7 +11,7 @@ int main() {
 			cv::circle(img, cv::Point(c[0], c[1]), c[2], cv::Scalar(c[3], c[4], c[5]), CV_FILLED, CV_AA);
 		}
 		cv::imshow("circles", img);
-		cv::waitKey(100);
+		if(cv::waitKey(100)==27)break;
 		circles.pop_front();
 		circles.push_back(cv::Vec6d(rand() % 500, rand() % 500, rand() % 250, rand() % 255, rand() % 255, rand() % 255));
 	}

@@ -30,13 +30,11 @@ echo Downloading...
 call :SafeRMDIR "%SystemDrive%\JAVA"
 if not exist %SystemDrive%\JAVA md %SystemDrive%\JAVA
 cd %SystemDrive%\JAVA
-curlw -L "https://download.java.net/java/GA/jdk10/10.0.1/fb4372174a714e6b8c52526dc134031e/10/openjdk-10.0.1_windows-x64_bin.tar.gz" -o "%SystemDrive%\JAVA\openjdk.tar.gz"
+curlw -L "https://download.java.net/java/GA/jdk12.0.1/69cfe15208a647278a19ef0990eea691/12/GPL/openjdk-12.0.1_windows-x64_bin.zip" -o "%SystemDrive%\JAVA\openjdk.zip"
 echo Installing...
 call :Download7z
-7z x openjdk*.tar.gz -y
-7z x openjdk*.tar -y
-DEL *.tar
-DEL *.tar.gz
+7z x openjdk*.zip -y
+DEL *.zip
 dir /B > z.txt
 set /p "jdkname="<"z.txt"
 call :DownloadSetw

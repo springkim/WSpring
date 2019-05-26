@@ -28,15 +28,15 @@ call :Download7z
 cd %TEMP%
 title install_mingw64
 echo Downloading...
-::powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://sourceforge.net/projects/ditto-cp/files/Ditto/?source=navbar' -UseBasicParsing;($HTML.Links.href) > ditto_html.txt"
-::powershell "get-content ditto_html.txt -ReadCount 10000 | foreach { $_ -match 'latest' } | out-file -encoding ascii ditto_latest.txt"
-::set /p "url="<"ditto_latest.txt"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://sourceforge.net/projects/ditto-cp/files/Ditto/?source=navbar' -UseBasicParsing;($HTML.Links.href) > ditto_html.txt"
+powershell "get-content ditto_html.txt -ReadCount 10000 | foreach { $_ -match 'latest' } | out-file -encoding ascii ditto_latest.txt"
+set /p "url="<"ditto_latest.txt"
 
 
-::curlw -L "https://sourceforge.net%url%" -o "ditto_setup.exe"
-::DEL "ditto_html.txt"
-::DEL "ditto_latest.txt"
-curlw -L "https://github.com/springkim/WSpring/releases/download/sourceforge/DittoSetup_64bit_3_22_20_0.exe" -o "ditto_setup.exe"
+curlw -L "https://sourceforge.net%url%" -o "ditto_setup.exe"
+DEL "ditto_html.txt"
+DEL "ditto_latest.txt"
+
 start /wait ditto_setup.exe /VERYSILENT
 
 echo Finish!!
