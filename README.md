@@ -1,7 +1,7 @@
 <img src="img/windows10.png" width="64"> <img src="img/B.png" width="64"> WSpring
 ---------------------------------------------------------------------------------------------------------------------
 
-Windows(x64) Programming Library & Tool Setup Project
+Windows OS Tool Setup Project
 -----------------------------------------------------
 
 ### Download WSpring
@@ -11,18 +11,6 @@ Run below command on Windows CMD.
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;(New-Object System.Net.WebClient).DownloadFile('https://github.com/springkim/WSpring/archive/master.zip','wspring.zip');& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('wspring.zip', '.'); };Remove-Item wspring.zip;Rename-Item WSpring-master WSpring"
 ```
 
-### Global/Local
-
-Global install is installing library on compiler directory. It can run directly your source code without any settings. Local library is installing library on your project directory. You have to use local library if you consider move or release your project.
-In this project will install library as global.
-
-### x86/x64
-
-Drop x86(32bit application). x86 is past technology on desktop computer. Actually many libraries don't support x86 system.
-
-### Shared/Static
-
-This option is actually not important. But consider if you want use independent executable file. But static library depends on compiler. MSVC14's library will not work on MSVC15. So we use shared library.
 
 
 Installer
@@ -325,74 +313,6 @@ Waterfox is an open-source web browser for 64-bit operating systems, with an aim
 
 Windows Subsystem for Linux (WSL) is a compatibility layer for running Linux binary executables (in ELF format) natively on Windows 10. Do not install WSL from Windows store if you are korean. This script will install WSL(current locale) and Xming(for GUI) automatically.
 
-Libraries
----------
-
-### <img src="img/opencv.png" width="64">OpenCV
-
-<img src="img/ver_latest.png" height="20">
-
-
-**[OpenCV](https://opencv.org/)** is open source computer vision library. Please install opencv correctly way. Many people install opencv strange way *(e.g. C:/Opencv)* . Also OpenCV dropped C interface after version 3.0. So you need to install both 2.4.X and 3.X if you are C/C++ programmer.
-
-Usually, we use gcc(MinGW64), g++(MinGW64), Visual Studio(/TC), Visual Studio(/TP) in Windows OS for C/C++.  
-It will install opencv2.x for C compiler and install opencv3.x(contrib,world) for C++ compiler.
-
-This Installer will change something. That will select automatically correct version for your compiler.
-
-gcc and /TC will select OpenCV2.X.
-
-g++ and /TP will select OpenCV3.x(contrib).
-
-So, You don't have to any settings for Visual Studio. library link command(#pragma comment) is already wrote in opencv header file. and all dll is copied to System folder.
-
-But you need link libraries in MinGW64.
-Here is sample build command using environment variable.
-```batch
-gcc <...> %opencv2%
-```
-```batch
-g++ <...> %opencv3%
-```
-
-### <img src="img/openblas.png" width="64"> OpenBLAS
-
-<img src="img/ver_latest.png" height="20">
-
-**[OpenBLAS](http://www.openblas.net/)** is an optimized BLAS library based on GotoBLAS2 1.13 BSD version. Usually we use BLAS for Matrix Multiplication in C. C++ has [Eigen](eigen.tuxfamily.org/) and Python has numpy.
-
-Likewise library link command is in cblas.h. You just need to include. and if you are using gcc then link below command.
-
-```batch
-gcc <...> -lopenblas
-```
-
-There is a example code in [tests/OpenBLAS_Tests](tests/OpenBLAS_Tests).
-
-
-### <img src="img/tinyxml2.png" width="64"> TinyXML2
-
-<img src="img/ver_latest.png" height="20">
-
-**[TinyXML-2](http://www.grinninglizard.com/tinyxml2/)** is a simple, small, efficient, C++ XML parser that can be easily integrating into other programs.
-
-### <img src="img/google.png" width="64"> glog
-
-<img src="img/ver_latest.png" height="20">
-
-**[glog](https://github.com/google/glog)** is google logging library.
-
-### <img src="img/hdf5.png" width="64"> hdf5
-
-<img src="img/ver_latest.png" height="20">
-
-Hierarchical Data Format is a set of file formats designed to store and organize large amounts of data.
-
-### <img src="img/zlib.png" width="64"> zlib
-
-<img src="img/ver_latest.png" height="20">
-
-zlib is a software library used for data compression. zlib was written by Jean-loup Gailly and Mark Adler and is an abstraction of the DEFLATE compression algorithm used in their gzip file compression program.w
 
 ## Enabler
 
