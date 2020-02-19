@@ -25,16 +25,17 @@ call :AbsoluteDownloadCurl
 
 ::start
 title install_clover
-cd %TEMP%
+
 call :AbsoluteDownloadHtmlAgilityPack
+powershell "cd $env:temp;$wc = New-Object System.Net.WebClient;$html=$wc.DownloadString('http://en.ejie.me/');add-type -Path %WINDIR%\System32\HtmlAgilityPack.dll;$doc = New-Object HtmlAgilityPack.HtmlDocument;$doc.LoadHtml($html);$doc.DocumentNode.SelectSingleNode('html').SelectSingleNode('body').SelectSingleNode('div').SelectSingleNode('div').SelectSingleNode('div').SelectSingleNode('div').SelectSingleNode('div').InnerText -replace ' ','' > clover_tags.txt;"
+powershell "cd $env:temp;get-content clover_tags.txt -ReadCount 1000 | foreach { $_ -match '^[0-9\.]+' | out-file -encoding ascii clover_ver.txt }"
 
-powershell "$wc = New-Object System.Net.WebClient;$html=$wc.DownloadString('http://en.ejie.me/');add-type -Path %WINDIR%\System32\HtmlAgilityPack.dll;$doc = New-Object HtmlAgilityPack.HtmlDocument;$doc.LoadHtml($html);$doc.DocumentNode.SelectSingleNode('html').SelectSingleNode('body').SelectSingleNode('div').SelectSingleNode('div').SelectSingleNode('div').SelectSingleNode('div').SelectSingleNode('div').InnerText -replace ' ','' > clover_tags.txt;"
-powershell "get-content clover_tags.txt -ReadCount 1000 | foreach { $_ -match '^[0-9\.]+' | out-file -encoding ascii clover_ver.txt }"
-
-set /p "VER="<"clover_ver.txt"
+set /p "VER="<"%TEMP%\clover_ver.txt"
+echo "http://cn.ejie.me/uploads/setup_clover@%VER%.exe"
 curlw -L "http://cn.ejie.me/uploads/setup_clover@%VER%.exe" -o "%TEMP%\clover.exe"
 
 echo Installing...
+cd /D %TEMP%
 start /wait clover.exe /S
 echo Finish!!
 pause
