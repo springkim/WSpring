@@ -27,21 +27,24 @@ call :AbsoluteDownloadCurl
 title install_clion
 cd %TEMP%
 echo Downloading...
-powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://confluence.jetbrains.com/display/CLION/Release+notes' -UseBasicParsing; $HTML.Links.href > %TEMP%\clion_latest.txt"
-powershell "get-content %TEMP%\clion_latest.txt -ReadCount 1000 | foreach { $_ -match '^/display/' -notMatch 'EAP' -notMatch 'RC' -match 'build'} | out-file -encoding ascii %TEMP%\clion_ver.txt"
+
+
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://confluence.jetbrains.com/display/CLION/Release+notes' -UseBasicParsing; $HTML.Links.outerHTML -ireplace '\<[^\>]*\>' > %TEMP%\clion_latest.txt"
+powershell "get-content %TEMP%\clion_latest.txt -ReadCount 1000 | foreach { $_ -match 'CLion' -notMatch 'EAP' -notMatch 'RC' -match 'build'} | out-file -encoding ascii %TEMP%\clion_ver.txt"
 
 powershell "get-content %TEMP%\clion_ver.txt | sort -Descending | get-unique | out-file -encoding ascii %TEMP%\clion_ver2.txt"
 
-powershell "get-content %TEMP%\clion_ver2.txt -ReadCount 1000 | foreach { $_.Split('+')[1].Split('%%')[0] } | out-file -encoding ascii %TEMP%\clion_ver3.txt"
+powershell "get-content %TEMP%\clion_ver2.txt -ReadCount 1000 | foreach { $_.Split(' ')[1]} | out-file -encoding ascii %TEMP%\clion_ver3.txt"
 
 ::verify laster verison of CLion
 if not exist "%SystemDrive%\Program Files\JetBrains" md "%SystemDrive%\Program Files\JetBrains"
 
-cd "%SystemDrive%\Program Files\JetBrains\"
+cd /D "%SystemDrive%\Program Files\JetBrains\"
 set /p "VER="<"%TEMP%\clion_ver3.txt"
-curlw -L "https://download.jetbrains.com/cpp/CLion-%VER%.zip" -o "CLion-%VER%.zip"
 
 echo %VER% is latest version of windows clion.
+
+curlw -L "https://download.jetbrains.com/cpp/CLion-%VER%.win.zip" -o "CLion-%VER%.zip"
 
 
 ::#section=windows
@@ -50,8 +53,6 @@ echo Unzipping...
 call :SafeRMDIR "%SystemDrive%\Program Files\JetBrains\CLion-%VER%"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip', '%SystemDrive%\Program Files\JetBrains\CLion-%VER%'); }"
 echo Download settings
-
-curlw -L "https://github.com/springkim/WSpring/releases/download/program/clion_settings.jar" -o "%SystemDrive%\Program Files\JetBrains\CLion-%VER%\settings.jar"
 
 del "%SystemDrive%\Program Files\JetBrains\CLion-%VER%.zip"
 DEL "%TEMP%\clion_latest.txt"

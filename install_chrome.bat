@@ -27,7 +27,7 @@ title install_chrome
 echo Downloading...
 curlw -L "https://github.com/springkim/WSpring/releases/download/program/ChromeSetup.exe" -o "%TEMP%\ChromeSetup.exe"
 echo Installing...
-cd "%TEMP%"
+cd /D %TEMP%
 call ChromeSetup.exe /silent /install
 del "%TEMP%\ChromeSetup.exe"
 echo Finish!!

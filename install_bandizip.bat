@@ -30,8 +30,8 @@ powershell "Set-ExecutionPolicy RemoteSigned -Force"
 
 curlw -L "https://www.bandisoft.co.kr/bandizip/dl.php?web" -o "%TEMP%\BANDIZIP-SETUP-KR.EXE"
 
-cd %TEMP%
 echo Installing...
+cd /D %TEMP%
 start /wait BANDIZIP-SETUP-KR.EXE /S
 DEL "%TEMP%\BANDIZIP-SETUP-KR.EXE"
 echo Finish!!
