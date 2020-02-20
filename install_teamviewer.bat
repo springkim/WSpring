@@ -27,7 +27,7 @@ title install_teamviewer
 echo Downloading...
 curlw -L "https://download.teamviewer.com/download/TeamViewer_Setup.exe" -o "%TEMP%\TeamViewer_Setup.exe"
 echo Installing...
-cd %TEMP%
+cd /D %TEMP%
 start /wait TeamViewer_Setup.exe /S /norestart
 del "%TEMP%\TeamViewer_Setup.exe"
 echo Finish!!

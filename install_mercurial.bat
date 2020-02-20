@@ -25,7 +25,7 @@ call :AbsoluteDownloadCurl
 ::::::::::::install
 title install_mercurial
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://www.mercurial-scm.org/release/windows/' -UseBasicParsing;($HTML.Links.href) > hg_latest.txt"
 

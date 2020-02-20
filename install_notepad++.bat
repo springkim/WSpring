@@ -25,17 +25,19 @@ call :AbsoluteDownloadCurl
 
 ::::::::::::install
 title install_notepad++
-cd %TEMP%
+cd /D %TEMP%
 echo Downloading...
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://notepad-plus-plus.org/download' -UseBasicParsing;($HTML.Links.href) > npp_latest.txt"
-powershell "get-content npp_latest.txt -ReadCount 1000 | foreach { $_ -match 'Installer.x64.exe' } | out-file -encoding ascii npp_url.txt"
+powershell "get-content npp_latest.txt -ReadCount 1000 | foreach { $_ -match 'https://notepad-plus-plus.org/downloads' } | out-file -encoding ascii npp_url.txt"
 set /p "url="<"npp_url.txt"
-
-curlw -L "https://notepad-plus-plus.org/%url%" -o "%TEMP%\npp.exe"
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri '%url%' -UseBasicParsing;($HTML.Links.href) > npp_latest2.txt"
+powershell "get-content npp_latest2.txt -ReadCount 1000 | foreach { $_ -match 'Installer.x64.exe' } | out-file -encoding ascii npp_url2.txt"
+set /p "url2="<"npp_url2.txt"
+curlw -L "%url2%" -o "%TEMP%\npp.exe"
 echo Installing...
 if exist "%programfiles%\Notepad++\uninstall.exe" "%programfiles%\Notepad++\uninstall.exe" /S
 if exist "%programfiles(x86)%\ Notepad++\uninstall.exe" "%programfiles(x86)%\ Notepad++\uninstall.exe" /S
-cd %TEMP%
+cd /D %TEMP%
 start /wait npp.exe /S
 del "%TEMP%\npp.exe"
 echo Finish!!

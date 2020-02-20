@@ -27,7 +27,7 @@ call :AbsoluteDownloadCurl
 title install_shareX
 taskkill /im ShareX.exe
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/ShareX/ShareX/releases/latest' -UseBasicParsing;($HTML.Links.href) > sharex_latest.txt"
 powershell "get-content sharex_latest.txt -ReadCount 1000 | foreach { $_ -match 'setup.exe' } | out-file -encoding ascii sharex_url.txt"
 set /p "url="<"sharex_url.txt"

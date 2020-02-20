@@ -26,7 +26,7 @@ call :AbsoluteDownloadCurl
 ::start
 title install_potplayer
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 curlw -L "https://t1.daumcdn.net/potplayer/PotPlayer/Version/Latest/PotPlayerSetup64.exe" -o "potplayer.exe"
 echo Installing...
 start /wait potplayer.exe /S

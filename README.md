@@ -302,7 +302,7 @@ Microsoft **[Visual Studio](https://www.visualstudio.com/)** is an integrated de
 
 ### <img src="img/waterfox.png" width="64">Waterfox
 
-<img src="img/waterfox_ver.png" height="20">
+<img src="img/ver_latest.png" height="20">
 
 **Use waterfox instead firefox56.**
 Waterfox is an open-source web browser for 64-bit operating systems, with an aim to be speedy, ethical, and maintain support for legacy extensions dropped by Firefox, from which it is forked. There are official releases for 64-bit Windows, macOS, 64-bit Linux, and 64-bit Android.

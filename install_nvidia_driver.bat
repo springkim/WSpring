@@ -28,7 +28,7 @@ title install nvidia driver
 echo Downloading...
 curlw -L "https://github.com/springkim/WSpring/releases/download/driver/nvidia_driver.exe" -o "%TEMP%\nvidia-desktop.exe"
 echo Installing...
-cd "%TEMP%"
+cd /D "%TEMP%"
 call nvidia-desktop.exe -s -noreboot
 del "%TEMP%\nvidia-desktop.exe"
 echo Finish!!

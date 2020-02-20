@@ -26,7 +26,7 @@ call :DownloadSetw
 ::start
 title install_python3
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://www.python.org/downloads/' -UseBasicParsing;($HTML.Links.href) > python_html.txt"
 powershell "get-content python_html.txt -ReadCount 10000 | foreach { $_ -match '/downloads/release/python-3' } | out-file -encoding ascii python_url.txt"

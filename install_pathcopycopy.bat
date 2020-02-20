@@ -25,7 +25,7 @@ call :AbsoluteDownloadCurl
 ::start
 title install_pathcopycopy
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 if exist "%programfiles%\Path Copy Copy\unins000.exe" "%programfiles%\Path Copy Copy\unins000.exe" /VERYSILENT /NORESTART
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/clechasseur/pathcopycopy/releases' -UseBasicParsing;($HTML.Links.href) > pcc_latest.txt"
 powershell "get-content pcc_latest.txt -ReadCount 1000 | foreach { $_ -match '.exe$' } | out-file -encoding ascii pcc_url.txt"

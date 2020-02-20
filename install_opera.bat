@@ -30,7 +30,7 @@ powershell "Set-ExecutionPolicy RemoteSigned -Force"
 
 curlw -L "https://net.geo.opera.com/opera/stable/windows?http_referrer=https://www.google.co.kr/&utm_source=google_via_opera_com&utm_medium=ose&utm_campaign=google_ose_via_opera_com_https&utm_lastpage=opera.com/&utm_tryagain=yes" -o "%TEMP%\OperaSetup.exe"
 
-cd %TEMP%
+cd /D %TEMP%
 echo Installing...
 start /wait OperaSetup.exe --silent --desktopshortcut=0 --quicklaunchshortcut=0 --pintotaskbar=0 --launchbrowser=0
 ::DEL "%TEMP%\OperaSetup.exe"

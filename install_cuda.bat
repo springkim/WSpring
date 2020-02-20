@@ -46,11 +46,18 @@ if not x%CUDAVER:10.0=%==x%CUDAVER% (
 	call :Download7z
 	curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_10.0.130_411.31_win10.7z" -o "%TEMP%/%CUDAVER%/cuda10.0.7z"
 	7z x "%TEMP%\%CUDAVER%\cuda10.0.7z" -y -o"%TEMP%\%CUDAVER%"
-	cd "%TEMP%\%CUDAVER%"
+	cd /D "%TEMP%\%CUDAVER%"
 	move cuda_10.0* cuda10.0.exe
 )
-
-cd "%TEMP%\%CUDAVER%"
+if not x%CUDAVER:10.1=%==x%CUDAVER% (
+	call :Download7z
+	curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_10.1.105_418.96_win10.7z.001" -o "%TEMP%/%CUDAVER%/cuda10.1.7z.001"
+	curlw -L "https://github.com/springkim/WSpring/releases/download/cuda/cuda_10.1.105_418.96_win10.7z.002" -o "%TEMP%/%CUDAVER%/cuda10.1.7z.002"
+	7z x "%TEMP%\%CUDAVER%\cuda10.1.7z.001" -y -o"%TEMP%\%CUDAVER%"
+	cd /D "%TEMP%\%CUDAVER%"
+	move cuda_10.1* cuda10.1.exe
+)
+cd /D "%TEMP%\%CUDAVER%"
 SETLOCAL EnableDelayedExpansion
 FOR /R %%E IN (*.exe) DO (
 	set file=%%~nxE
@@ -133,7 +140,7 @@ exit /b
 TITLE CUDASelecter
 setlocal EnableDelayedExpansion
 set numOpts=0
-if "%1" equ "" set OPT="CUDA8.0" "CUDA9.0" "CUDA9.1" "CUDA10.0"
+if "%1" equ "" set OPT="CUDA8.0" "CUDA9.0" "CUDA9.1" "CUDA10.0" "CUDA10.1"
 if not "%1" equ "" set OPT=%*
 for %%a in (%OPT%) do set /A numOpts+=1&&set option[!numOpts!]=%%~a
 rem Clear previous doskey history

@@ -29,7 +29,7 @@ if exist "%AppData%\Haroo Studio\Haroopad\Uninstall.lnk" (
 	"%AppData%\Haroo Studio\Haroopad\Uninstall.lnk" /qb
 )
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://bitbucket.org/rhiokim/haroopad-download/downloads/' -UseBasicParsing;($HTML.Links.href) > haroopad_latest.txt"
 powershell "get-content haroopad_latest.txt -ReadCount 1000 | foreach { $_ -match '/rhiokim/haroopad-download/downloads/Haroopad' } | out-file -encoding ascii haroopad_url.txt"
 powershell "get-content haroopad_url.txt -ReadCount 1000 | foreach { $_ -match 'msi' } | out-file -encoding ascii haroopad_url2.txt"

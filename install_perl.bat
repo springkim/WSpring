@@ -25,7 +25,7 @@ call :AbsoluteDownloadCurl
 ::::::::::::install
 title install_perl
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'http://strawberryperl.com/releases.html' -UseBasicParsing;($HTML.Links.href) > perl_latest.txt"
 powershell "get-content perl_latest.txt -ReadCount 1000 | foreach { $_ -match '64bit.zip' } | out-file -encoding ascii perl_url.txt"

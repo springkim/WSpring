@@ -28,7 +28,7 @@ title install_HxD
 echo Downloading...
 curlw -L "https://mh-nexus.de/downloads/HxDSetup.zip" -o "%TEMP%\HxDSetup.zip"
 
-cd %TEMP%
+cd /D %TEMP%
 echo Unzipping...
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\HxDSetup.zip', '.'); }"
 

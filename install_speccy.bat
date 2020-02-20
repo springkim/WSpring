@@ -26,7 +26,7 @@ call :AbsoluteDownloadCurl
 ::start
 title install_speccy
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 powershell "$HTML=Invoke-WebRequest -Uri 'https://www.ccleaner.com/speccy/download/standard' -UseBasicParsing;($HTML.Links.href) > speccy_latest.txt"
 powershell "get-content speccy_latest.txt -ReadCount 1000 | foreach { $_ -match 'spsetup' } | out-file -encoding ascii speccy_url.txt"
 set /p "url="<"speccy_url.txt"

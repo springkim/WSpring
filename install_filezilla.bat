@@ -28,7 +28,7 @@ title install_filezilla
 if exist "%programfiles%\FileZilla FTP Client\uninstall.exe" "%programfiles%\FileZilla FTP Client\uninstall.exe" /S
 if exist "%programfiles(x86)%\FileZilla FTP Client\uninstall.exe" "%programfiles(x86)%\FileZilla FTP Client\uninstall.exe" /S
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://filezilla-project.org/download.php?show_all=1' -UseBasicParsing;($HTML.Links.href) > filezilla_latest.txt"
 powershell "get-content filezilla_latest.txt -ReadCount 1000 | foreach { $_ -match 'win64-setup.exe' } | out-file -encoding ascii filezilla_url.txt"
 powershell "get-content filezilla_url.txt -ReadCount 1000 | foreach { $_ -match 'https' } | out-file -encoding ascii filezilla_url2.txt"

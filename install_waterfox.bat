@@ -26,7 +26,12 @@ call :AbsoluteDownloadCurl
 ::::::::::::install
 title install_waterfox
 echo Downloading...
-curlw -L "https://github.com/springkim/WSpring/releases/download/program/Waterfox.exe" -o "%TEMP%\waterfox.exe"
+cd /D %TEMP%
+powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://www.waterfox.net/download/' -UseBasicParsing;($HTML.Links.href) > parse_waterfox.txt"
+powershell "get-content parse_waterfox.txt -ReadCount 1000 | foreach { $_ -match 'win64/installer' } | out-file -encoding ascii parse_waterfox1.txt"
+powershell "get-content parse_waterfox1.txt -ReadCount 1000 | foreach { $_ -match 'Current' } | out-file -encoding ascii parse_waterfox2.txt"
+set /p "url="<"parse_waterfox2.txt"
+curlw -L "%url%" -o "%TEMP%\waterfox.exe"
 
 echo Installing...
 "%TEMP%\waterfox.exe" -ms

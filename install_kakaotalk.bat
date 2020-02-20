@@ -25,7 +25,7 @@ call :AbsoluteDownloadCurl
 ::start
 title install_kakaotalk
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 curlw -L "http://app.pc.kakao.com/talk/win32/KakaoTalk_Setup.exe" -o "KakaoTalk_Setup.exe"
 echo Installing...
 start /wait KakaoTalk_Setup.exe /S

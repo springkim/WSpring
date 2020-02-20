@@ -32,7 +32,7 @@ echo Downloading...
 set DIR=%WINDIR%\colortool
 call :SafeRMDIR %DIR%
 md %DIR%
-cd %DIR%
+cd /D %DIR%
 curlw -L "https://github.com/springkim/WSpring/releases/download/program/colortool.zip" -o "colortool.zip"
 powershell.exe -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('colortool.zip', '.'); }"
 setw %DIR%

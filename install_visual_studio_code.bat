@@ -24,7 +24,7 @@ CD /D "%~dp0"
 call :AbsoluteDownloadCurl
 
 ::start
-cd %TEMP%
+cd /D %TEMP%
 title install_visual_studio_code
 echo Downloading...
 powershell "Set-ExecutionPolicy RemoteSigned -Force"

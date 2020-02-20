@@ -30,11 +30,11 @@ curlw -L "https://github.com/springkim/WSpring/releases/download/vs2015/vs2015co
 curlw -L "https://github.com/springkim/WSpring/releases/download/vs2015/vs2015community.7z.002" -o "%TEMP%\vs2015community.7z.002"
 
 echo Unzipping...
-cd %TEMP%
+cd /D %TEMP%
 call :Download7z
 7z x vs2015community.7z.001 -y -o"%TEMP%"
 echo Installing...
-cd "%TEMP%\vs2015community"
+cd /D "%TEMP%\vs2015community"
 call vs_community.exe /AdminFile %CD%\AdminDeployment.xml /s
 powershell "$s=(New-Object -COM WScript.Shell).CreateShortcut('%USERPROFILE%\Desktop\Visual Studio 2015.lnk');$s.TargetPath='%SystemDrive%\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe';$s.Save()"
 
@@ -45,7 +45,7 @@ start /wait "VSIX" "%SystemDrive%\Program Files (x86)\Microsoft Visual Studio 14
 DEL "%TEMP%\vs2015community.7z"
 call :SafeRMDIR "%TEMP%\vs2015community"
 
-cd %TEMP%
+cd /D %TEMP%
 curlw -L "https://github.com/springkim/WSpring/releases/download/program/SDMiSaeng.ttf" -o "SDMS.ttf"
 call :FontInstall "SDMS.ttf"
 echo Finish!!

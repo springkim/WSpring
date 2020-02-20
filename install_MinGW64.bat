@@ -25,7 +25,7 @@ call :AbsoluteDownloadCurl
 call :DownloadSetw
 call :Download7z
 ::start
-cd %TEMP%
+cd /D %TEMP%
 title install_mingw64
 echo Downloading...
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://sourceforge.net/projects/mingw-w64/files/?source=navbar' -UseBasicParsing;($HTML.Links.href) > MinGW64_html.txt"

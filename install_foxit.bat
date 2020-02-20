@@ -29,7 +29,7 @@ echo Downloading...
 curlw -L "https://github.com/springkim/WSpring/releases/download/program/FoxitReader92_L10N_Setup.exe" -o "%TEMP%\foxit.exe"
 
 echo Installing...
-cd %TEMP%
+cd /D %TEMP%
 ::start /wait foxit.exe /ForceInstall /VERYSILENT DESKTOP_SHORTCUT="0" MAKEDEFAULT="0" VIEWINBROWSER="0" LAUNCHCHECKDEFAULT="0" AUTO_UPDATE="0" /passive /norestart
 start /wait foxit.exe /quiet
 

@@ -25,7 +25,7 @@ call :AbsoluteDownloadCurl
 ::start
 title install_dependency_walker
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://github.com/lucasg/Dependencies/releases' -UseBasicParsing;($HTML.Links.href) > depends_latest.txt"
 powershell "get-content depends_latest.txt -ReadCount 1000 | foreach { $_ -match 'x64' } | out-file -encoding ascii depends_url1.txt"
 powershell "get-content depends_url1.txt -ReadCount 1000 | foreach { $_ -match 'Release' } | out-file -encoding ascii depends_url2.txt"

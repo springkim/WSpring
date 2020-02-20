@@ -26,7 +26,7 @@ call :AbsoluteDownloadCurl
 ::start
 title install_office365
 echo Downloading...
-cd %TEMP%
+cd /D %TEMP%
 curlw -L "https://github.com/springkim/WSpring/releases/download/program/office365x64.exe" -o "office365x64.exe"
 echo Installing...
 start /wait office365x64.exe

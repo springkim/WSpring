@@ -40,8 +40,8 @@ echo Unzipping...
 call :SafeRMDIR "%SystemDrive%\Program Files\CMake"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%TEMP%\CMake.zip', '%SystemDrive%\Program Files\CMake'); }"
 echo Installing...
-CD "%SystemDrive%\Program Files\CMake"
-CD cmake*
+CD /D "%SystemDrive%\Program Files\CMake"
+CD /D cmake*
 move bin ..\
 move doc ..\
 move man ..\
