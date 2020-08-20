@@ -45,9 +45,13 @@ echo Installing...
 call :SafeRMDIR "%TEMP%\cuda"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%CUDNNZIP%', '%TEMP%'); }"
 cd /D %TEMP%
-xcopy /Y "cuda\include\*.*" "%CUDA_PATH%\include\" /e /h /k 2>&1 >NUL
-xcopy /Y "cuda\lib\x64\*.*" "%CUDA_PATH%\lib\x64\" /e /h /k 2>&1 >NUL
-xcopy /Y "cuda\bin\*.*" "%CUDA_PATH%\bin\" /e /h /k 2>&1 >NUL
+
+where nvcc > "%temp%\cudapath.txt"
+set /p "cudapath="<"%TEMP%\cudapath.txt"
+
+xcopy /Y "cuda\include\*.*" "%cudapath%\include\" /e /h /k 2>&1 >NUL
+xcopy /Y "cuda\lib\x64\*.*" "%cudapath%\lib\x64\" /e /h /k 2>&1 >NUL
+xcopy /Y "cuda\bin\*.*" "%cudapath%\bin\" /e /h /k 2>&1 >NUL
 call :SafeRMDIR "%TEMP%\cuda"
 
 echo Finish!!
