@@ -46,8 +46,8 @@ call :SafeRMDIR "%TEMP%\cuda"
 powershell -nologo -noprofile -command "& { Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('%CUDNNZIP%', '%TEMP%'); }"
 cd /D %TEMP%
 
-where nvcc > "%temp%\cudapath.txt"
-set /p "cudapath="<"%TEMP%\cudapath.txt"
+call :GetCudaPath
+echo %cudapath%
 
 xcopy /Y "cuda\include\*.*" "%cudapath%\include\" /e /h /k 2>&1 >NUL
 xcopy /Y "cuda\lib\x64\*.*" "%cudapath%\lib\x64\" /e /h /k 2>&1 >NUL
@@ -63,6 +63,23 @@ IF EXIST "%~1" (
 	RMDIR /S /Q "%~1"
 )
 exit /b
+::::::::::::::::::::::::::::::FUNCTION::::::::::::::::::::::::::::::
+:GetCudaPath
+where nvcc > "%temp%\nvccpath.txt"
+if "%ERRORLEVEL%" eq "0" (
+    pushd %CD%
+    set /p "nvccpath="<"%TEMP%\nvccpath.txt"
+    For %%A in ("%nvccpath%") do (set cudapath=%%~dpA)
+    echo %cudapath%
+    set cudapath=%cudapath%\..
+    cd /D %cudapath%
+    set cudapath=%CD%
+    echo %cudapath%
+    popd
+) else (
+    echo No Cuda
+    exit
+)
 ::https://stackoverflow.com/questions/15885132/file-folder-chooser-dialog-from-a-windows-batch-script
 :  #>
 
