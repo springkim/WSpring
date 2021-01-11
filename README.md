@@ -1,8 +1,6 @@
-<img src="img/windows10.png" width="64"> <img src="img/B.png" width="64"> WSpring
----------------------------------------------------------------------------------------------------------------------
+![](Readme/title.png)
 
-Windows OS Tool Setup Project
------------------------------------------------------
+##Windows Scripts are Powerful, Relative, and Independent Non-commercial Group
 
 ### Download WSpring
 
@@ -15,33 +13,19 @@ powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolT
 
 Installer
 ----------------------------
-
-### <img src="img/atom.png" width="64">Atom
-
-<img src="img/ver_latest.png" height="20">
-
-**[Atom](https://atom.io/)** is a text editor that's modern, approachable, yet hackable to the core—a tool you can customize to do anything but also use productively without ever touching a config file.
-
-You can use atom for writing markdown documents instead of Haroopad. It supports synchronization too.
-
-### <img src="img/bandizip.png" width="64">Bandizip
-
-<img src="img/ver_latest.png" height="20">
-
-**[Bandizip](https://www.bandisoft.co.kr/bandizip/)** is a lightweight, fast and free All-In-One Zip Archiver. Bandizip has a very fast Zip algorithm for compression & extraction with Fast Drag and Drop, High Speed Archiving, and Multi-core compression. It handles the most popular compression formats, including Zip, 7z, Rar, and so on.
-
-### <img src="img/bomi.png" width="64">Bomi
-
-<img src="img/ver_latest.png" height="20">
-
-**[Bomi](https://bomi-player.github.io/)** is a multimedia player formerly known as CMPlayer, which is aimed for easy usage but also provides various powerful features and convenience functions. Just install and enjoy it! There will be already what you expect. If you don't like, you can configure almost everything.
+|Atom|Bomi|--|--|--|
+|--|--|--|--|-
+|<img src="img/atom.png" width="64">|<img src="img/bomi.png" width="64">|--|--|--|
+|<img src="img/ver_latest.png" height="20">|<img src="img/ver_latest.png" height="20">|--|--|--|
 
 
-### <img src="img/chrome.png" width="64">Chrome
+|Chrome|Chrome Canary|Chrominun|--|--|
+|--|--|--|--|-
+|<img src="img/chrome.png" width="64">|<img src="img/chrome-canary.png" width="64">|<img src="img/chromium.png" width="64">|--|--|
+|<img src="img/ver_latest.png" height="20">|<img src="img/ver_latest.png" height="20">|<img src="img/ver_latest.png" height="20">|--|--|
 
-<img src="img/ver_latest.png" height="20">
 
-**[Google Chrome](https://www.google.co.kr/chrome/index.html)** is a freeware web browser developed by Google. It was first released in September 2008, for Microsoft Windows, and was later ported to Linux, macOS, iOS and Android. Google Chrome is also the main component of Chrome OS, where it serves as a platform for running web apps.
+
 
 ### <img src="img/clion.png" width="64">Clion
 
@@ -294,7 +278,7 @@ Microsoft **[Visual Studio](https://www.visualstudio.com/)** is an integrated de
 * Python
 * Visual F#
 
-### <img src="img/vscode.png" width="64">Visual Studio Code
+### <img src="img/vscode.png" width="64">
 
 <img src="img/ver_latest.png" height="20">
 
