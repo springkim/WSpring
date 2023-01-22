@@ -31,7 +31,7 @@ echo Downloading...
 powershell "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; $HTML=Invoke-WebRequest -Uri 'https://sourceforge.net/projects/mingw-w64/files/?source=navbar' -UseBasicParsing;($HTML.Links.href) > MinGW64_html.txt"
 powershell "get-content MinGW64_html.txt -ReadCount 10000 | foreach { $_ -match 'release-posix-seh-rt' } | out-file -encoding ascii MinGW64_url.txt"
 set /p "url="<"MinGW64_url.txt"
-curlw -L "%url%" -o "mingw64.7z"
+curlw -k -L "%url%" -o "mingw64.7z"
 DEL "MinGW64_html.txt"
 DEL "MinGW64_url.txt"
 
